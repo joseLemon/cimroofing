@@ -1,0 +1,738 @@
+/*
+Theme Name: CIM Roofing
+Theme URL: http://
+Author: Lemon Three
+Author URL: lemonthree.mx
+Description: Tema para la página web de CIM Roofing.
+Version: 1.0
+Text Domain: 
+*/
+
+@import 'https://fonts.googleapis.com/css?family=Lato';
+
+/* GENERAL STYLES */
+.vertical-align{
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+
+
+
+/* NAVBAR */
+.navbar {
+    border-radius: 0;
+    width: 290px;
+    margin-left: 220px;
+    height: 100vh;
+    position: fixed!important;
+}
+
+.navbar .container-fluid{
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.navbar-header, .navbar-brand{
+    width: 100%;
+}
+
+.navbar-brand{
+    height: auto;
+    float: none;
+    display: block;
+    margin: 0 auto!important;
+}
+
+.navbar-brand img{
+    margin: 0 auto;
+}
+
+.navbar-nav{
+    border-top: 1px solid #717171;
+    border-bottom: 1px solid #717171;
+    margin-top: 30px;
+}
+
+.navbar-nav>li{
+    width: 100%;
+}
+
+.navbar-nav>li>a{
+    width: 200px;
+    margin: 0 auto;
+    font-size: 18px;
+    font-family: Lato;
+    font-weight: 900;
+    -webkit-transition: color 300ms ease;
+    -moz-transition: color 300ms ease;
+    transition: color 300ms ease;
+    padding-bottom: 25px;
+}
+
+.navbar-nav>li.active>a,
+.navbar-nav>li:hover>a{
+    background-color: transparent!important;
+    color: #004989!important;
+
+}
+
+.navbar-nav>li>a::before{
+    content: '>';
+    font-family: cursive;
+    font-size: 20px;
+    position: absolute;
+    left: -10px;
+    top: 13px;
+}
+.navbar .links-container{
+    padding: 0 20px;
+}
+
+.navbar .dropdown-menu{
+    background-color: rgba(149,149,149,.7);
+    left: auto;
+    right: -250px;
+    border: 0;
+    height: 200vh;
+    top: calc(-100vh + 90px);
+    width: 220px!important;
+    color: #ffffff!important;
+    display: block!important;
+}
+
+
+
+.navbar-nav .dropdown-font>li>a{
+    font-size: 15px;
+    font-family: Lato;
+    font-weight: 900;
+    color: #ffffff;
+    height: 50px;
+    width: 200px;
+    margin: 0 auto;
+    display: inline-block;
+    text-decoration: none;
+    -webkit-transition: color 500ms ease;
+    -moz-transition: color 500ms ease;
+    transition: color 500ms ease;
+}
+
+.dropdown-image:before{
+    content: url(img/element/dropdown-line)!important;   
+    right:0px!important;
+    width:26px!important;
+    height: 3px!important;
+    display: block;
+    position: absolute!important;
+}
+
+/* .dropdown-font>li:hover>a */
+/* INICIO */
+
+
+#inicio1{
+    background: url(img/backgrounds/1.png) no-repeat center center;
+    background-size: cover;
+    position: relative;
+}
+
+#inicio1 .img-decoration{
+    max-width: calc(100% - 510px);
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    max-height: 100%;
+}
+
+#inicio1 .img-text{
+    margin: auto;
+    position: absolute;
+    left: 35vw;
+    top: 10vh;
+    z-index: 10;
+    max-height: 100%;
+    max-width: calc(100% - 770px);
+}
+
+#inicio2{
+    background: url(img/backgrounds/2.png) no-repeat center center;
+    background-size: cover;
+    position: relative;
+}
+
+#inicio2 .img-decoration{
+    position: absolute;
+    left: 460px;
+    bottom: 0px;
+    top:0px;
+    height: 100%;
+    max-width: calc(100%-10hv);
+}
+
+#inicio2 .img-text{
+    margin: auto;
+    position: absolute;
+    left: 57vw;
+    right: 182px;
+    bottom: 25px;
+    z-index: 10;
+    max-height: 100%;
+    max-width: calc(100% - 800px);
+}
+
+#inicio3{
+    background: url(img/backgrounds/3.png) no-repeat center center;
+    background-size: cover;
+    position: relative;
+}
+
+#inicio3 .img-decoration{
+    max-width: calc(100% - 510px);
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    max-height: 100%;
+}
+
+#inicio3 .img-text{
+    margin: auto;
+    position: absolute;
+    left: 35vw;
+    top: 10vh;
+    z-index: 10;
+    max-height: 100%;
+    max-width: calc(100% - 870px);
+}
+
+#inicio4{
+    background: url(img/backgrounds/4.png) no-repeat center center;
+    background-size: cover;
+    position: relative;
+}
+
+#inicio4 .img-decoration{
+    position: absolute;
+    left: 460px;
+    bottom: 0px;
+    top:0px;
+    height: 100%;
+}
+
+#inicio4 .img-text{
+    margin: auto;
+    position: absolute;
+    left: 57vw;
+    right: 182px;
+    top: 50px;
+    z-index: 10;
+    max-height: 100%;
+    max-width: calc(100% - 850px);
+}
+
+#inicio5{
+    background: url(img/backgrounds/5.png)no-repeat center center;
+    background-size: cover;
+    position: relative;
+}
+#inicio5 .img-decoration{
+    max-width: calc(100% - 510px);
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    max-height: 100%;
+}
+
+#inicio5 .img-text{
+    margin: auto;
+    position: absolute;
+    left: 35vw;
+    top: 35vh;
+    z-index: 10;
+    max-height: 100%;
+    max-width: calc(100% - 840px);
+}
+
+/* NOSOTROS */
+#compania1{
+    background: url(img/backgrounds/compania.png) no-repeat center center;
+    background-size: cover;   
+}
+
+#compania2{
+    background: url(img/backgrounds/compania2.png) no-repeat center center;
+    background-size: cover;
+}
+
+#compania3{
+    background: url(img/backgrounds/compania3.png) no-repeat center center;
+    background-size: cover;
+}
+
+#fabricantes{
+    background: url(img/backgrounds/fabricantes.png) no-repeat center center;
+    background-size: cover;
+}
+
+#responsabilidad{
+    background: url(img/backgrounds/responsabilidad.png) no-repeat center center;
+    background-size: cover;
+} 
+
+#certificaciones{
+    background: url(img/backgrounds/certificaciones.png) no-repeat center center;
+    background-size: cover;
+}
+
+#empleos{
+    background: url(img/backgrounds/empleosbg.png) no-repeat center center;
+    background-size: cover;
+}
+
+.contenedor-nosotros{
+     padding-top:200px;
+    padding-right: 80px;
+}
+
+.contenedor-nosotros .img-decoration{
+    max-width: 180px;
+    height: auto;
+    float: left;
+}
+
+/* TEXTO NOSOTROS */
+
+.divider{
+    width: 280px;
+    height: 3px;
+    margin: 0 auto;
+    display: block;
+}
+
+.titulo-nosotros{
+    font-family: Lato;
+    color: #004989;
+    font-size: 23px;
+    font-weight: 400;
+    text-align: center;
+}
+
+.titulo-contenido{
+    font-family: Lato;
+    font-size: 18px;
+    font-weight: 300;
+    text-decoration: underline;
+    transform: scale(1.041,0.932);
+    vertical-align: top;
+}
+
+.texto-contenido{
+    font-family: Lato;
+    font-size: 14px;
+    font-weight: 300;
+    max-width: 250px;
+    max-height: 280px;
+    float: right;
+    margin-right: 45px;
+    
+}
+/* SERVICIOS */
+.servicios{
+    background: url(img/backgrounds/servicios.png) no-repeat center center!important;
+    background-size: cover;  
+}
+
+#impermeabilizacion {
+
+}
+
+#renovacion{
+
+}
+
+#reemplazo{
+
+}
+
+#reparacion{
+
+}
+
+#mantpreventivo{
+
+}
+
+#inspeccion{
+
+}
+
+#contrato{
+
+}
+
+/* MEDIA QUERIES */
+
+@media(max-width: 1366px){
+    .navbar{
+        margin-left: 180px;
+    }
+
+    .navbar-nav>li>a{
+        font-size: 14px;
+        padding-bottom: 15px;
+    }
+}
+
+
+@media(max-width: 1024px){
+    .navbar{
+        width:230px;
+        margin-left: 100px;
+    }
+
+    .navbar-brand img{
+        max-width: 100%;
+
+    }
+
+    .navbar .container-fluid{
+        padding-left:15px;
+        padding-right: 15px;
+    }
+
+    .navbar-nav>li>a{
+        font-size: 13px;
+        padding-bottom: 15px;
+        padding-left: 30px;
+    }
+
+    .navbar-nav>li>a::before{
+        left: 5px;
+    }
+
+    #inicio1 .img-decoration{
+
+        max-width: calc(100% - 450px);
+    }
+
+    #inicio1 .img-text{
+        left: 350px;
+        max-width: calc(100% - 650px);
+    }
+    #inicio2 .img-decoration{
+        left: 332px;
+    }
+
+    #inicio2 .img-text{
+        left: auto;
+        right: 20px;
+        bottom: 28vh;
+        max-width: calc(100% - 700px);
+        min-width: auto;
+    }
+    #inicio3 .img-decoration{
+        max-width: calc(100% - 300px); 
+        bottom: 0px;
+        right: 15px;
+    }
+
+    #inicio3 .img-text{
+        top:30px;
+        left: 405px;
+        max-width: calc(100% - 650px);
+    }
+    #inicio4 .img-decoration{
+
+        left: 329px;
+    }
+
+    #inicio4 .img-text{
+        left: auto;
+        right: 9px;
+        max-width: calc(100% - 680px);
+    }
+
+    #inicio5 .img-text{
+        left: 360px;
+        top: 54vh;
+        max-width: calc(100% - 690px);
+    }
+
+
+}
+
+@media(max-width: 992px){
+    .navbar{
+        width:230px;
+        margin-left: 150px;
+    }
+
+    .navbar-brand img{
+        max-width: 30vh;
+
+    }
+
+    .navbar .container-fluid{
+        padding-left:15px;
+        padding-right: 15px;
+    }
+
+    .navbar-nav>li>a{
+        font-size: 13px;
+        padding-bottom: 15px;
+        padding-left: 30px;
+    }
+
+    .navbar-nav>li>a::before{
+        left: 5px;
+    }
+
+    #inicio1 .img-decoration{
+        max-width: calc(100% - 550px);
+    }
+
+    #inicio1 .img-text{
+        left: 400px;
+        max-width: calc(100% - 610px);
+    }
+    #inicio2 .img-decoration{
+        left: 381px;
+    }
+    #inicio2 .img-text{
+        left: 68vw; 
+        right: auto;
+        bottom: 20px;
+        max-width: calc(100% - 70vw);
+        min-width: auto;
+    }
+    #inicio3 .img-decoration{
+        max-width: calc(100% - 200px);
+        max-height: 100%;
+        top:0px;
+    }
+
+    #inicio3 .img-text{
+        left: 410px;
+        top: 20px;
+        max-width: calc(100% - 710px);
+    }
+    #inicio4 .img-decoration{
+        left: 381px;
+    }
+
+    #inicio4 .img-text{
+        left: auto;
+        right: 20px;
+        max-width: calc(100% - 680px);
+    }
+
+
+    #inicio5 .img-text{
+        left: 400px;
+        max-width: calc(100% - 680px);
+    }
+}
+@media(max-width: 769px){
+
+    .navbar-header {
+        float: none;
+    }
+    .navbar-toggle {
+        display: block;
+    }
+    .navbar-collapse {
+        border-top: 1px solid transparent;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+    .navbar-collapse.collapse {
+        display: none!important;
+    }
+    .navbar-nav {
+        float: none!important;
+        margin: 7.5px -15px;
+    }
+    .navbar-nav>li {
+        float: none;
+    }
+    .navbar-nav>li>a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .navbar-text {
+        float: none;
+        margin: 15px 0;
+    }
+    /* since 3.1.0 */
+    .navbar-collapse.collapse.in { 
+        display: block!important;
+    }
+    .collapsing {
+        overflow: hidden!important;
+    }
+    .navbar{
+        margin-left: 20px;
+        width: 200px;
+        height:200px;
+    }
+    .navbar-brand{
+        margin: 0 auto!important;
+    }
+    .navbar-brand img{
+        max-width: 100px;
+    }
+    .navbar-nav{
+        margin-top: 0px;
+    }
+
+    .navbar .container-fluid{
+        padding-left:15px;
+        padding-right: 15px;
+    }
+
+    .navbar-nav>li>a{
+        font-size: 10px;
+        padding-bottom: 5px;
+        padding-left: 50px;
+    }
+
+    .navbar-nav>li>a::before{
+        left: 35px;
+        font-size: 15px;
+        top: 9px;
+    }
+
+    #inicio1 .img-text{
+        left: auto;
+        right:50px;
+        top: 15px;
+        max-width: 55%;
+    }
+
+    #inicio1 .img-decoration{
+        max-width: 100%;
+    }
+
+    #inicio2 .img-text{
+        right: 5px;
+        left :auto;
+        bottom: 400px;
+        max-width: 55%;
+    }
+
+    #inicio2 .img-decoration{
+        left: 0px;
+        max-width: 100%;
+    }
+
+    #inicio3 .img-text{
+        left: auto;
+        right: 20px;
+        top: 10vh;
+        max-width: 60%;
+    }
+
+    #inicio3 .img-decoration{
+        bottom: 0px;
+        top:auto;
+        max-width: 100%;
+    }
+    #inicio4 .img-text{
+        right: 2px;
+        top: 5vh;
+        max-width: 55%;
+    }
+    #inicio4 .img-decoration{
+        max-width: 90%;
+        max-height:90%;
+        left: 0px;
+        bottom:0px;
+        top:auto;
+    }
+    #inicio5 .img-text{
+        right:40px;
+        left: auto;
+        top: 20px;
+        max-width: 60%;
+    }
+
+    #inicio5 .img-decoration{
+        max-width: 100%;
+    }
+}
+
+@media(max-width: 450px){
+    .vertical-align{
+        top: 40%;
+    }
+    .navbar{
+        margin-left: 20px;
+        width: 140px;
+        height:140px;
+    }
+    .navbar-brand{
+        margin: 0 auto!important;
+        top:0px;
+        margin-left: 10%!important;
+    }
+    .navbar-brand img{
+        max-width: 100%;
+    }
+    .navbar-nav>li>a{
+        font-size: 10px;
+        padding-bottom: 5px;
+        padding-left: 30px;
+    }
+    .navbar-nav>li>a::before{
+        left: 15px;
+        font-size: 15px;
+    }
+    #inicio1 .img-text{
+        right: 10px;
+        top: 20px;
+        max-width: 45%;
+    }
+    #inicio1 .img-decoration{
+        max-width:130%;
+        max-height:auto;
+        right:0px;
+    }
+    #inicio2 .img-text{
+        right: 5px;
+        bottom: 90px;
+        max-width: 45%;
+    }
+
+    #inicio3 .img-text{
+        right:8px;
+        top:45px;
+        max-width: 45%;
+    }
+
+    #inicio3 .img-decoration{
+        max-width:190%;
+        right:0px;
+    }
+    #inicio4 .img-text{
+        right: 8px;
+        top: 50px;
+        max-width: 45%;
+    }
+    #inicio4 .img-decoration{
+        max-width:100%;
+        max-height:auto;
+        right:0px;
+    }
+
+    #inicio5 .img-text{
+        right: 8px;
+        top: 40px;
+        max-width: 45%;
+    }
+    #inicio5 .img-decoration{
+        max-width:70%;
+        right:0px;
+    }
+}
