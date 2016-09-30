@@ -10,17 +10,12 @@
         <script type="text/javascript" src="js/jquery.fullPage.js"></script>
     </head>
     <body>
-
-
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container-fluid vertical-align">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
+                        <span>Menu</span>
                     </button>
                     <a class="navbar-brand" href="index.php"><img src="img/logo.png" alt="logo"></a>
                 </div>
@@ -72,7 +67,6 @@
                         <li><a href="#">BLOG</a></li>
                         <li><a href="#">CONTACTO</a></li>
                     </ul>
-
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>

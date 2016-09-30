@@ -44,7 +44,7 @@ function activateDropdownLinks(){
         case 'inspeccion':
             $('.dropdown-menu a:eq(5)').addClass('active dropdown-image');
             break;
-            case 'contrato':
+        case 'contrato':
             $('.dropdown-menu a:eq(6)').addClass('active dropdown-image');
             break;
         default: 
@@ -53,3 +53,11 @@ function activateDropdownLinks(){
     }
 }
 
+$('.navbar-collapse').on('show.bs.collapse', function () {
+    console.log('shown');
+    $('.navbar').addClass('open');
+});
+
+$('.navbar-collapse').on('hide.bs.collapse', function () {
+    $('.navbar').removeClass('open');
+});
