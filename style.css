@@ -286,13 +286,38 @@ Text Domain:
 }
 
 #empleos{
-    background: url(img/backgrounds/empleosbg.png) no-repeat center center;
+    background: url(img/backgrounds/empleos-bg.jpg) no-repeat center center;
     background-size: cover;
 }
 
-.contenedor-nosotros{
-    padding-top:200px;
+#compania1 .contenedor-nosotros{
+    margin-top:40vh;
+}
+
+#compania2 .contenedor-nosotros{
+    padding-top:15px;
     padding-right: 80px;
+}
+
+#compania3 .contenedor-nosotros{
+    margin-top: 30vh;
+}
+
+#mision{
+    margin-top: 30vh;
+    width: 400px;
+    height: 100px;
+}
+
+#vision{
+    margin-top: 20vh;
+    width: 400px;
+    height: 100px;
+    margin-left: 40px;
+}
+
+#valores{
+    width: 300px;
 }
 
 .contenedor-nosotros .img-decoration{
@@ -301,24 +326,69 @@ Text Domain:
     float: left;
 }
 
+.icons{
+    max-width:50px;
+    max-height: auto;
+    margin-top: 30px;
+}
+
+#mision .icons{
+    float: left;
+}
+
+#vision .icons{
+    float: right;
+}
+
+#fabricantes .align-div{
+    position: relative;
+    transform: translateY(10%);
+}
+
+#contenedor-fabricantes{
+    margin-top: 20px;
+}
+
+#contenedor-fabricantes > img {
+    display: inline-block;
+}
+
+#fabricantes .marca{
+    width: 150px;
+    margin: 15px 20px 15px 20px;
+}
+
+.contenedor-nosotros{
+    min-height: 100%;
+    height: 100%;
+}
+
+
+
+#certificaciones . img-decoration{
+    width: 500px;   
+}
+
 /* TEXTO NOSOTROS */
 
-.divider{
+
+#compania1 .divider{
     width: 280px;
     height: 3px;
     margin: 0 auto;
     display: block;
 }
 
-.titulo-nosotros{
+#compania1 .titulo-nosotros{
     font-family: Lato;
     color: #004989;
     font-size: 23px;
     font-weight: 400;
     text-align: center;
+    letter-spacing: 3px;
 }
 
-.titulo-contenido{
+#compania1 .titulo-contenido{
     font-family: Lato;
     font-size: 18px;
     font-weight: 300;
@@ -327,50 +397,422 @@ Text Domain:
     vertical-align: top;
 }
 
-.texto-contenido{
+#compania1 .texto-contenido{
+    font-family: Lato;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+#compania1 .tamanotexto{
+    max-width:400px;
+    margin-left: 180px;
+}
+
+#compania2 .titulo-nosotros,
+#compania3 .titulo-nosotros{
+    font-family: Lato;
+    color: #004989;
+    font-size: 23px;
+    font-weight: 400;
+    text-align: center;
+    letter-spacing: 3px;
+    text-align: left;
+    line-height: 10%;
+}
+
+#compania2 .titulo-contenido{
+    font-family: Lato;
+    font-size: 14px;
+    font-weight: 300;
+    transform: scale(1.041,0.932);
+    vertical-align: top;
+    color:#ffffff;
+}
+
+#compania2 .texto-contenido{
     font-family: Lato;
     font-size: 14px;
     font-weight: 300;
     max-width: 250px;
     max-height: 280px;
-    float: right;
-    margin-right: 45px;
-
+    vertical-align: top;
+    color: #ffffff;
 }
+
+#compania2 .tamanotexto{
+    max-width:400px;
+    margin-left: 60px;
+}
+
+#compania2 .divider, 
+#compania3 .divider{
+    width: 100px;
+    height: 3px;
+    display: block;
+    left:0px;
+}
+
+#compania3 .texto-contenido{
+    font-family: Lato;
+    font-weight: 900;
+    font-size: 16px;
+    color: #0e2f47;
+    letter-spacing: 1px;
+}
+
+#compania3 .valores{
+    width: 300px;
+    float:right;
+}
+
+#compania3 .carousel{
+    width: 200px!important;
+}
+
+#compania3 .carousel .img-decoration{
+    max-width: 200px;
+}
+
+#compania3 .carousel-indicators{
+    bottom: -8px!important;
+}
+
+#fabricantes .divider{
+    width: 310px;
+    height: 3px;
+    display: block;
+}
+
+#fabricantes .titulo-nosotros{
+    font-family: Lato;
+    color: #ffffff;
+    font-size: 23px;
+    font-weight: 400;
+    text-align: left;
+    letter-spacing: 3px;
+}
+
+#fabricantes .titulo-contenido{
+    font-family: Lato;
+    font-size: 18px;
+    font-weight: 500;
+    color: #ffffff;
+    letter-spacing: 2px;
+}
+
+#fabricantes .texto-contenido{
+    font-family: Lato;
+    font-size: 18px;
+    font-weight: 500;
+    color: #ffffff;
+    letter-spacing: 1.5px;
+}
+
+#fabricantes .tamanotexto{
+    max-width:400px;
+    margin-left: 180px;
+}
+
+#fabricantes .contenedor-nosotros{
+    min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+    min-height: 100vh; /* These two lines are counted as one :-)       */
+    display: flex;
+}
+
+#responsabilidad .divider{
+    width: 310px;
+    height: 3px;
+    display: block;
+    margin: 0 auto;
+}
+
+#responsabilidad .titulo-nosotros{
+    font-family: Lato;
+    color: #118771;
+    font-size: 23px;
+    font-weight: 400;
+    text-align: center;
+    letter-spacing: 3px;
+}
+
+#responsabilidad .tamano-texto{
+    max-width: 350px;  
+    margin-left: 150px;
+}
+
+#responsabilidad .texto-contenido{
+    font-family: Lato;
+    font-size: 16px;
+    font-weight: 300;
+    color: #100f0f;
+}
+
+#responsabilidad{
+    position:relative;
+}
+
+#responsabilidad .img-decoration{
+    max-width: 550px;
+    bottom:0px!important;
+    right:20px;
+    position: absolute;
+}
+
+#responsabilidad .contenedor-nosotros{
+    min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+    min-height: 100vh; /* These two lines are counted as one :-)       */
+    display: flex;
+    justify-content: center;
+}
+
+#certificaciones .divider{
+    height: 4px;
+    vertical-align: top;
+}
+
+#certificaciones .titulo-nosotros{
+    font-family: Lato;
+    color: #ffffff;
+    font-size: 23px;
+    font-weight: 400;
+    text-align: left;
+    letter-spacing: 3px;
+    display: inline-block;
+}
+#certificaciones .contenedor-nosotros{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#certificaciones .contenido{
+    position: relative;
+}
+#certificaciones .img-decoration{
+    max-width: 400px!important;
+    display:block!important;
+    margin: 0 auto!important;
+    position: absolute;
+}
+
+#empleos .contenido-empleos{
+    width: 350px;   
+    margin-top: 60vh;
+    margin-left: 50px;
+}
+
+#empleos .divider{
+    width: 310px;
+    height: 3px;
+    display: block;
+}
+
+#empleos .titulo-nosotros{
+    font-family: Lato;
+    color: #004989;
+    font-size: 23px;
+    font-weight: 400;
+    text-align: left;
+    letter-spacing: 3px;
+}
+
+
+#empleos .texto-contenido{
+    font-family: Lato;
+    font-size: 14px;
+    font-weight: 700;
+    color: #3e3e3e;
+}
+
+.contenido-empleos{
+    position: relative;
+    z-index: 20;
+    margin-left: 200px!important;
+}
+#empleos{
+    position:relative;
+}
+#empleos .bg-decoration{
+    width: 100%;
+    z-index: 10;
+    bottom:0px;
+    left:0px;
+    position: absolute;
+}
+
 /* SERVICIOS */
 .servicios{
     background: url(img/backgrounds/servicios.png) no-repeat center center!important;
     background-size: cover;  
 }
 
-#impermeabilizacion {
+.titulo-servicios {
+    font-family: Lato;
+    font-size: 23px;
+    font-weight: 400;
+    text-align: left;
+    letter-spacing: 3px;
+    color: #004989;
+    text-align: center;
+}
+
+.divider-servicios{
+    width: 320px;
+    height: 3px;
+    display: block;
+    margin: 0 auto;
+}
+
+.texto-contenido-servicios{
+    font-family: Lato;
+    font-size: 18px;
+    color: #5a5a5a;
+    font-weight: 600;
+}
+
+.tamano-texto-servicios{
+    margin-top: 30px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.img-decoration-servicios{
+    width: 180px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.contenedor{
+    min-height: 97%;  /* Fallback for browsers do NOT support vh unit */
+    min-height: 97vh; /* These two lines are counted as one :-)       */
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/*CIM SAFETY*/
+#cimsafety{
+    background: url(img/backgrounds/cimsafety.png) no-repeat center center;
+    background-size: cover;
+}
+
+#cimsafety .titulo {
+    font-family: Lato;
+    font-size: 23px;
+    font-weight: 400;
+    text-align: left;
+    letter-spacing: 3px;
+    color: #000000;
+}
+
+#cimsafety .divider{
+    width: 320px;
+    height: 3px;
+    display: block;
+}
+
+#cimsafety .texto-contenido{
+    font-family: Lato;
+    font-size: 16px;
+    color: #3b3b3b;
+    font-weight: 700;
+}
+
+#cimsafety .tamano-texto{
+    margin-top: 30px;
+    max-width: 500px;
+}
+
+#cimsafety .img-decoration{
+    width: 200px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+}
+
+#cimsafety .contenedor{
+    min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+    min-height: 100vh; /* These two lines are counted as one :-)       */
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* GALERIA */
+#galeria{
+    background: url(img/backgrounds/galeria.png) no-repeat center center;
+    background-size: cover;
+}
+
+/* CONTACTO */
+#contacto{
+    background: url(img/backgrounds/contacto.png) no-repeat center center;
+    background-size: cover;
+}
+#contacto .titulo{
+    font-family: Lato;
+    font-size: 20px;
+    font-weight: 400;
+    color: #03496a;
+}
+#contacto .textbox{
+    width: 400px;
+    border-width: 1px;
+    height: 40px;
+    border-style: solid;
+    border-color: #03496a;
+    margin-bottom: 10px;
+}
+
+#contacto .nombre{
+    background: url(img/element/icon-user.png) right no-repeat #ffffff;
+    background-position: 98%;
+}
+
+#contacto .direccion{
+    background: url(img/element/icon-location.png) right no-repeat #ffffff;
+    background-position: 98%;
+}
+
+#contacto .telefono{
+    background: url(img/element/icon-phone.png) right no-repeat #ffffff;
+    background-position: 98%;
+}
+#contacto .textarea-contacto{
+    width: 400px;
+    height: 165px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #03496a;
+    background: url(img/element/icon-mail.png) right no-repeat #ffffff;
+    background-position: 98% 5%;
+}
+
+#contacto .boton-contacto{
+    background-color: #03496a;
+    width: 100px;
+    height: 48px;
+    font-family: Lato;
+    color: #ffffff;
+    font-weight: 500;
+}
+
+#contacto .tamano-texto{
+    float:right;
 
 }
 
-#renovacion{
-
+.texto-contacto{
+    font-family: Lato;
+    font-weight: 600;
+    font-size: 18px;
+    color: #004989;
+    display: block;
+    text-align: right;
 }
-
-#reemplazo{
-
-}
-
-#reparacion{
-
-}
-
-#mantpreventivo{
-
-}
-
-#inspeccion{
-
-}
-
-#contrato{
-
-}
-
 /* MEDIA QUERIES */
 
 @media(max-width: 1366px){

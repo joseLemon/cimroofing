@@ -1,6 +1,7 @@
 $('.dropdown-menu a').click(function() {
     activateDropdownLinks();
 });
+
 function activateDropdownLinks(){
     var activeID = $('.section.active').attr('id');
     $('.dropdown-menu a').removeClass('active dropdown-image');

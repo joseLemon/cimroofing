@@ -33,11 +33,11 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">NOSOTROS <span></span></a>
                             <ul class="dropdown-menu">
                                 <div class="vertical-align links-container dropdown-font">
-                                    <li><a href="#">COMPAÑÍA</a></li>
-                                    <li><a href="#">FABRICANTES</a></li>
-                                    <li><a href="#">RESPONSABILIDAD</a></li>
-                                    <li><a href="#">CERTIFICACIONES</a></li>
-                                    <li><a href="#">EMPLEOS</a></li>
+                                    <li><a href="#compania">COMPAÑÍA</a></li>
+                                    <li><a href="#fabricantes">FABRICANTES</a></li>
+                                    <li><a href="#responsabilidad">RESPONSABILIDAD</a></li>
+                                    <li><a href="#certificaciones">CERTIFICACIONES</a></li>
+                                    <li><a href="#empleos">EMPLEOS</a></li>
                                 </div>
                             </ul>
                         </li>
@@ -49,23 +49,23 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">SERVICIOS <span></span></a>
                             <ul class="dropdown-menu">
                                 <div class="vertical-align links-container dropdown-font">
-                                    <li><a href="#">IMPERMEABILIZACIÓN</a></li>
-                                    <li><a href="#">RENOVACIÓN</a></li>
-                                    <li><a href="#">REEMPLAZO</a></li>
-                                    <li><a href="#">REPARACIÓN</a></li>
-                                    <li><a href="#">MANT. PREVENTIVO</a></li>
-                                    <li><a href="#">INSPECCIÓN</a></li>
-                                    <li><a href="#">CONTRATO</a></li>
+                                    <li><a href="#impermeabilizacion">IMPERMEABILIZACIÓN</a></li>
+                                    <li><a href="#renovacion">RENOVACIÓN</a></li>
+                                    <li><a href="#reemplazo">REEMPLAZO</a></li>
+                                    <li><a href="#reparacion">REPARACIÓN</a></li>
+                                    <li><a href="#mantpreventivo">MANT. PREVENTIVO</a></li>
+                                    <li><a href="#inspeccion">INSPECCIÓN</a></li>
+                                    <li><a href="#contrato">CONTRATO</a></li>
                                 </div>
                             </ul>
                         </li>
                         <?php } else {  ?>
                         <li><a href="page-servicios.php">SERVICIOS</a></li>
                         <?php } ?>
-                        <li><a href="#">CIM SAFETY</a></li>
-                        <li><a href="#">GALERÍA</a></li>
+                        <li><a href="page-cimsafety.php">CIM SAFETY</a></li>
+                        <li><a href="page-galeria.php">GALERÍA</a></li>
                         <li><a href="#">BLOG</a></li>
-                        <li><a href="#">CONTACTO</a></li>
+                        <li><a href="page-contacto.php">CONTACTO</a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
