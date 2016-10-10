@@ -256,8 +256,16 @@ Text Domain:
 
 /* NOSOTROS */
 #compania1{
-    background: url(img/backgrounds/compania.png) no-repeat center center;
-    background-size: cover;   
+    background: url(img/backgrounds/compania1.png) no-repeat center center;
+    background-size: cover; 
+    position: relative;
+}
+
+#compania1 .bg-asset{
+    position: absolute;
+    width: 80%;
+    height:100%;
+    z-index: 10;
 }
 
 #compania2{
@@ -291,7 +299,7 @@ Text Domain:
 }
 
 #compania1 .contenedor-nosotros{
-    margin-top:40vh;
+    margin-top:30vh;
 }
 
 #compania2 .contenedor-nosotros{
@@ -330,6 +338,7 @@ Text Domain:
     max-width:50px;
     max-height: auto;
     margin-top: 30px;
+    margin-left:5px;
 }
 
 #mision .icons{
@@ -514,9 +523,11 @@ Text Domain:
 }
 
 #fabricantes .contenedor-nosotros{
-    min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
-    min-height: 100vh; /* These two lines are counted as one :-)       */
+    min-height: 80%;  /* Fallback for browsers do NOT support vh unit */
+    min-height: 80vh; /* These two lines are counted as one :-)       */
     display: flex;
+    justify-content:center;
+    align-items:center;
 }
 
 #responsabilidad .divider{
@@ -585,7 +596,7 @@ Text Domain:
     justify-content: center;
 }
 
-#certificaciones .contenido{
+#certificaciones .contenido-cert{
     position: relative;
 }
 #certificaciones .img-decoration{
@@ -595,11 +606,6 @@ Text Domain:
     position: absolute;
 }
 
-#empleos .contenido-empleos{
-    width: 350px;   
-    margin-top: 60vh;
-    margin-left: 50px;
-}
 
 #empleos .divider{
     width: 310px;
@@ -624,14 +630,28 @@ Text Domain:
     color: #3e3e3e;
 }
 
-.contenido-empleos{
-    position: relative;
-    z-index: 20;
-    margin-left: 200px!important;
-}
 #empleos{
     position:relative;
 }
+
+
+#empleos .contenedor-nosotros{
+    display: inline-block;
+    position:relative;
+}
+
+#empleos .contenido-empleos{
+    width: 350px;   
+    z-index: 100;
+    /* margin-left: 200px!important;
+    margin-top: 55%;*/
+    position: absolute;
+    top:55vh;
+    right:150px;
+    display: inline-block;
+    overflow: hidden;
+}
+
 #empleos .bg-decoration{
     width: 100%;
     z-index: 10;
@@ -742,10 +762,51 @@ Text Domain:
 }
 
 /* GALERIA */
-#galeria{
-    background: url(img/backgrounds/galeria.png) no-repeat center center;
+.slide-wrapper {
+    position: relative
+}
+
+#galeria .img-bg{
+    /*  background: url(img/backgrounds/galeria2.png) no-repeat center center fixed;
+    background-size: cover;
+    z-index: 99999;*/
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+
+
+    min-width: 100%;
+    height: 100%;
+    z-index: 40;
+}
+
+#galeria .img-gallery{
+    z-index: 10;
+    min-width:100%;
+    min-height:100%;
+}
+
+#galeria .left, 
+#galeria .right, #galeria .carousel-indicators,
+#galeria .carousel-control{
+    z-index: 150;
+}
+
+#galeria .carousel-button{
+    margin: auto;
+    vertical-align: middle; 
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    max-width: 20px;
+}
+/* BLOG */
+#blog{
+    background: url(img/backgrounds/blog.png) no-repeat center center;
     background-size: cover;
 }
+
 
 /* CONTACTO */
 #contacto{
@@ -829,7 +890,7 @@ Text Domain:
 @media(max-width: 1024px){
     .navbar{
         width:230px;
-        margin-left: 100px;
+        margin-left: 0px;
     }
     .navbar-brand img{
         max-width: 100%;
@@ -847,22 +908,26 @@ Text Domain:
     .navbar-nav>li>a::before{
         left: 5px;
     }
+    .navbar .dropdown-menu{
+        right: -244px;
+        width:230px!important;
+    }
     #inicio1 .img-decoration{
 
         max-width: calc(100% - 450px);
     }
     #inicio1 .img-text{
-        left: 350px;
-        max-width: calc(100% - 650px);
+        left: 300px;
+        max-width: calc(100% - 600px);
     }
     #inicio2 .img-decoration{
-        left: 332px;
+        left: 230px;
     }
     #inicio2 .img-text{
         left: auto;
         right: 20px;
-        bottom: 28vh;
-        max-width: calc(100% - 700px);
+        bottom: 20px;
+        max-width: calc(100% - 650px);
         min-width: auto;
     }
     #inicio3 .img-decoration{
@@ -872,39 +937,72 @@ Text Domain:
     }
     #inicio3 .img-text{
         top:30px;
-        left: 405px;
+        left: 280px;
         max-width: calc(100% - 650px);
     }
     #inicio4 .img-decoration{
 
-        left: 329px;
+        left: 230px;
     }
     #inicio4 .img-text{
         left: auto;
         right: 9px;
-        max-width: calc(100% - 680px);
+        max-width: calc(100% - 650px);
     }
     #inicio5 .img-text{
-        left: 360px;
-        top: 54vh;
-        max-width: calc(100% - 690px);
+        left: 250px;
+        max-width: calc(100% - 650px);
+    }
+    /* NOSOTROS */
+    #fabricantes .align-div{
+        transform: none;
+    }
+    #responsabilidad .tamano-texto{
+        margin-left: 10px;
     }
 
+    #empleos .contenedor-nosotros{
+        position:relative;
+    }
+    #empleos .contenido-empleos{
+        width: 330px;
+        margin-top: 537px;
+        margin-left: 90px!important;
+        position: absolute; 
+        bottom: 0;
+    }
 
+    #empleos .divider{
+        width: 260px;
+    }
+
+    #empleos .titulo-nosotros{
+        display: inline-block;
+    }
+    #empleos .texto-contenido{
+        font-size: 12px;
+    }
+
+    /* GALERIA */
+    #galeria{
+        background-color: #e6e6ff;
+    }
+
+    #galeria .slide-wrapper{
+        top: 22.5%;
+        margin-left: 230px;
+        display: inline-block;
+
+    }
 }
 
 @media(max-width: 992px){
     .navbar{
-        width:230px;
-        margin-left: 150px;
-    }
-    .navbar-brand img{
-        max-width: 30vh;
-
+        width:210px;
     }
     .navbar .container-fluid{
-        padding-left:15px;
-        padding-right: 15px;
+        padding-left:5px;
+        padding-right:5px;
     }
     .navbar-nav>li>a{
         font-size: 13px;
@@ -913,6 +1011,13 @@ Text Domain:
     }
     .navbar-nav>li>a::before{
         left: 5px;
+    }
+    .navbar .dropdown-menu{
+        right: -215px;
+        width:210px!important;
+    }
+    .navbar-nav .dropdown-font>li>a{
+        font-size: 13px;
     }
     #inicio1 .img-decoration{
         max-width: calc(100% - 550px);
@@ -952,6 +1057,69 @@ Text Domain:
     #inicio5 .img-text{
         left: 400px;
         max-width: calc(100% - 680px);
+    }
+    /* NOSOTROS */
+    #compania1 .titulo-nosotros{
+        font-size: 20px;
+    }
+
+    #compania1 .titulo-contenido{
+        font-size: 15px;
+    }
+
+    #compania1 .texto-contenido{
+        font-family: Lato;
+        font-size: 13px;
+        font-weight: 400;
+    }
+
+    #compania1 .tamanotexto{
+        max-width:400px;
+        margin-left: 180px;
+    }
+
+    #mision{
+        margin-top: 100px;
+        width: 400px;
+        height: 100px;
+    }
+
+    #compania2 .tamanotexto{
+        width: 280px;
+    }
+
+    #compania3 .valores{
+        max-width: 250px; 
+    }
+    #fabricantes .marca{
+        max-width: 100px;
+    }
+    #responsabilidad .tamano-texto{
+        margin-left: 30px;
+    }
+    #responsabilidad .img-decoration{
+        max-width: 400px;
+    }
+    #certificaciones .img-decoration{
+        max-width: 350px!important;
+        margin: 0 auto;
+        display: block;
+        position:absolute; 
+    }
+    #certificaciones .divider{
+        width: 350px!important;
+    }
+    #certificaciones .titulo-nosotros{
+        font-size: 21px;
+    }
+    /* CIM SAFETY */
+    #cimsafety .titulo {
+        text-align:center;
+    }
+
+    #cimsafety .divider{
+        display: block;
+        margin: 0 auto;
     }
 }
 

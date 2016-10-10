@@ -64,7 +64,7 @@
                         <?php } ?>
                         <li><a href="page-cimsafety.php">CIM SAFETY</a></li>
                         <li><a href="page-galeria.php">GALERÍA</a></li>
-                        <li><a href="#">BLOG</a></li>
+                        <li><a href="page-blog.php">BLOG</a></li>
                         <li><a href="page-contacto.php">CONTACTO</a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->

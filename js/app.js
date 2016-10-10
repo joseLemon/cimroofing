@@ -1,4 +1,4 @@
-$('.dropdown-menu a').click(function() {
+$('.dropdown-menu a').click(function(){
     activateDropdownLinks();
 });
 
@@ -62,3 +62,7 @@ $('.navbar-collapse').on('show.bs.collapse', function () {
 $('.navbar-collapse').on('hide.bs.collapse', function () {
     $('.navbar').removeClass('open');
 });
+
+$('.carousel').carousel({
+   interval: 7000
+  });

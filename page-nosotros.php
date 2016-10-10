@@ -2,12 +2,13 @@
 <?php include('header.php'); ?>
 <div id="fullpage">
     <section class="section" id="compania1">
+       <img src="img/backgrounds/elementscompania.png" alt="elementos fondo compania 1" class="bg-asset">
         <div class="row">
             <div class="col-sm-7"></div>
             <div class="col-sm-5 contenedor-nosotros">
                 <h3 class="titulo-nosotros">Acerca de Nosotros</h3><br>
                 <img src="img/content/division-compania.png" class="divider"><br>
-                <img src="img/content/compania.png" alt="persona compania 1" class="img-decoration">          
+                <img src="img/content/empresario.jpg" alt="persona compania 1" class="img-decoration">          
                 <text class="titulo-contenido">Compañía </text><br>
                 <div class="tamanotexto">
                     <text class="texto-contenido">
@@ -34,10 +35,12 @@
                 </div>
                 <div id="vision">
                     <img src="img/element/vision.png" alt="icono vision" class="icons">
+                    <div class="tamanotexto">
                     <text class="titulo-contenido">Visión</text><br>
                     <text class="texto-contenido">
                         Consolidar CIM Roofing como la compañía líder en el Mercado de Texas, siendo reconocidos como un símbolo de confianza y profesionalismo dedicado al servicio, calidad e innovación.
                     </text>
+                </div>
                 </div>
             </div>
         </div>
@@ -137,7 +140,7 @@
         </div>
     </section>
     <section class="section" id="empleos">
-        <img src="img/backgrounds/asset-empleos.png" alt="triangulos fondo empleos" class="bg-decoration">
+       <img src="img/backgrounds/asset-empleos.png" alt="triangulos fondo empleos" class="bg-decoration">
         <div class="row">
             <div class="col-sm-6"></div>
             <div class="col-sm-6 contenedor-nosotros">
@@ -148,7 +151,6 @@
                         <p>Estamos constantemente buscando gente talentosa para formar cuadrillas profesionales.</p>
                         Si quisiera ser parte de un excelente ambiente de trabajo y cree que CIM Roofing sería una buena empresa para usted, por favor contactenos por correo electrónico o llene la siguiente forma y envíela a info@cimroofing.com.
                     </text>
-
                 </div>
             </div>
         </div>
