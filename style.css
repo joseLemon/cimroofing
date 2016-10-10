@@ -128,6 +128,11 @@ Text Domain:
     position: absolute!important;
 }
 
+.img-text {
+    -webkit-filter: drop-shadow(3px 3px 3px #222);
+    filter:         drop-shadow(3px 3px 3px #222);
+}
+
 /* .dropdown-font>li:hover>a */
 /* INICIO */
 
@@ -139,17 +144,16 @@ Text Domain:
 }
 
 #inicio1 .img-decoration{
-    max-width: calc(100% - 510px);
+    max-height: 85%;
     position: absolute;
     right: 0px;
     bottom: 0px;
-    max-height: 100%;
 }
 
 #inicio1 .img-text{
     margin: auto;
     position: absolute;
-    left: 35vw;
+    left: 520px;
     top: 10vh;
     z-index: 10;
     max-height: 100%;
@@ -174,11 +178,9 @@ Text Domain:
 #inicio2 .img-text{
     margin: auto;
     position: absolute;
-    left: 57vw;
-    right: 182px;
+    right: 15px;
     bottom: 25px;
     z-index: 10;
-    max-height: 100%;
     max-width: calc(100% - 800px);
 }
 
@@ -189,17 +191,16 @@ Text Domain:
 }
 
 #inicio3 .img-decoration{
-    max-width: calc(100% - 510px);
     position: absolute;
     right: 0px;
     bottom: 0px;
-    max-height: 100%;
+    max-height: 85%;
 }
 
 #inicio3 .img-text{
     margin: auto;
     position: absolute;
-    left: 35vw;
+    left: 520px;
     top: 10vh;
     z-index: 10;
     max-height: 100%;
@@ -214,21 +215,19 @@ Text Domain:
 
 #inicio4 .img-decoration{
     position: absolute;
-    left: 460px;
+    left: 400px;
     bottom: 0px;
-    top:0px;
     height: 100%;
+    max-height: 85%;
 }
 
 #inicio4 .img-text{
     margin: auto;
     position: absolute;
-    left: 57vw;
-    right: 182px;
+    right: 180px;
     top: 50px;
     z-index: 10;
-    max-height: 100%;
-    max-width: calc(100% - 850px);
+    max-width: calc(40vw);
 }
 
 #inicio5{
@@ -237,17 +236,16 @@ Text Domain:
     position: relative;
 }
 #inicio5 .img-decoration{
-    max-width: calc(100% - 510px);
     position: absolute;
     right: 0px;
     bottom: 0px;
-    max-height: 100%;
+    max-height: 85%;
 }
 
 #inicio5 .img-text{
     margin: auto;
     position: absolute;
-    left: 35vw;
+    left: 520px;
     top: 35vh;
     z-index: 10;
     max-height: 100%;
@@ -752,12 +750,14 @@ Text Domain:
     background: url(img/backgrounds/contacto.png) no-repeat center center;
     background-size: cover;
 }
+
 #contacto .titulo{
     font-family: Lato;
     font-size: 20px;
     font-weight: 400;
     color: #03496a;
 }
+
 #contacto .textbox{
     width: 400px;
     border-width: 1px;
@@ -781,6 +781,7 @@ Text Domain:
     background: url(img/element/icon-phone.png) right no-repeat #ffffff;
     background-position: 98%;
 }
+
 #contacto .textarea-contacto{
     width: 400px;
     height: 165px;
@@ -823,6 +824,28 @@ Text Domain:
         font-size: 14px;
         padding-bottom: 15px;
     }
+    #inicio1 .img-text{
+        left: 480px;
+        max-width: calc(100% - 650px);
+    }
+    #inicio2 .img-text{
+        bottom: auto;
+        top: 40vh;
+        max-width: calc(100% - 650px);
+    }
+    #inicio3 .img-text{
+        left: 480px;
+        max-width: calc(100% - 650px);
+    }
+    #inicio4 .img-text{
+        left: auto;
+        right: 15px;
+        max-width: calc(100% - 700px);
+    }
+    #inicio5 .img-text{
+        left: 480px;
+        max-width: calc(100% - 690px);
+    }
 }
 
 
@@ -848,8 +871,6 @@ Text Domain:
         left: 5px;
     }
     #inicio1 .img-decoration{
-
-        max-width: calc(100% - 450px);
     }
     #inicio1 .img-text{
         left: 350px;
@@ -861,28 +882,26 @@ Text Domain:
     #inicio2 .img-text{
         left: auto;
         right: 20px;
-        bottom: 28vh;
+        bottom: auto;
         max-width: calc(100% - 700px);
         min-width: auto;
     }
     #inicio3 .img-decoration{
-        max-width: calc(100% - 300px); 
         bottom: 0px;
         right: 15px;
     }
     #inicio3 .img-text{
         top:30px;
-        left: 405px;
+        left: 340px;
         max-width: calc(100% - 650px);
     }
     #inicio4 .img-decoration{
-
         left: 329px;
     }
     #inicio4 .img-text{
         left: auto;
         right: 9px;
-        max-width: calc(100% - 680px);
+        max-width: 45vw;
     }
     #inicio5 .img-text{
         left: 360px;
@@ -896,7 +915,6 @@ Text Domain:
 @media(max-width: 992px){
     .navbar{
         width:230px;
-        margin-left: 150px;
     }
     .navbar-brand img{
         max-width: 30vh;
@@ -915,43 +933,40 @@ Text Domain:
         left: 5px;
     }
     #inicio1 .img-decoration{
-        max-width: calc(100% - 550px);
     }
     #inicio1 .img-text{
-        left: 400px;
-        max-width: calc(100% - 610px);
+        left: 340px;
+        max-width: 55vw;
     }
     #inicio2 .img-decoration{
-        left: 381px;
+        left: 330px;
     }
     #inicio2 .img-text{
-        left: 68vw; 
+        left: 340px; 
         right: auto;
-        bottom: 20px;
-        max-width: calc(100% - 70vw);
+        max-width: 55vw;
         min-width: auto;
+        top: 40vh;
     }
     #inicio3 .img-decoration{
-        max-width: calc(100% - 200px);
-        max-height: 100%;
-        top:0px;
+        right: 0;
     }
     #inicio3 .img-text{
-        left: 410px;
-        top: 20px;
-        max-width: calc(100% - 710px);
+        top: 10vh;
+        left: 340px;
+        max-width: 55vw;
     }
     #inicio4 .img-decoration{
-        left: 381px;
+        left: 330px;
     }
     #inicio4 .img-text{
-        left: auto;
-        right: 20px;
-        max-width: calc(100% - 680px);
+        left: 340px;
+        max-width: 55vw;
     }
     #inicio5 .img-text{
-        left: 400px;
-        max-width: calc(100% - 680px);
+        top: 10vh;
+        left: 340px;
+        max-width: 55vw;
     }
 }
 
@@ -994,6 +1009,7 @@ Text Domain:
         height: 46px;
     }
     .navbar-toggle {
+        display: block;
         margin-top: 10px;
         float: left;
         border: 0;
@@ -1084,52 +1100,53 @@ Text Domain:
         padding-right: 15px;
     }
     #inicio1 .img-text{
-        left: auto;
-        right:50px;
-        top: 15px;
-        max-width: 55%;
+        left: 15px;
+        right: auto;
+        top: 35px;
+        max-width: calc(100% - 200px);
     }
     #inicio1 .img-decoration{
-        max-width: 100%;
     }
     #inicio2 .img-text{
-        right: 5px;
-        left :auto;
-        bottom: 400px;
-        max-width: 55%;
+        right: 15px;
+        left: auto;
+        max-width: calc(100% - 30px);
+        top: 35vh;
     }
     #inicio2 .img-decoration{
-        left: 0px;
-        max-width: 100%;
+        left: 0;
+        left: auto;
     }
     #inicio3 .img-text{
         left: auto;
-        right: 20px;
-        top: 10vh;
-        max-width: 60%;
+        right: 15px;
+        top: 70px;
+        max-width: calc(100% - 30px);
     }
     #inicio3 .img-decoration{
         bottom: 0px;
-        top:auto;
-        max-width: 100%;
+        top: auto;
+        max-width: 90%;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
     }
     #inicio4 .img-text{
-        right: 2px;
-        top: 5vh;
-        max-width: 55%;
+        right: auto;
+        left: 15px;
+        top: 35px;
+        max-width: calc(100% - 30px);
     }
-    #inicio4 .img-decoration{
-        max-width: 90%;
-        max-height:90%;
+    #inicio4 .img-decoration {
         left: 0px;
-        bottom:0px;
-        top:auto;
+        bottom: 0px;
+        top: auto;
     }
-    #inicio5 .img-text{
-        right:40px;
+    #inicio5 .img-text {
+        right: 15px;
         left: auto;
-        top: 20px;
-        max-width: 60%;
+        top: 35px;
+        max-width: calc(100% - 30px);
     }
     #inicio5 .img-decoration{
         max-width: 100%;
@@ -1141,49 +1158,46 @@ Text Domain:
         top: 40%;
     }
     #inicio1 .img-text{
-        right: 10px;
-        top: 20px;
-        max-width: 45%;
+        right: 15px;
+        top: auto;
+        bottom: 5vh;
+        max-width: calc(100% - 30px);
     }
     #inicio1 .img-decoration{
-        max-width:130%;
         max-height:auto;
         right:0px;
+    }
+    #inicio2 .img-decoration {
+        right: auto;
+        left: 0;
     }
     #inicio2 .img-text{
         right: 5px;
-        bottom: 90px;
-        max-width: 45%;
+        top: 35vh;
     }
-
     #inicio3 .img-text{
         right:8px;
-        top:45px;
-        max-width: 45%;
+        top: 45px;
     }
-
     #inicio3 .img-decoration{
-        max-width:190%;
         right:0px;
+        max-width: 100%;
     }
     #inicio4 .img-text{
-        right: 8px;
-        top: 50px;
-        max-width: 45%;
+        right: 15px;
+        top: 5vh;
     }
     #inicio4 .img-decoration{
-        max-width:100%;
-        max-height:auto;
-        right:0px;
+        left: 0;
+        max-width: 100%;
+        height: auto;
     }
 
     #inicio5 .img-text{
         right: 8px;
         top: 40px;
-        max-width: 45%;
     }
     #inicio5 .img-decoration{
-        max-width:70%;
         right:0px;
     }
 }
