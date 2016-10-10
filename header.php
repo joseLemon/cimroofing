@@ -29,8 +29,8 @@
                         <li><a href="index.php">INICIO <span class="sr-only">(current)</span></a></li>
                         <?php } ?>
                         <?php if($page == 'nosotros')  { ?>
-                        <li class="active" class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">NOSOTROS <span></span></a>
+                        <li class="active dropdown open">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">NOSOTROS <span></span></a>
                             <ul class="dropdown-menu">
                                 <div class="vertical-align links-container dropdown-font">
                                     <li><a href="#compania">COMPAÑÍA</a></li>
@@ -45,8 +45,8 @@
                         <li><a href="page-nosotros.php">NOSOTROS</a></li>
                         <?php } ?>
                         <?php if($page == 'servicios')  { ?>
-                        <li class="active" class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">SERVICIOS <span></span></a>
+                        <li class="active dropdown open">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">SERVICIOS <span></span></a>
                             <ul class="dropdown-menu">
                                 <div class="vertical-align links-container dropdown-font">
                                     <li><a href="#impermeabilizacion">IMPERMEABILIZACIÓN</a></li>
