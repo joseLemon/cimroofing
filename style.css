@@ -639,7 +639,7 @@ Text Domain:
 
 /* SERVICIOS */
 .servicios{
-    background: url(img/backgrounds/servicios.png) no-repeat center center!important;
+    background: url(img/backgrounds/servicios.png) no-repeat center center;
     background-size: cover;  
 }
 
