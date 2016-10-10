@@ -739,9 +739,58 @@ Text Domain:
 }
 
 /* GALERIA */
-#galeria{
-    background: url(img/backgrounds/galeria.png) no-repeat center center;
+#galeria {
+    position: relative;
+}
+
+#galeria::after {
+    content: '';
+    background: url(img/backgrounds/asset-galeria.png) no-repeat center center;
     background-size: cover;
+    position: absolute;
+    display: block;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    pointer-events: none;
+}
+
+#galeria .carousel .item {
+    overflow: hidden;
+}
+
+#galeria .carousel .item img {
+    min-width: 100%;
+    width: auto!important;
+    height: 100vh;
+    max-width: none;
+    position: relative;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+
+#galeria .carousel-control span{
+    color: #015c7b;
+    font-size: 100px!important;
+}
+
+#galeria .carousel-control span::before {
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    transform: translateY(-50%);
+    height: 120px;
+}
+
+#galeria .carousel-control.left span::before {
+    left: 0;
+}
+
+#galeria .carousel-control.right span::before {
+    right: 0;
 }
 
 /* CONTACTO */
