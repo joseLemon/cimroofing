@@ -707,6 +707,8 @@ Text Domain:
     display: flex;
     align-items: center;
     justify-content: center;
+    
+    margin-left: -40px;
 }
 /*CIM SAFETY*/
 #cimsafety{
@@ -884,7 +886,7 @@ Text Domain:
 
 #blog pos-indicators{
     bottom: 0px;
-    
+
 }
 
 #blog .link-blog{
@@ -1229,17 +1231,17 @@ Text Domain:
     #empleos .titulo-nosotros{
         font-size: 18px;
     }
-    
+
     /* SERVICIOS */
     .contenedor{
         position: absolute;
         right:50px;
     }
-    
+
     .texto-contenido-servicios{
         font-size: 15px;
     }
-    
+
     .img-decoration-servicios{
         width: 160px;
         margin-top: 20px;
@@ -1248,7 +1250,7 @@ Text Domain:
     #cimsafety .img-decoration{
         width:180px;
     }
-    
+
     #cimsafety .contenedor{
         position: absolute;
         right:10px;
@@ -1259,490 +1261,1057 @@ Text Domain:
     }
     /* CONTACTO */
     #contacto .contenido{
-        
+        margin-top: 50px;
     }
-    
+
     #contacto .titulo{
-        
+        font-size: 18px;
     }
-    
+
     #contacto .textbox{
-        
+        width: 370px;
+        height: 30px;
     }
-    
+
     #contacto .textarea-contacto{
         width: 370px;
         height: 150px;
     }
-    
+
     #contacto .boton-contacto{
         width: 90px;
         height: 40px;
     }
-    
+
     #contacto .texto-contacto{
         font-size: 15px;   
     }
 }
-    @media(max-width: 768px){
-        .navbar {
-            margin-left: 0;
-            height: auto;
-            width: 66px;
-            -webkit-transition: width 300ms ease;
-            -moz-transition: width 300ms ease;
-            transition: width 300ms ease;
-        }
-        .navbar.open {
-            width: 200px;
-        }
-        .navbar .vertical-align {
-            transform: none;
-            top: 0;
-        }
-        .navbar-header {
-            margin: 0!important;
-            height: 53px;
-        }
-        .navbar-brand {
-            height: 50px;
-            padding: 0;
-            float: right;
-            width: auto;
-            height: 0;
-            opacity: 0;
-        }
-        .navbar.open .navbar-brand {
-            padding-top: 4px;
-            position: absolute;
-            right: 15px;
-            opacity: 1;
-        }
-        .navbar-brand img {
-            width: auto;
-            height: 46px;
-        }
-        .navbar-toggle {
-            margin-top: 10px;
-            float: left;
-            border: 0;
-            border-radius: 0;
-            width: 36px;
-            height: 30px;
-            background-color: transparent!important;
-        }
-        .navbar-toggle::before, .navbar-toggle::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            pointer-events: none;
-            -webkit-transition: -webkit-transform 0.25s;
-            transition: transform 0.25s;
-            -webkit-transform-origin: 50% 50%;
-            transform-origin: 50% 50%;
-            background-color: #888;
-        }
-        .navbar-toggle::before {
-            -webkit-transform: translate3d(0, -10px, 0) scale3d(0.8, 1, 1);
-            transform: translate3d(0, -10px, 0) scale3d(0.8, 1, 1);
-        }
-        .navbar-toggle:not(.collapsed)::before {
-            -webkit-transform: rotate3d(0, 0, 1, 45deg);
-            transform: rotate3d(0, 0, 1, 45deg);
-        }
-        .navbar-toggle::after {
-            -webkit-transform: translate3d(0, 10px, 0) scale3d(0.8, 1, 1);
-            transform: translate3d(0, 10px, 0) scale3d(0.8, 1, 1);
-        }
-        .navbar-toggle:not(.collapsed)::after {
-            -webkit-transform: rotate3d(0, 0, 1, -45deg);
-            transform: rotate3d(0, 0, 1, -45deg);
-        }
-        .navbar-toggle span {
-            position: absolute;
-            left: 0;
-            overflow: hidden;
-            width: 100%;
-            height: 2px;
-            text-indent: 200%;
-            -webkit-transition: opacity 0.25s;
-            transition: opacity 0.25s;
-            background-color: #888;
-        }
-        .navbar-toggle:not(.collapsed) span {
-            opacity: 0;
-        }
-        .navbar-collapse {
-            border-top: 1px solid transparent;
-            box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
-            padding: 0;
-        }
-        .navbar-collapse.collapse {
-            display: none!important;
-        }
-        .navbar-nav {
-            margin: 0;
-            border-bottom: 0;
-        }
-        .navbar-nav>li>a {
-            padding-top: 6px;
-            padding-bottom: 6px;
-            font-size: 10px;
-            padding-left: 50px;
-        }
-        .navbar-nav>li>a::before{
-            left: 35px;
-            font-size: 15px;
-            top: 5px;
-        }
-        .navbar-text {
-            margin: 15px 0;
-        }
-        /* since 3.1.0 */
-        .navbar-collapse.collapse.in { 
-            display: block!important;
-        }
-        .collapsing {
-            overflow: hidden!important;
-        }
-        .navbar .container-fluid{
-            padding-left:15px;
-            padding-right: 15px;
-        }
-        #inicio1 .img-text{
-            left: auto;
-            right:auto;
-            bottom: 200px;
-            max-width: 60%;
-        }
-        #inicio1 .img-decoration{
-            max-width: 100%;
-        }
-        #inicio2 .img-text{
-            right: 5px;
-            left :auto;
-            bottom: 327px;
-            max-width: 55%;
-        }
-        #inicio2 .img-decoration{
-            left: 0px;
-            max-width: 100%;
-        }
-        #inicio3 .img-text{
-            left: auto;
-            right: 60px;
-            top: 20px;
-            max-width: 60%;
-        }
-        #inicio3 .img-decoration{
-            bottom: 0px;
-            top:auto;
-            max-width: 200%;
-        }
-        #inicio4 .img-text{
-            left: auto;
-            right: 40px;
-            top: 20px;
-            max-width: 55%;
-        }
-        #inicio4 .img-decoration{
-            max-width: 100%;
-            left: 0px;
-            bottom:0px;
-            top:auto;
-        }
-        #inicio5 .img-text{
-            right:60px;
-            left: auto;
-            top: 5px;
-            max-width: 70%;
-        }
-        #inicio5 .img-decoration{
-            max-width: 100%;
-        }
-/* NOSOTROS */
-        #compania1{
-            position: relative;
-        }
-        
-        #compania1 .contenedor-nosotros{
-            position:absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 600px;
-        }
-        
-        #compania1 .bg-asset{
-            margin-left: -325px;
-        }
-        
-        #fullpage .titulo-nosotros{
-            font-size: 40px;
-        }
-        
-        #compania1 .divider{
-            width: 400px;
-        }
-        
-        #compania1 .img-decoration{
-            max-width: 210px;
-            margin-left: -20px;
-            margin-right: 5px;
-        }
-        
-        #compania1 .titulo-contenido,
-        #compania2 .titulo-contenido{
-            font-size: 25px;
-            font-weight: 700;
-        }
-        
-        #compania1 .tamanotexto{
-            max-width: 600px;
-        }
-        
-        #compania1 .texto-contenido{
-         font-size: 19px;
-         font-weight: 600;
-        }
-        
-        #compania2{
-            position: relative;
-        }
-        
-        #compania2 .divider{
-            width:180px;
-        }
-        
-        #compania2 .contenedor-nosotros{
-            position:absolute;
-            margin-left: 200px;
-        }
-        
-        #mision{
-            margin-top: 300px;
-        }
-        
-        #compania2 .texto-contenido{
-            font-size: 18px;
-        }
-        
-        #compania2 .tamanotexto{
-            width: 400px;
-            margin-left: 80px;
-        }
-        
-        #compania2 .icons{
-            max-width: 60px;
-        }
-        
-        #vision .icons{
-            margin-left: 0px;
-        }
-        
-        #vision .tamanotexto{
-            margin-left: -10px;
-        }
-        
-        #compania3 .div1{
-            margin-left: 0px;
-            padding-left: 80px;
-        }
-        
-        #compania3 .divider{
-            width:160px;
-        }
-        
-        #compania3 .texto-contenido{
-            font-size: 20px;
-        }
-        
-        #compania3 .div2{
-            margin-left: -500px;
-        }
-        #compania3 .carousel{
-            width: 300px!important;
-        }
-        
-        #compania3 .img-decoration{
-            max-width: 300px!important;
-        }
-        
-        #valores{
-            max-width:300px;
-        }
-        
-        #fabricantes{
-            position:relative;
-        }
-        
-        #fabricantes .contenedor-nosotros{
-            position: absolute;
-            width: 600px;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-        
-        #fabricantes .titulo-nosotros{
-            text-align: center;
-        }
-        
-        #fabricantes .divider{
-            display: block;
-            margin: 0 auto;
-            width: 470px;
-        }
-        
-        #contenedor-fabricantes{
-            text-align: center;
-        }
-        
-        #fabricantes .tamano-texto{
-          text-align: left;
-            margin-left: 40px;
-        }
-        
-        #fabricantes .marca{
-            width:200px;    
-        }
-        
-        #fabricantes .titulo-contenido{
-            font-size: 25px;
-        }
-        
-        #fabricantes .texto-contenido{
-            font-size: 25px;
-        }
-        
-        #responsabilidad{
-            background: url(img/backgrounds/responsabilidad-small.png) no-repeat center center;
-            background-size: cover;
-            position: relative;
-        }
-        
-        #responsabilidad .contenedor-nosotros{
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 600px;
-        }
-        
-        #responsabilidad .tamano-texto{
-            max-width: 600px;
-            
-        }
-        
-        #responsabilidad .texto-contenido{
-            font-size: 24px;
-        }
-        
-        #responsabilidad .img-decoration{
-         max-width: 600px!important;
-         text-align: center;
-        }
-        
-        
-        #certificaciones{
-            position: relative;
-        }
-        
-        #certificaciones .contenedor-nosotros{
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-        
-        #certificaciones .titulo-nosotros{
-            text-align: center;
-        }
-        
-        #certificaciones .divider{
-            display: block;
-            margin: 0 auto;
-        }
-        
-        #certificaciones .img-decoration{
-            max-width: 550px!important;
-        }
-        
-        #empleos .bg-decoration{
-            width: 500%;
-            left: -1500px;
-        }
-        
-        #empleos .contenido-empleos{
-            width: 650px;
-            right: 30px;
-            bottom: 40px;
-        }
-        
-        #empleos .texto-contenido{
-            font-size: 25px;
-        }
-        
-        #empleos .divider{
-            width: 370px;
-        }
-/* SERVICIOS */
-        
-        
-/*  */
+@media(max-width: 768px){
+    .navbar {
+        margin-left: 0;
+        height: auto;
+        width: 66px;
+        -webkit-transition: width 300ms ease;
+        -moz-transition: width 300ms ease;
+        transition: width 300ms ease;
+    }
+    .navbar.open {
+        width: 200px;
+    }
+    .navbar .vertical-align {
+        transform: none;
+        top: 0;
+    }
+    .navbar-header {
+        margin: 0!important;
+        height: 53px;
+    }
+    .navbar-brand {
+        height: 50px;
+        padding: 0;
+        float: right;
+        width: auto;
+        height: 0;
+        opacity: 0;
+    }
+    .navbar.open .navbar-brand {
+        padding-top: 4px;
+        position: absolute;
+        right: 15px;
+        opacity: 1;
+    }
+    .navbar-brand img {
+        width: auto;
+        height: 46px;
+    }
+    .navbar-toggle {
+        display: block;
+        margin-top: 10px;
+        float: left;
+        border: 0;
+        border-radius: 0;
+        width: 36px;
+        height: 30px;
+        background-color: transparent!important;
+    }
+    .navbar-toggle::before, .navbar-toggle::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        pointer-events: none;
+        -webkit-transition: -webkit-transform 0.25s;
+        transition: transform 0.25s;
+        -webkit-transform-origin: 50% 50%;
+        transform-origin: 50% 50%;
+        background-color: #888;
+    }
+    .navbar-toggle::before {
+        -webkit-transform: translate3d(0, -10px, 0) scale3d(0.8, 1, 1);
+        transform: translate3d(0, -10px, 0) scale3d(0.8, 1, 1);
+    }
+    .navbar-toggle:not(.collapsed)::before {
+        -webkit-transform: rotate3d(0, 0, 1, 45deg);
+        transform: rotate3d(0, 0, 1, 45deg);
+    }
+    .navbar-toggle::after {
+        -webkit-transform: translate3d(0, 10px, 0) scale3d(0.8, 1, 1);
+        transform: translate3d(0, 10px, 0) scale3d(0.8, 1, 1);
+    }
+    .navbar-toggle:not(.collapsed)::after {
+        -webkit-transform: rotate3d(0, 0, 1, -45deg);
+        transform: rotate3d(0, 0, 1, -45deg);
+    }
+    .navbar-toggle span {
+        position: absolute;
+        left: 0;
+        overflow: hidden;
+        width: 100%;
+        height: 2px;
+        text-indent: 200%;
+        -webkit-transition: opacity 0.25s;
+        transition: opacity 0.25s;
+        background-color: #888;
+    }
+    .navbar-toggle:not(.collapsed) span {
+        opacity: 0;
+    }
+    .navbar-collapse {
+        border-top: 1px solid transparent;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+        padding: 0;
+    }
+    .navbar-collapse.collapse {
+        display: none!important;
+    }
+    .navbar-nav {
+        margin: 0;
+        border-bottom: 0;
+    }
+    .navbar-nav>li>a {
+        padding-top: 6px;
+        padding-bottom: 6px;
+        font-size: 10px;
+        padding-left: 50px;
+    }
+    .navbar-nav>li>a::before{
+        left: 35px;
+        font-size: 15px;
+        top: 5px;
+    }
+    .navbar-text {
+        margin: 15px 0;
+    }
+    /* since 3.1.0 */
+    .navbar-collapse.collapse.in { 
+        display: block!important;
+    }
+    .collapsing {
+        overflow: hidden!important;
+    }
+    .navbar .container-fluid{
+        padding-left:15px;
+        padding-right: 15px;
+    }
+    #inicio1 .img-text{
+        left: auto;
+        right:auto;
+        bottom: 200px;
+        max-width: 60%;
+    }
+    #inicio1 .img-decoration{
+        max-width: 100%;
+    }
+    #inicio2 .img-text{
+        right: 5px;
+        left :auto;
+        bottom: 327px;
+        max-width: 55%;
+    }
+    #inicio2 .img-decoration{
+        left: 0px;
+        max-width: 100%;
+    }
+    #inicio3 .img-text{
+        left: auto;
+        right: 60px;
+        top: 20px;
+        max-width: 60%;
+    }
+    #inicio3 .img-decoration{
+        bottom: 0px;
+        top:auto;
+        max-width: 200%;
+    }
+    #inicio4 .img-text{
+        left: auto;
+        right: 40px;
+        top: 20px;
+        max-width: 55%;
+    }
+    #inicio4 .img-decoration{
+        max-width: 100%;
+        left: 0px;
+        bottom:0px;
+        top:auto;
+    }
+    #inicio5 .img-text{
+        right:60px;
+        left: auto;
+        top: 5px;
+        max-width: 70%;
+    }
+    #inicio5 .img-decoration{
+        max-width: 100%;
+    }
+    /* NOSOTROS */
+    #compania1{
+        position: relative;
     }
 
-    @media(max-width: 450px){
-        .vertical-align{
-            top: 40%;
-        }
-        #inicio1 .img-text{
-            right: 10px;
-            top: 20px;
-            max-width: 45%;
-        }
-        #inicio1 .img-decoration{
-            max-width:130%;
-            max-height:auto;
-            right:0px;
-        }
-        #inicio2 .img-text{
-            right: 5px;
-            bottom: 90px;
-            max-width: 45%;
-        }
-
-        #inicio3 .img-text{
-            right:8px;
-            top:45px;
-            max-width: 45%;
-        }
-
-        #inicio3 .img-decoration{
-            max-width:190%;
-            right:0px;
-        }
-        #inicio4 .img-text{
-            right: 8px;
-            top: 50px;
-            max-width: 45%;
-        }
-        #inicio4 .img-decoration{
-            max-width:100%;
-            max-height:auto;
-            right:0px;
-        }
-
-        #inicio5 .img-text{
-            right: 8px;
-            top: 40px;
-            max-width: 45%;
-        }
-        #inicio5 .img-decoration{
-            max-width:70%;
-            right:0px;
-        }
+    #compania1 .contenedor-nosotros{
+        position:absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 600px;
     }
+
+    #compania1 .bg-asset{
+        margin-left: -325px;
+    }
+
+    #fullpage .titulo-nosotros{
+        font-size: 40px;
+    }
+
+    #compania1 .divider{
+        width: 400px;
+    }
+
+    #compania1 .img-decoration{
+        max-width: 210px;
+        margin-left: -20px;
+        margin-right: 5px;
+    }
+
+    #compania1 .titulo-contenido,
+    #compania2 .titulo-contenido{
+        font-size: 25px;
+        font-weight: 700;
+    }
+
+    #compania1 .tamanotexto{
+        max-width: 600px;
+    }
+
+    #compania1 .texto-contenido{
+        font-size: 19px;
+        font-weight: 600;
+    }
+
+    #compania2{
+        position: relative;
+    }
+
+    #compania2 .divider{
+        width:180px;
+    }
+
+    #compania2 .contenedor-nosotros{
+        position:absolute;
+        margin-left: 200px;
+    }
+
+    #mision{
+        margin-top: 300px;
+    }
+
+    #compania2 .texto-contenido{
+        font-size: 18px;
+    }
+
+    #compania2 .tamanotexto{
+        width: 400px;
+        margin-left: 80px;
+    }
+
+    #compania2 .icons{
+        max-width: 60px;
+    }
+
+    #vision .icons{
+        margin-left: 0px;
+    }
+
+    #vision .tamanotexto{
+        margin-left: -10px;
+    }
+
+    #compania3 .div1{
+        margin-left: 0px;
+        padding-left: 80px;
+    }
+
+    #compania3 .divider{
+        width:160px;
+    }
+
+    #compania3 .texto-contenido{
+        font-size: 20px;
+    }
+
+    #compania3 .div2{
+        margin-left: -500px;
+    }
+    #compania3 .carousel{
+        width: 300px!important;
+    }
+
+    #compania3 .img-decoration{
+        max-width: 300px!important;
+    }
+
+    #valores{
+        max-width:300px;
+    }
+
+    #fabricantes{
+        position:relative;
+    }
+
+    #fabricantes .contenedor-nosotros{
+        position: absolute;
+        width: 600px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    #fabricantes .titulo-nosotros{
+        text-align: center;
+    }
+
+    #fabricantes .divider{
+        display: block;
+        margin: 0 auto;
+        width: 470px;
+    }
+
+    #contenedor-fabricantes{
+        text-align: center;
+    }
+
+    #fabricantes .tamano-texto{
+        text-align: left;
+        margin-left: 40px;
+    }
+
+    #fabricantes .marca{
+        width:200px;    
+    }
+
+    #fabricantes .titulo-contenido{
+        font-size: 25px;
+    }
+
+    #fabricantes .texto-contenido{
+        font-size: 25px;
+    }
+
+    #responsabilidad{
+        background: url(img/backgrounds/responsabilidad-small.png) no-repeat center center;
+        background-size: cover;
+        position: relative;
+    }
+
+    #responsabilidad .contenedor-nosotros{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 600px;
+    }
+
+    #responsabilidad .tamano-texto{
+        max-width: 600px;
+
+    }
+
+    #responsabilidad .texto-contenido{
+        font-size: 24px;
+    }
+
+    #responsabilidad .img-decoration{
+        max-width: 600px!important;
+        text-align: center;
+    }
+
+
+    #certificaciones{
+        position: relative;
+    }
+
+    #certificaciones .contenedor-nosotros{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    #certificaciones .titulo-nosotros{
+        text-align: center;
+    }
+
+    #certificaciones .divider{
+        display: block;
+        margin: 0 auto;
+    }
+
+    #certificaciones .img-decoration{
+        max-width: 550px!important;
+    }
+
+    #empleos .bg-decoration{
+        width: 500%;
+        left: -1500px;
+    }
+
+    #empleos .contenido-empleos{
+        width: 650px;
+        right: 30px;
+        bottom: 40px;
+    }
+
+    #empleos .texto-contenido{
+        font-size: 25px;
+    }
+
+    #empleos .divider{
+        width: 370px;
+    }
+    /* SERVICIOS */
+    .divider-servicios{
+        width: 100%;
+    }
+
+    #impermeabilizacion{
+        position: relative;
+    }
+
+    #impermeabilizacion .contenedor{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 700px;
+    }
+
+    #renovacion{
+        position: relative;
+    }
+
+    #renovacion .contenedor{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 700px;
+    }
+
+    #reemplazo{
+        position: relative;
+    }
+
+    #reemplazo .contenedor{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 700px;
+    }
+
+    #reparacion{
+        position: relative;
+    }
+
+    #reparacion .contenedor{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 700px;
+    }
+
+    #mantpreventivo{
+        position: relative;
+    }
+
+    #mantpreventivo .contenedor{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 700px;
+    }
+
+    #inspeccion{
+        position: relative;
+    }
+
+    #inspeccion .contenedor{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 700px;
+    }
+
+    #contrato{
+        position: relative;
+    }
+
+    #contrato .contenedor{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 700px;
+    }
+
+    .titulo-servicios{
+        font-size: 40px;
+    }
+
+    .texto-contenido-servicios{
+        font-size: 25px;
+    }
+
+    .img-decoration-servicios{
+        width: 180px;
+    }
+    /* CIM SAFETY */
+    #cimsafety .contenedor{
+        position: absolute;
+        width: 550px;
+        right: 0px;
+        margin-top: 120px;
+    }
+
+    #cimsafety .titulo{
+        font-size: 40px;
+    }
+
+    #cimsafety .texto-contenido{
+        font-size: 20px;
+    }
+    /* GALERIA */
+    #galeria .left{
+        left:0px;
+    }
+
+    /* BLOG */    
+    #blog{
+        background-position: 70%;
+    }
+
+    #blog .contenedor{
+        right: auto;
+        left: 20%;
+    }
+
+    #blog .titulo{
+        font-size: 25px;
+    }
+
+    #blog .tamano-texto{
+        height: 300px;
+    }
+
+    #blog .titulo-contenido{
+        font-size: 25px;
+    }
+
+    #blog .link-blog,
+    #blog .texto-contenido{
+        font-size: 20px;
+    }
+
+    /* CONTACTO */
+    #contacto .contenedor{
+        right: auto;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 600px;
+    }
+
+    #contacto .titulo{
+        font-size: 32px;
+        text-align: center;
+    }
+
+    #contacto .textbox{
+        width: 470px;
+        height: 40px;
+        margin-left: 45px;
+        font-size: 20px;
+    }
+
+    #contacto .textarea-contacto{
+        width: 470px;
+        height: 200px;
+        margin-left: 45px;
+        font-size: 20px;
+    }
+
+    #contacto .boton-contacto{
+        margin-left: 45px;
+        font-size: 20px;
+        height: 60px;
+    }
+
+    #contacto .texto-contacto{
+        margin-right: 45px;
+        font-size: 25px;
+    }
+}
+
+@media(max-width: 450px){
+    .vertical-align{
+        top: 40%;
+    }
+    #inicio1 .img-text{
+        left: 5px;
+        top: auto;
+        bottom: 180px;
+        max-width: 70%;
+        margin: 0;
+    }
+    #inicio1 .img-decoration{
+        max-width: none;
+        max-height: 95%;
+        right: -40px;
+    }
+    #inicio2 .img-text{
+        /* right: 35px;
+        bottom: 290px;*/
+        top: 45%;
+        bottom: auto;
+        left: 50%;
+        right: auto;
+        transform: translate(-50%, -50%);
+        max-width: 80%;
+    }
+
+    #inicio2 .img-decoration{
+        height: 100%;
+        max-width: none;
+    }
+
+    #inicio3 .img-text{
+        left: 0px;
+        right: auto;
+        bottom: 200px;
+        top: auto;
+        max-width: 70%;
+    }
+
+    #inicio3 .img-decoration{
+        max-width: none;
+        max-height: 110%;
+        right: -150px;
+    }
+
+    #inicio4 .img-text{
+        right: 10px;
+        top: 40px;
+        max-width: 70%;
+    }
+    #inicio4 .img-decoration{
+        max-width: none;
+        max-height: 88%;
+        left: -70px;
+    }
+
+    #inicio5 .img-text{
+        left: 50px;
+        top: 20px;
+        max-width: 70%;
+    }
+    #inicio5 .img-decoration{
+        max-width: none;
+        max-height: 85%;
+        right:0px;
+    }
+
+    /* NOSOTROS */    
+    #compania1 .contenedor-nosotros{
+        width: 100%;
+        top: 40%;
+    }
+
+    #compania1 .img-decoration{
+        max-width: 120px;
+    }
+
+    #compania1 .titulo-nosotros{
+        font-size: 25px;
+    }
+
+    #compania1 .divider{
+        width: 290px;
+    }
+
+    #compania1 .titulo-contenido{
+        font-size: 15px;
+    }
+
+    #compania1 .texto-contenido{
+        font-size: 15px;
+    }
+
+    #compania2 .contenedor-nosotros{
+        margin-left: auto;
+    }
+
+    #compania2 .titulo-nosotros{
+        font-size: 25px;
+        margin-left: 60px;
+    }
+
+    #compania2 .divider{
+        width: 120px;
+        margin-left: 60px;
+    }
+
+    #mision{
+        margin-top: 15vh;
+        margin-left: -10px;
+    }
+
+    #compania2 .icons{
+        max-width: 50px;
+    }
+
+    #compania2 .tamanotexto{
+        width: 60%;
+    }
+
+    #mision .tamanotexto{
+        margin-left: 65px;
+    }
+
+    #compania2 .titulo-contenido{
+        font-size: 15px;
+    }
+
+    #compania2 .texto-contenido{
+        font-size: 12px;
+    }
+
+    #vision{
+        margin-left: 10px;
+        margin-top: auto;
+        position: absolute;
+        bottom: 10%;
+    }
+
+    #vision .icons{
+        float: none;
+    }
+
+    #vision .tamanotexto{
+        margin-left: -10px;
+        float: left;
+    }
+
+    #compania3{
+        position: relative;
+        background: url(img/backgrounds/compania1.png) no-repeat left center;
+        background-size: cover;
+    }
+
+    #compania3 .div1{
+        position: absolute;
+        margin: 0;
+        margin-top: 5vh;
+        padding: 0;
+        top: 50%;
+        left: 80%;
+        transform: translate(-50%, -50%);
+        width: 90%;
+    }
+
+    #compania3 .titulo-nosotros{
+        font-size: 25px;
+    }
+
+    #compania3 .divider{
+        width: 110px;
+    }
+
+    #compania3 .texto-contenido{
+        font-size: 12px;
+    }
+
+    #compania3 .div2{
+        position: absolute;
+        margin: 0;
+        top: 90%;
+        left: 55%;
+        transform: translate(-50%, -50%);
+    }
+
+    #compania3 .carousel{
+        width: 65vw!important;
+    }
+
+    #compania3 .img-decoration{
+        max-width: 100%!important;
+    }
+
+    #fabricantes .contenedor-nosotros{
+        width: 100%;
+        margin-top: 2vh;
+    }
+
+    #fabricantes .titulo-nosotros{
+        font-size: 25px;
+    }
+
+    #fabricantes .divider{
+        width: 320px;
+    }
+
+    #fabricantes .marca{
+        margin: 20px;
+        max-width: 60px!important;
+    }
+
+    #fabricantes .titulo-contenido{
+        font-size: 15px;
+    }
+
+    #fabricantes .texto-contenido{
+        font-size: 14px;
+    }
+
+    #responsabilidad .contenedor-nosotros{
+        width: 100%;
+        top: 60%;
+        margin-top: -5vh;
+    }
+
+    #responsabilidad .tamano-texto{
+        max-width: 100%;
+        margin:0;
+    }
+
+    #responsabilidad .divider{
+        width: 95%;
+    }
+
+    #responsabilidad .titulo-nosotros{
+        font-size: 25px;
+    }
+
+    #responsabilidad .texto-contenido{
+        font-size: 15px;
+    }
+
+    #responsabilidad .img-decoration{
+        max-width:210px!important;
+        display: block;
+        margin: 0 auto;
+    }
+
+    #certificaciones .contenedor-nosotros{
+        width:100%;
+        margin-top: 10px;
+    }
+
+    #certificaciones .titulo-nosotros{
+        font-size: 25px;
+    }
+
+    #certificaciones .divider{
+        max-width: 90%;
+    }
+
+    #certificaciones .img-decoration{
+        max-width: 90%!important;
+        margin-left: 15px!important;
+    }
+
+    #empleos .bg-decoration{
+        /*width: 420%;
+        left: -800px;*/
+        width: auto;
+        height: 80%;
+        right:-45%;
+        left: auto;
+    }
+
+    #empleos .contenido-empleos{
+        bottom: -20px;
+        width: 80%;
+        height: 300px;
+        left: 20px;
+    }
+
+    #empleos .titulo-nosotros{
+        font-size: 20px;
+    }
+
+    #empleos .divider{
+        width: 85%;
+    }
+
+    #empleos .texto-contenido{
+        font-size: 14px;
+    }
+
+
+    /* SERVICIOS */
+    #impermeabilizacion .contenedor,
+    #renovacion .contenedor,
+    #reemplazo .contenedor,
+    #reparacion .contenedor,
+    #mantpreventivo .contenedor,
+    #inspeccion .contenedor,
+    #contrato .contenedor{
+        max-width: 100%;
+    }
+
+    .titulo-servicios{
+        font-size: 20px;
+    }
+
+    .divider-servicios{
+        width: 90%;
+    }
+    .texto-contenido-servicios{
+        font-size: 14px;
+    }
+
+    .img-decoration-servicios{
+        width: 30%;
+    }
+    /* CIM SAFETY */
+    #cimsafety{
+        background-position: 80% 0%;
+    }
+
+    #cimsafety .contenedor{
+        width: 100%;
+        margin-top: 0px;
+    }
+
+    #cimsafety .titulo{
+        font-size: 20px;
+    }
+
+    #cimsafety .divider{
+        width: 90%;
+    }
+
+    #cimsafety .tamano-texto{
+        display: inline;
+    }
+
+    #cimsafety .texto-contenido{
+        font-size: 12px;
+    }
+
+    #cimsafety .img-decoration{
+        width: 35%;
+    }
+
+    /* GALERIA */    
+
+    /* BLOG */
+    #blog{
+        background-position: 75% 0%;
+    }
+
+    #blog .contenedor{
+        right: auto;
+        width: 100%;
+        left: 0;
+    }
+
+    #blog .titulo{
+        font-size: 20px;
+        display: inline;
+    }
+
+    #blog .divider{
+        width: 55px;
+        height: 2px;
+    }
+
+    #blog .pos{
+        width: 100%;
+    }
+
+    #blog .titulo-contenido{
+        font-size: 17px;
+    }
+
+    #blog .tamano-texto{
+        width: 90%;
+        height: 160px;
+    }
+
+    #blog .texto-contenido,
+    #blog .link-blog{
+        font-size: 12px;
+    }
+
+
+    /* CONTACTO */
+    #contacto{
+        background-position: 100% 100%;
+    }
+
+    #contacto .contenedor{
+        width: 100%;
+    }
+
+    #contacto .contenido{
+        width: 100%;
+    }
+
+    #contacto .titulo{
+        font-size: 16px;
+    }
+
+    #contacto .textbox{
+        width: 95%;
+        height: 30px;
+        margin-left: auto;
+        font-size: 13px;
+    }
+
+    #contacto .textarea-contacto{
+        width: 95%;
+        height: 115px;
+        margin-left: auto;
+        font-size: 13px;
+    }
+
+    #contacto .boton-contacto{
+        margin-left: auto;
+        font-size: 13px;
+        width: 70px;
+        height: 40px;
+    }
+
+    #contacto .texto-contacto{
+        font-size: 12px;
+    }
+}
