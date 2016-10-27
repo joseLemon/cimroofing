@@ -591,9 +591,8 @@ Text Domain:
     color: #ffffff;
     font-size: 23px;
     font-weight: 400;
-    text-align: left;
+    text-align: center;
     letter-spacing: 3px;
-    display: inline-block;
 }
 #certificaciones .contenedor-nosotros{
     min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
@@ -707,7 +706,7 @@ Text Domain:
     display: flex;
     align-items: center;
     justify-content: center;
-    
+
     margin-left: -40px;
 }
 /*CIM SAFETY*/
@@ -828,6 +827,10 @@ Text Domain:
 #blog{
     background: url(img/backgrounds/blog1.png) no-repeat center center;
     background-size: cover;
+}
+
+#blog .contenedor{
+    margin-left: 0;
 }
 
 #blog .titulo{
@@ -1259,6 +1262,14 @@ Text Domain:
     #galeria .left{
         left:200px;
     }
+
+    /* BLOG */
+    #blog .pos{
+        left: 95px;
+        top: 30%;
+    }
+
+
     /* CONTACTO */
     #contacto .contenido{
         margin-top: 50px;
@@ -1708,6 +1719,7 @@ Text Domain:
         left: 50%;
         transform: translate(-50%, -50%);
         width: 700px;
+        margin-left: 0;
     }
 
     #renovacion{
@@ -1720,6 +1732,7 @@ Text Domain:
         left: 50%;
         transform: translate(-50%, -50%);
         width: 700px;
+        margin-left: 0;
     }
 
     #reemplazo{
@@ -1732,6 +1745,7 @@ Text Domain:
         left: 50%;
         transform: translate(-50%, -50%);
         width: 700px;
+        margin-left: 0;
     }
 
     #reparacion{
@@ -1744,6 +1758,7 @@ Text Domain:
         left: 50%;
         transform: translate(-50%, -50%);
         width: 700px;
+        margin-left: 0;
     }
 
     #mantpreventivo{
@@ -1756,6 +1771,7 @@ Text Domain:
         left: 50%;
         transform: translate(-50%, -50%);
         width: 700px;
+        margin-left: 0;
     }
 
     #inspeccion{
@@ -1768,6 +1784,7 @@ Text Domain:
         left: 50%;
         transform: translate(-50%, -50%);
         width: 700px;
+        margin-left: 0;
     }
 
     #contrato{
@@ -1780,6 +1797,7 @@ Text Domain:
         left: 50%;
         transform: translate(-50%, -50%);
         width: 700px;
+        margin-left: 0;
     }
 
     .titulo-servicios{
@@ -1847,6 +1865,7 @@ Text Domain:
         top: 50%;
         transform: translate(-50%, -50%);
         width: 600px;
+        margin-left: 0;
     }
 
     #contacto .titulo{
@@ -2184,7 +2203,8 @@ Text Domain:
     #mantpreventivo .contenedor,
     #inspeccion .contenedor,
     #contrato .contenedor{
-        max-width: 100%;
+        width: 100%;
+        left: 50%;
     }
 
     .titulo-servicios{
@@ -2256,6 +2276,8 @@ Text Domain:
 
     #blog .pos{
         width: 100%;
+        left: 30px;
+        top: 35%;
     }
 
     #blog .titulo-contenido{
@@ -2313,5 +2335,343 @@ Text Domain:
 
     #contacto .texto-contacto{
         font-size: 12px;
+    }
+}
+
+@media(max-height: 440px){
+    #inicio1 .img-text{
+        left: 40px;
+        bottom: 130px;
+        max-width: 55%s;
+    }
+
+    #inicio2 .img-text{
+        bottom: 10px;
+        right:40px;
+    }
+
+    #inicio3 .img-text{
+        left: 10px;
+        right: auto;
+        top: 65px;
+        max-width: 55%;
+    }
+
+    #inicio5 .img-text{
+        right: auto;
+        left: 5%;
+        top: 30%;
+        max-width: 60%;
+    }
+
+    /* NOSOTROS */
+    #compania1 .contenedor-nosotros{
+        top: 30%;
+        left: 55%;
+        width: 90%;
+    }
+
+    #compania1 .titulo-nosotros{
+        font-size: 25px;
+    }
+
+    #compania1 .titulo-nosotros,
+    #compania2 .titulo-nosotros,
+    #compania3 .titulo-nosotros{
+        margin-bottom: 0;
+    }
+
+    #compania1 .divider{
+        width: 230px;
+    }
+
+    #compania1 .img-decoration{
+        max-width: 150px;
+    }
+
+    #compania1 .titulo-contenido{
+        font-size: 15px;
+    }
+
+    #compania1 .texto-contenido{
+        font-size: 13px;
+    }
+
+    #compania1 .tamanotexto{
+        margin-left: 135px;
+        max-width: 350px;
+    }
+
+    #compania2 .contenedor-nosotros{
+        padding-top: 0;
+        margin-left: 2%;/*35px;*/
+    }
+
+    #compania2 .titulo-nosotros{
+        margin-left: 170px;
+    }
+
+    #compania2 .divider{
+        margin-left: 170px;
+        width: 100px;
+    }
+
+    #compania2 .icons{
+        max-width: 40px;
+    }
+
+    #compania2 .tamanotexto{
+        width: 355px;
+        margin-left: 50px;
+    }
+
+    #compania2 .titulo-contenido{
+        font-size: 15px;
+    }
+
+    #compania2 .texto-contenido{
+        font-size: 13px;
+    }
+
+    #mision{
+        margin-top: 30px;
+    }
+
+    #vision{
+        /* margin-top: 14vh;
+        margin-left: 160px;*/
+        position: absolute;
+        bottom: -10px;
+        right: 50px;
+    }
+
+    #vision .tamanotexto{
+        margin-left: 0;
+    }
+
+    #compania3{
+        position: relative;
+    }
+
+    #compania3 .div1{
+        position: absolute;
+        padding: 0;
+        margin: 0;
+        right: auto;
+        left: 56%;
+        top: 20%;
+    }
+
+    #fullpage .titulo-nosotros{
+        font-size: 18px;
+    }
+
+    #compania3 .divider{
+        width: 80px;
+    }
+
+    #compania3 .texto-contenido{
+        font-size: 12px;
+    }
+
+    #compania3 .div2{
+        /* margin-top: 60px;
+        margin-left: 115px;*/
+        margin:0;
+        position: absolute;
+        top: 15%;
+        left: 12%;
+    }
+
+    #compania3 .carousel{
+        width: 150px!important;
+    }
+
+    #compania3 .img-decoration{
+        max-width: 150px!important;
+    }
+
+    #fabricantes .contenedor-nosotros{
+        width: 100%;
+    }
+
+    #fabricantes .divider{
+        width: 270px;
+    }
+
+    #fabricantes .marca{
+        width: 11%;
+        margin: 10px;
+    }
+
+    #fabricantes .titulo-contenido,
+    #fabricantes .texto-contenido{
+        font-size: 13px;
+    }
+
+    #responsabilidad .contenedor-nosotros{
+        width: 100%;
+    }
+
+    #responsabilidad .titulo-nosotros{
+        font-size: 18px;
+    }
+
+    #responsabilidad .divider{
+        width: 380px;
+    }
+
+    #responsabilidad .texto-contenido{
+        font-size: 13px;
+    }
+
+    #responsabilidad .img-decoration{
+        max-width: 35%!important;
+    }
+
+    #certificaciones .titulo-nosotros,
+    #responsabilidad .titulo-nosotros,
+    #fabricantes .titulo-nosotros{
+        margin:0;
+    }
+
+    #certificaciones .divider{
+        width: 310px!important;
+    }
+
+    #certificaciones .img-decoration{
+        width: 65%;
+        float: none;
+    }
+
+    #empleos .bg-decoration{
+        width: 1100px;
+        left: auto;
+        right: -60px;
+    }
+
+    #empleos .contenido-empleos{
+        width: 70%;
+        right: 5%;
+        bottom: 0px;
+    }
+
+    #empleos .divider{
+        width: 200px;
+    }
+
+    #empleos .texto-contenido{
+        font-size: 13px;
+    }
+
+    /* SERVICIOS */
+
+    #impermeabilizacion .contenedor,
+    #renovacion .contenedor,
+    #reemplazo .contenedor,
+    #reparacion .contenedor,
+    #mantpreventivo .contenedor,
+    #inspeccion .contenedor,
+    #contrato .contenedor{
+        width: 100%;
+        height: 100%;
+    }
+    
+    .titulo-servicios{
+        font-size: 18px;
+    }
+    
+    .texto-contenido-servicios{
+        font-size: 13px;
+    }
+    
+    .img-decoration-servicios{
+        width: 20%;
+    }
+    
+    .divider-servicios{
+        width: 65%;
+    }
+    
+    /* BLOG */
+    #blog{
+        background-position: 100% 50%;
+        background-size: 1000px;/* 960px 150%;*/
+    }
+    
+    #blog .contenedor{
+        right: 10px;
+    }
+    
+    #blog .pos{
+        top: auto;
+        left: auto;
+        right: 0px;
+    }
+    
+    #blog .titulo{
+        font-size: 20px;
+    }
+    
+    #blog .titulo-contenido{
+        font-size: 15px;
+    }
+    
+    #blog .texto-contenido,
+    #blog .link-blog{
+        font-size: 15px;
+    }
+    
+    #blog .tamano-texto{
+        width: 400px;
+        height: 170px;
+    }
+    
+    /* CONTACTO */
+    #contacto{
+        background-position: 100%;
+        background-size: 1000px;
+    }
+    
+    #contacto .contenedor{
+        width: 100%;
+        height: 100%;
+        margin-left: 0px;
+    }
+    
+    #contacto .contenido{
+        margin-top: 0;
+    }
+    
+    #contacto .titulo{
+        font-size: 16px;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+    
+    #contacto .textbox{
+        width: 100%;
+        height: 25px;
+        font-size: 12px;
+        margin-left: 0;
+    }
+    
+    #contacto .textarea-contacto{
+        width: 100%;
+        height: 100px;
+        font-size: 12px;
+        background-position: 99% 10%;
+        margin-left: 0;
+    }
+    
+    #contacto .boton-contacto{
+        font-size: 14px;
+        width: 70px;
+        height: 35px;
+        margin-left: 0;
+    }
+    
+    #contacto .texto-contacto{
+        font-size: 13px;
     }
 }

@@ -1,6 +1,11 @@
-$('.dropdown-menu a').click(function(){
+/*$('.dropdown-menu a').click(function(){
     activateDropdownLinks();
-});
+});*/
+
+
+ $(".dropdown-menu").on("click", "li", function(){
+            activateDropdownLinks();
+         });
 
 function activateDropdownLinks(){
     var activeID = $('.section.active').attr('id');
