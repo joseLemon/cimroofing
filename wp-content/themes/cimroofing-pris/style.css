@@ -103,7 +103,6 @@ Text Domain:
     top: calc(-100vh + 90px);
     width: 220px!important;
     color: #ffffff!important;
-    display: block!important;
 }
 
 
@@ -113,23 +112,29 @@ Text Domain:
     font-family: Lato;
     font-weight: 900;
     color: #ffffff;
-    height: 50px;
-    width: 200px;
+    padding: 15px 0 15px 0;
+    width: 100%;
     margin: 0 auto;
     display: inline-block;
     text-decoration: none;
     -webkit-transition: color 500ms ease;
     -moz-transition: color 500ms ease;
     transition: color 500ms ease;
+    position: relative;
 }
 
 .dropdown-image:before{
-    content: url(img/element/dropdown-line)!important;   
-    right:0px!important;
-    width:26px!important;
+    content: '';
+    right: -20px!important;
+    width: 26px!important;
     height: 3px!important;
     display: block;
     position: absolute!important;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    transform: translateY(-50%);
+    background: #fff;
 }
 
 /* .dropdown-font>li:hover>a */
@@ -886,12 +891,12 @@ Text Domain:
 #blog .carousel-indicators li{
     background-color: #26a990;  
 }
-
+/*
 #blog pos-indicators{
     bottom: 0px;
 
 }
-
+*/
 #blog .link-blog{
     background-color: #26a990;
     color:#ffffff;
@@ -1406,10 +1411,12 @@ Text Domain:
         padding-top: 6px;
         padding-bottom: 6px;
         font-size: 10px;
-        padding-left: 50px;
+        padding-left: 28px;
+        padding-right: 0;
+        width: 100%;
     }
     .navbar-nav>li>a::before{
-        left: 35px;
+        left: 15px;
         font-size: 15px;
         top: 5px;
     }
@@ -1417,7 +1424,7 @@ Text Domain:
         margin: 15px 0;
     }
     /* since 3.1.0 */
-    .navbar-collapse.collapse.in { 
+    .navbar-collapse.collapse.in {
         display: block!important;
     }
     .collapsing {
@@ -1426,6 +1433,26 @@ Text Domain:
     .navbar .container-fluid{
         padding-left:15px;
         padding-right: 15px;
+    }
+    .navbar .dropdown-menu {
+        position: relative;
+        right: auto;
+        width: 100%!important;
+        top: auto;
+        height: auto;
+    }
+    .navbar .dropdown-menu .links-container {
+        padding: 0;
+    }
+    .navbar .dropdown-menu a {
+        color: #777!important;
+        height: auto!important;
+        padding: 5px 0px 5px 28px!important;
+        font-size: 10px!important;
+        width: 100%;
+    }
+    .navbar .dropdown-image::before {
+        display: none;
     }
     #inicio1 .img-text{
         left: auto;

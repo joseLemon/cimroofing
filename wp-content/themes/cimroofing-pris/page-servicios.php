@@ -1,6 +1,6 @@
 <?php $page = 'servicios'; ?>
 <?php include('header.php'); ?>
-<div id="fullpage">
+<div id="fullpage-servicios">
     <section class="section servicios" id="impermeabilizacion">
         <div class="row no-margin">
             <div class="col-sm-6"></div>

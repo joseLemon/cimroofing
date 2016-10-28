@@ -1,6 +1,6 @@
 <?php $page = 'nosotros'; ?>
 <?php include('header.php'); ?>
-<div id="fullpage">
+<div id="fullpage-nosotros">
     <section class="section" id="compania1">
        <img src="<?php echo bloginfo('template_url').'/'; ?>img/backgrounds/elementscompania.png" alt="elementos fondo compania 1" class="bg-asset">
         <div class="row no-margin">

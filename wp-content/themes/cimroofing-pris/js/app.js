@@ -1,11 +1,11 @@
 /*$('.dropdown-menu a').click(function(){
+ activateDropdownLinks();
+ });*/
+
+
+$(".dropdown-menu").on("click", "li", function(){
     activateDropdownLinks();
-});*/
-
-
- $(".dropdown-menu").on("click", "li", function(){
-            activateDropdownLinks();
-         });
+});
 
 function activateDropdownLinks(){
     var activeID = $('.section.active').attr('id');
@@ -53,14 +53,13 @@ function activateDropdownLinks(){
         case 'contrato':
             $('.dropdown-menu a:eq(6)').addClass('active dropdown-image');
             break;
-        default: 
+        default:
             $('.dropdown-menu a').removeClass('active dropdown-image');
             break;
     }
 }
 
 $('.navbar-collapse').on('show.bs.collapse', function () {
-    console.log('shown');
     $('.navbar').addClass('open');
 });
 
@@ -69,5 +68,11 @@ $('.navbar-collapse').on('hide.bs.collapse', function () {
 });
 
 $('.carousel').carousel({
-   interval: 7000
-  });
+    interval: 7000
+});
+
+$('ul.dropdown-menu').on('click', function(event){
+    // The event won't be propagated up to the document NODE and
+    // therefore delegated events won't be fired
+    event.stopPropagation();
+});

@@ -29,15 +29,15 @@
                         <li><a href="index">INICIO <span class="sr-only">(current)</span></a></li>
                         <?php } ?>
                         <?php if($page == 'nosotros')  { ?>
-                        <li class="active" class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">NOSOTROS <span></span></a>
+                        <li class="active open" class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">NOSOTROS <span></span></a>
                             <ul class="dropdown-menu">
                                 <div class="vertical-align links-container dropdown-font">
-                                    <li><a href="#compania">COMPAÑÍA</a></li>
-                                    <li><a href="#fabricantes">FABRICANTES</a></li>
-                                    <li><a href="#responsabilidad">RESPONSABILIDAD</a></li>
-                                    <li><a href="#certificaciones">CERTIFICACIONES</a></li>
-                                    <li><a href="#empleos">EMPLEOS</a></li>
+                                    <li><a href="#section-nosotros" class="active">COMPAÑÍA</a></li>
+                                    <li><a href="#section-fabricantes">FABRICANTES</a></li>
+                                    <li><a href="#section-responsabilidad">RESPONSABILIDAD</a></li>
+                                    <li><a href="#section-certificaciones">CERTIFICACIONES</a></li>
+                                    <li><a href="#section-empleos">EMPLEOS</a></li>
                                 </div>
                             </ul>
                         </li>
@@ -45,17 +45,17 @@
                         <li><a href="nosotros">NOSOTROS</a></li>
                         <?php } ?>
                         <?php if($page == 'servicios')  { ?>
-                        <li class="active" class="dropdown">
+                        <li class="active open" class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">SERVICIOS <span></span></a>
                             <ul class="dropdown-menu">
                                 <div class="vertical-align links-container dropdown-font">
-                                    <li><a href="#impermeabilizacion">IMPERMEABILIZACIÓN</a></li>
-                                    <li><a href="#renovacion">RENOVACIÓN</a></li>
-                                    <li><a href="#reemplazo">REEMPLAZO</a></li>
-                                    <li><a href="#reparacion">REPARACIÓN</a></li>
-                                    <li><a href="#mantpreventivo">MANT. PREVENTIVO</a></li>
-                                    <li><a href="#inspeccion">INSPECCIÓN</a></li>
-                                    <li><a href="#contrato">CONTRATO</a></li>
+                                    <li><a href="#section-impermeabilizacion" class="active">IMPERMEABILIZACIÓN</a></li>
+                                    <li><a href="#section-renovacion">RENOVACIÓN</a></li>
+                                    <li><a href="#section-reemplazo">REEMPLAZO</a></li>
+                                    <li><a href="#section-reparacion">REPARACIÓN</a></li>
+                                    <li><a href="#section-preventivo">MANT. PREVENTIVO</a></li>
+                                    <li><a href="#section-inspeccion">INSPECCIÓN</a></li>
+                                    <li><a href="#section-contrato">CONTRATO</a></li>
                                 </div>
                             </ul>
                         </li>
