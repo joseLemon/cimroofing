@@ -137,7 +137,153 @@ Text Domain:
     background: #fff;
 }
 
-/* .dropdown-font>li:hover>a */
+
+
+/*************** SCROLLBAR BASE CSS ***************/
+
+.scroll-wrapper {
+    overflow: hidden !important;
+    padding: 0 !important;
+    position: relative;
+    height: 200px;
+}
+
+.scroll-wrapper > .scroll-content {
+    border: none !important;
+    box-sizing: content-box !important;
+    height: auto;
+    left: 0;
+    margin: 0;
+    max-height: none;
+    max-width: none !important;
+    overflow: scroll !important;
+    padding: 0;
+    position: relative !important;
+    top: 0;
+    width: auto !important;
+}
+
+.scroll-wrapper > .scroll-content::-webkit-scrollbar {
+    height: 0;
+    width: 0;
+}
+
+.scroll-element {
+    display: none;
+}
+.scroll-element, .scroll-element div {
+    box-sizing: content-box;
+}
+
+.scroll-element.scroll-x.scroll-scrollx_visible,
+.scroll-element.scroll-y.scroll-scrolly_visible {
+    display: block;
+}
+
+.scroll-element .scroll-bar,
+.scroll-element .scroll-arrow {
+    cursor: default;
+}
+
+.scroll-textarea {
+    border: 1px solid #cccccc;
+    border-top-color: #999999;
+}
+.scroll-textarea > .scroll-content {
+    overflow: hidden !important;
+}
+.scroll-textarea > .scroll-content > textarea {
+    border: none !important;
+    box-sizing: border-box;
+    height: 100% !important;
+    margin: 0;
+    max-height: none !important;
+    max-width: none !important;
+    overflow: scroll !important;
+    outline: none;
+    padding: 2px;
+    position: relative !important;
+    top: 0;
+    width: 100% !important;
+}
+.scroll-textarea > .scroll-content > textarea::-webkit-scrollbar {
+    height: 0;
+    width: 0;
+}
+
+
+
+
+/*************** SIMPLE INNER SCROLLBAR ***************/
+
+.scrollbar-inner > .scroll-element,
+.scrollbar-inner > .scroll-element div
+{
+    border: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    z-index: 10;
+}
+
+.scrollbar-inner > .scroll-element div {
+    display: block;
+    height: 100%;
+    left: 0;
+    top: 0;
+    width: 100%;
+}
+
+.scrollbar-inner > .scroll-element.scroll-x {
+    bottom: 2px;
+    height: 8px;
+    left: 0;
+    width: 100%;
+}
+
+.scrollbar-inner > .scroll-element.scroll-y {
+    height: 100%;
+    right: 2px;
+    top: 0;
+    width: 8px;
+}
+
+.scrollbar-inner > .scroll-element .scroll-element_outer {
+    overflow: hidden;
+}
+
+.scrollbar-inner > .scroll-element .scroll-element_outer,
+.scrollbar-inner > .scroll-element .scroll-element_track,
+.scrollbar-inner > .scroll-element .scroll-bar {
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+}
+
+.scrollbar-inner > .scroll-element .scroll-element_track,
+.scrollbar-inner > .scroll-element .scroll-bar {
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+    filter: alpha(opacity=40);
+    opacity: 0.4;
+}
+
+.scrollbar-inner > .scroll-element .scroll-element_track { background-color: #e0e0e0; }
+.scrollbar-inner > .scroll-element .scroll-bar { background-color: #c2c2c2; }
+.scrollbar-inner > .scroll-element:hover .scroll-bar { background-color: #919191; }
+.scrollbar-inner > .scroll-element.scroll-draggable .scroll-bar { background-color: #919191; }
+
+
+/* update scrollbar offset if both scrolls are visible */
+
+.scrollbar-inner > .scroll-element.scroll-x.scroll-scrolly_visible .scroll-element_track { left: -12px; }
+.scrollbar-inner > .scroll-element.scroll-y.scroll-scrollx_visible .scroll-element_track { top: -12px; }
+
+
+.scrollbar-inner > .scroll-element.scroll-x.scroll-scrolly_visible .scroll-element_size { left: -12px; }
+.scrollbar-inner > .scroll-element.scroll-y.scroll-scrollx_visible .scroll-element_size { top: -12px; }
+
+
+
 /* INICIO */
 
 
@@ -829,16 +975,22 @@ Text Domain:
     max-width: 20px;
 }
 /* BLOG */
-#blog{
+#blog, #singleblogpost{
     background: url(img/backgrounds/blog1.png) no-repeat center center;
     background-size: cover;
 }
 
-#blog .contenedor{
+#blog .contenedor,
+#singleblogpost .contenedor{
     margin-left: 0;
 }
 
-#blog .titulo{
+#singleblogpost .contenedor{
+    width: 40%;
+}
+
+#blog .titulo,
+#singleblogpost .titulo{
     font-family: Lato;
     font-size: 23px;
     font-weight: 400;
@@ -848,16 +1000,19 @@ Text Domain:
     display: inline-block;
 }
 
-#blog .divider{
+#blog .divider,
+#singleblogpost .divider{
     width: 90px;
     height: 3px;
 }
 
-#blog .img-decoration{
+#blog .img-decoration,
+#singleblogpost .img-decoration{
     width: 13px;
 }
 
-#blog .titulo-contenido{
+#blog .titulo-contenido,
+#singleblogpost .titulo-contenido{
     font-family: Lato;
     font-size: 17px;
     font-weight: 800;
@@ -865,7 +1020,9 @@ Text Domain:
 }
 
 #blog .fecha,
-#blog .texto-contenido{
+#blog .texto-contenido,
+#singleblogpost .fecha,
+#singleblogpost .texto-contenido{
     font-family: Lato;
     font-weight: 500;
     color: #3b3b3b;
@@ -877,10 +1034,21 @@ Text Domain:
     height: 190px;
 }
 
-#blog .pos{
+#singleblogpost .tamano-texto{
+    width: 500px;
+    height: auto;
+
+}
+
+#blog .pos,
+#singleblogpost .pos{
     position:absolute;
     top: 35%;
     left: 50px;
+}
+
+#singleblogpost .pos{
+    z-index: 20;
 }
 
 #blog .carousel-indicators{ 
@@ -891,18 +1059,34 @@ Text Domain:
 #blog .carousel-indicators li{
     background-color: #26a990;  
 }
-/*
-#blog pos-indicators{
-    bottom: 0px;
 
-}
-*/
 #blog .link-blog{
     background-color: #26a990;
     color:#ffffff;
     font: 25px;
     font-family: Lato;
 }
+
+
+#singleblogpost .bg-asset{
+    max-height: auto;
+    max-width: 100%;
+    position: absolute;
+}
+
+#singleblogpost .link{
+    font-size: 15px;
+}
+
+#singleblogpost .link a{
+    font-family: Lato;
+    font-weight: 400;
+    color: #ffffff;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    background-color: #39bca3;
+}
+
 /* CONTACTO */
 #contacto{
     background: url(img/backgrounds/contacto.png) no-repeat center center;
@@ -1114,6 +1298,17 @@ Text Domain:
     #galeria .left{
         left:230px;
     }
+
+    /* BLOG */
+    #blog .tamano-texto{
+        width: 470px;
+    }
+
+    #singleblogpost .contenedor{
+        width: 48%;
+    }
+
+
 }
 
 @media(max-width: 992px){
@@ -1269,9 +1464,14 @@ Text Domain:
     }
 
     /* BLOG */
-    #blog .pos{
+    #blog .pos, 
+    #singleblogpost .pos{
         left: 95px;
         top: 30%;
+    }
+
+    #singleblogpost{
+        height: 100vh;
     }
 
 
@@ -1859,16 +2059,26 @@ Text Domain:
     }
 
     /* BLOG */    
-    #blog{
+    #blog, #singleblogpost{
         background-position: 70%;
     }
 
-    #blog .contenedor{
+    #blog .contenedor,
+    #singleblogpost .contenedor{
         right: auto;
         left: 20%;
     }
 
-    #blog .titulo{
+    #singleblogpost .contenedor{
+        width: 70%;
+    }
+
+    #singleblogpost .scroll-wrapper{
+        height: 300px;    
+    }
+
+    #blog .titulo,
+    #singleblogpost .titulo{
         font-size: 25px;
     }
 
@@ -1876,12 +2086,15 @@ Text Domain:
         height: 300px;
     }
 
-    #blog .titulo-contenido{
+    #blog .titulo-contenido,
+    #singleblogpost .titulo-contenido{
         font-size: 25px;
     }
 
     #blog .link-blog,
-    #blog .texto-contenido{
+    #blog .texto-contenido,
+    #singleblogpost .link,
+    #singleblogpost .texto-contenido{
         font-size: 20px;
     }
 
@@ -2281,33 +2494,50 @@ Text Domain:
     /* GALERIA */    
 
     /* BLOG */
-    #blog{
+    #blog, #singleblogpost{
         background-position: 75% 0%;
     }
 
-    #blog .contenedor{
+    #blog .contenedor, 
+    #singleblogpost .contenedor{
         right: auto;
         width: 100%;
         left: 0;
     }
 
-    #blog .titulo{
+    #singleblogpost .contenedor{
+        width: 90%;    
+    }
+
+    #singleblogpost .scroll-wrapper{
+        height: 100%;
+    }
+
+    #blog .titulo, 
+    #singleblogpost .titulo{
         font-size: 20px;
         display: inline;
     }
 
-    #blog .divider{
+    #blog .divider, 
+    #singleblogpost .divider{
         width: 55px;
         height: 2px;
     }
 
-    #blog .pos{
+    #blog .pos,
+    #singleblogpost .pos{
         width: 100%;
         left: 30px;
         top: 35%;
     }
 
-    #blog .titulo-contenido{
+    #singleblogpost .pos{
+        height: 30%;    
+    }
+
+    #blog .titulo-contenido,
+    #singleblogpost .titulo-contenido{
         font-size: 17px;
     }
 
@@ -2317,7 +2547,9 @@ Text Domain:
     }
 
     #blog .texto-contenido,
-    #blog .link-blog{
+    #blog .link-blog,
+    #singleblogpost .texto-contenido,
+    #singleblogpost .link a{
         font-size: 12px;
     }
 
@@ -2603,86 +2835,107 @@ Text Domain:
         width: 100%;
         height: 100%;
     }
-    
+
     .titulo-servicios{
         font-size: 18px;
     }
-    
+
     .texto-contenido-servicios{
         font-size: 13px;
     }
-    
+
     .img-decoration-servicios{
         width: 20%;
     }
-    
+
     .divider-servicios{
         width: 65%;
     }
-    
+
     /* BLOG */
-    #blog{
+    #blog, #singleblogpost{
         background-position: 100% 50%;
         background-size: 1000px;/* 960px 150%;*/
     }
-    
-    #blog .contenedor{
+
+    #blog .contenedor,
+    #singleblogpost .contenedor{
         right: 10px;
     }
-    
-    #blog .pos{
+
+    #singleblogpost .contenedor{
+        left: auto; 
+        width: 430px;
+        right: 5px;
+    }
+
+    #blog .pos,
+    #singleblogpost .pos{
         top: auto;
         left: auto;
         right: 0px;
     }
-    
-    #blog .titulo{
+
+    #singleblogpost .pos{
+        top: 17%;
+        height: 50%;
+    }
+
+    #singleblogpost .scroll-wrapper{
+        height: 100%;
+    }
+
+    #blog .titulo,
+    #singleblogpost .titulo{
         font-size: 20px;
     }
-    
-    #blog .titulo-contenido{
+
+    #blog .titulo-contenido,
+    #singleblogpost .titulo-contenido{
         font-size: 15px;
     }
-    
+
     #blog .texto-contenido,
-    #blog .link-blog{
+    #blog .link-blog,
+    #singleblogpost .texto-contenido,
+    #singleblogpost .link a{
         font-size: 15px;
     }
-    
+
     #blog .tamano-texto{
         width: 400px;
         height: 170px;
     }
-    
+
     /* CONTACTO */
     #contacto{
         background-position: 100%;
         background-size: 1000px;
     }
-    
+
     #contacto .contenedor{
         width: 100%;
         height: 100%;
         margin-left: 0px;
     }
-    
+
     #contacto .contenido{
         margin-top: 0;
     }
-    
+
     #contacto .titulo{
         font-size: 16px;
         margin-top: 0;
         margin-bottom: 0;
     }
-    
+
     #contacto .textbox{
         width: 100%;
         height: 25px;
         font-size: 12px;
         margin-left: 0;
     }
-    
+
     #contacto .textarea-contacto{
         width: 100%;
         height: 100px;
@@ -2690,14 +2943,14 @@ Text Domain:
         background-position: 99% 10%;
         margin-left: 0;
     }
-    
+
     #contacto .boton-contacto{
         font-size: 14px;
         width: 70px;
         height: 35px;
         margin-left: 0;
     }
-    
+
     #contacto .texto-contacto{
         font-size: 13px;
     }

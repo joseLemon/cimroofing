@@ -76,3 +76,4 @@ $('ul.dropdown-menu').on('click', function(event){
     // therefore delegated events won't be fired
     event.stopPropagation();
 });
+
