@@ -1,0 +1,195 @@
+*{
+    font-family: Lato;
+    font-size: 18px;
+
+}
+
+
+.general-content{
+    margin: 25px;
+}
+
+.logo{
+    width: 250px;
+    margin: 0 auto;
+    display: block;
+    padding-top: 25px; 
+}
+
+.form-divider{
+    width: 450px;
+    height: 10px;
+    margin: 0 auto;
+    display: block;
+}
+
+.longwidth{
+    width:100%;
+}
+
+.title{
+    font-family: Lato;
+    font-size: 20px;
+    font-weight: 600;
+    color: #004989;
+    text-align: center;
+    display: inherit;
+}
+
+.title-section{
+    font-family: Lato;
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffffff;
+    background-color: #004989;
+    width: 500px;
+    height: 25px;
+    margin-top:25px;
+    margin-bottom: 20px;
+}
+
+
+.division-bar{
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+#materials-checklist{
+    height: 205px;
+}
+
+
+.checkbox-grid li {
+    display: block;
+    float: left;
+    width: 25%;
+    margin-bottom: 10px;
+}
+
+#inspection-checklist-section{
+    text-align: center;
+}
+
+table, th, td {
+    border: 1px solid grey;
+}
+
+#observation{
+    width: 100%;
+}
+
+.blueparagraph{
+    font-family: Lato;
+    font-size: 21px;
+    color: #ffffff;
+    background-color: #004989;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.smallfont{
+    font: 18px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    
+}
+
+.title-centered{
+    font-size: 21px;
+    font-weight: 600;
+    text-align: center;
+    display: inherit;
+}
+
+.drawingarea{
+    height: 500px;
+}
+
+.glossary{
+    border: none;
+    text-align: justify;
+}
+
+.definition{
+    width: 525px;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-bottom:10px;
+}
+
+.views-img{
+    width:90%;
+    margin: 0 auto;
+    display: block;
+}
+
+.textarea-comment,
+.textarea-coresample{
+    width:100%;
+    height: 200px;
+}
+
+
+#facility, #date-maintenance,
+#location, #inspected{
+    width:29%;
+    margin: 10px;
+}
+
+#project-owner,
+#project-address{
+    width: 60%;
+    margin: 10px;
+}
+
+#height-at-eave,
+#height-at-ridge{
+    width: 29%;
+    margin: 10px;
+}
+
+.content{
+    margin:10px;
+}
+
+
+#clearaccessposition{
+    width: 100px;
+    margin: 10px;
+}
+
+#flatmembraneselect,
+#slopedselect{
+    width:150px;
+}
+
+#size-of-roof{
+    width: 60%;
+    margin: 10px;
+}
+
+#manufacturer{
+    width: 30%;
+    margin: 10px;
+}
+
+#year-installed,
+#year-manufactured{
+    margin: 10px;
+    width: 13%;
+}
+
+#inspected-by,
+#title{
+    margin: 10px;
+    width: 29%;
+}
+
+#signature,
+#date{
+    margin: 10px;
+    width: 29%;
+}
