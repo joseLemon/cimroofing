@@ -25,6 +25,8 @@
 
 .longwidth{
     width:100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .title{
@@ -108,13 +110,18 @@ table, th, td {
     height: 500px;
 }
 
-.glossary{
+.glossary,
+.no-border{
     border: none;
-    text-align: justify;
+}
+
+.no-border{
+    margin-left:auto; 
+    margin-right:auto;
 }
 
 .definition{
-    width: 525px;
+    width: 90%;/*525px;*/
     margin-left: 15px;
     margin-right: 15px;
     margin-bottom:10px;
@@ -192,4 +199,59 @@ table, th, td {
 #date{
     margin: 10px;
     width: 29%;
+}
+
+#inspectionlist-button{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* PROJECT FORM */
+.inside-content{
+    margin: 15px;
+    padding: 10px;
+    border: 1px solid black;
+}
+
+.project-info{
+    width:660px;
+    margin: 0 auto;
+}
+
+.project-img{
+    margin: 20px;
+}
+
+.information{
+    float: right;
+    margin-top: 20%;
+}
+
+#workitems{
+    margin: 15px;
+}
+
+#details-field-notes{
+    width:70%;
+    height: 150px;
+    margin: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#pictures-button{
+    margin-top:10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.signature{
+    text-align: center;
+}
+
+#submitproject-button{
+    margin-left: 20px;
 }
