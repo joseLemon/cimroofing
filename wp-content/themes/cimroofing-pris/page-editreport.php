@@ -1,4 +1,4 @@
-<?php $page = 'reportform'; ?>
+<?php $page = 'editreport'; ?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -17,7 +17,10 @@
         <?php 
 
         $id = $_GET['id'];
+        $rid = $_GET['rid'];
         $project = $wpdb->get_results("select * from projects where project_id = $id");
+        $report = $wpdb->get_results("select * from reports where report_id = $rid");
+        $report = $report[0];
 
         ?>
 
@@ -32,7 +35,7 @@
                 <div class="inside-content">
                     <p class="content">Contractor work log: Please submit the following log at the specified frequency identified by Roof Management during the preconstruction meeting. The log should provide an accurate account of the work items completed, progress to completion, issues encountered and photo representation of various stages of work during the reporting period.</p>
 
-                    <form method="POST" action="<?php echo home_url().'/'; ?>controller" id="save" name="save">
+                    <form method="POST" action="<?php echo home_url().'/'; ?>controller">
                         <div class="project-info">
                             <img src="<?php echo bloginfo('template_url').'/'; ?>img/content/project-img-example.png" alt="imagen proyecto" class="project-img">
                             <div class="information">
@@ -51,11 +54,11 @@
                             <table style="margin-left:0" class="no-border">
                                 <tr class="no-border">
                                     <td class="no-border">Start Date:</td> 
-                                    <td class="no-border"><input type="date" name="start-date" id="dateproject"></td>
+                                    <td class="no-border"><input type="date" name="start-date" id="dateproject" value="<?php echo $report->report_start_date; ?>"></td>
                                 </tr>
                                 <tr class="no-border">
                                     <td class="no-border">End Date: </td>
-                                    <td class="no-border"><input type="date" name="end-date" id="dateproject"></td>
+                                    <td class="no-border"><input type="date" name="end-date" id="dateproject" value="<?php echo $report->report_end_date; ?>"></td>
                                 </tr>
                             </table>
                         </div>
@@ -67,81 +70,77 @@
                             Step 2: Select the work items completed during the reporting period of this log.  <br>
                             <table style="margin-left:auto;margin-right:auto;margin-top:10px">
                                 <tr class="no-border">
-                                    <td class="no-border"><input type="checkbox" name="workitems[]" value="1" id="workitems" />Surface preparation</td>
-                                    <td class="no-border"><input type="checkbox" name="workitems[]" value="2" id="workitems" />Installed skylights</td>
-                                    <td class="no-border"><input type="checkbox" name="workitems[]" value="3" id="workitems" />Replaced deck</td>
-                                </tr>
-                                <tr class="no-border">
-                                    <td class="no-border"><input type="checkbox" name="workitems[]" value="4" id="workitems"/>Installed edge metal</td>
-                                    <td class="no-border"><input type="checkbox" name="workitems[]" value="5" id="workitems" />Installed wood nailer/blocking</td>
-                                    <td class="no-border"><input type="checkbox" name="workitems[]" value="6" id="workitems" />Installed gutters and downspouts</td>
-                                </tr>
-                                <tr class="no-border">
-                                    <td class="no-border"><input type="checkbox" name="workitems[]" value="7" id="workitems"/>Installed insulation</td>
-                                    <td class="no-border"><input type="checkbox" name="workitems[]" value="8" id="workitems" />Installed internal drains</td>
-                                    <td class="no-border"><input type="checkbox" name="workitems[]" value="9" id="workitems" />Installed field membrane</td>
-                                </tr>
-                                <tr class="no-border">
-                                    <td class="no-border"><input type="checkbox" name="workitems[]" value="10" id="workitems"/>Applied surfacing</td>
-                                    <td class="no-border"><input type="checkbox" name="workitems[]" value="11" id="workitems"/>Installed inter-ply membrane/felt</td>
-                                    <td class="no-border"><input type="checkbox" name="workitems[]" value="12" id="workitems" />Completed night tie-in</td>
-                                </tr>
-                                <tr class="no-border">
-                                    <td class="no-border"><input type="checkbox" name="workitems[]" value="13" id="workitems" />Installed capsheet</td>
-                                    <td class="no-border"><input type="checkbox" name="workitems[]" value="14" id="workitems" />Installed 15# felt</td>
-                                    <td class="no-border"><input type="checkbox" name="workitems[]" value="15" id="workitems" />Installed parapet flashings</td>
-                                </tr>
-                                <tr class="no-border">
-                                    <td class="no-border"><input type="checkbox" name="workitems[]" value="16" id="workitems" />Installed ice and water shield</td>
-                                    <td class="no-border"><input type="checkbox" name="workitems[]" value="17" id="workitems" />Installed curb flashings</td>
-                                    <td class="no-border"><input type="checkbox" name="workitems[]" value="18" id="workitems" />Installed shingles</td>
-                                </tr>
-                                <tr class="no-border">
-                                    <td class="no-border"><input type="checkbox" name="workitems[]" value="19" id="workitems" />Installed detail flashings</td>
-                                    <td class="no-border"><input type="checkbox" name="workitems[]" value="20" id="workitems" />Completed punch list</td>
-                                </tr>
+                                    <?php 
+                                    $count = $wpdb->get_var("SELECT COUNT(*) FROM report_work_items WHERE report_id= '$rid'");
+                                    $work = $wpdb->get_results("select work_item_id from report_work_items where report_id = $rid");
+                                    $work_name = $wpdb->get_results("select work_item_name from work_items");
+
+                                    for($i=1;$i<=20;$i++){
+                                        $found = false;
+
+                                        /* if(($column % 3) == 0){
+                                    echo '<tr class="no-border">';
+                                }*/
+
+                                        for($n=0;$n<$count;$n++){
+                                            if($work[$n]->work_item_id == $i)
+                                                $found = true;
+                                        }
+
+                                        if($found==true)
+                                            echo '<td class="no-border"><input type="checkbox" name="workitems[]" value="', $i ,'" id="workitems" checked />', $work_name[($i-1)]->work_item_name ,'</td>';
+                                        else
+                                            echo '<td class="no-border"><input type="checkbox" name="workitems[]" value="', $i ,'" id="workitems" />', $work_name[($i-1)]->work_item_name ,'</td>';
+
+
+                                        if((($i % 3) == 0) && $i!=1){
+                                            echo '</tr><tr class="no-border">';
+                                        }
+
+                                    }
+
+                                    ?>
                                 <tr class="no-border">
                             </table><br>
                         </div>
                         <img src="<?php echo bloginfo('template_url').'/'; ?>img/content/division-empleos.png" alt="divider" class="form-divider longwidth" style="height:2px"><br>
-                        <div class="progress-completion">
+                        <div class="progress">
                             <text style="font-weight:700;font-size:19px">PROGRESS TO COMPLETION</text><br> 
                             Step 3: Update the progress to completion by inputting the total percent complete and the total square feet of the roofing <text style="color:red;font-weight:600">installed to date.</text>  <br>
                             <table style="margin-left:0" class="no-border">
                                 <tr class="no-border">
                                     <td class="no-border">Square feet installed to date:</td> 
-                                    <td class="no-border"><input type="text" name="square-feet-todate" id="square-feet-todate"></td>
+                                    <td class="no-border"><input type="text" name="square-feet-todate" id="square-feet-todate" value="<?php echo $report->report_square_feet_to_date; ?>"></td>
                                 </tr>
                                 <tr class="no-border">
                                     <td class="no-border">Percentage completed: </td>
-                                    <td class="no-border"><input type="text" name="percentage-completed" id="percentagecompleted"></td>
+                                    <td class="no-border"><input type="text" name="percentage-completed" id="percentagecompleted" value="<?php echo $report->report_percentage_completed; ?>"></td>
                                 </tr>
                                 <tr class="no-border">
                                     <td class="no-border">Target completion date: </td>
-                                    <td class="no-border"><input type="date" name="target-date" id="targetdate"></td>
+                                    <td class="no-border"><input type="date" name="target-date" id="targetdate" value="<?php echo $report->report_target_completion_date; ?>"></td>
                                 </tr>
                             </table>
-                            <input type="checkbox" name="completion-metal" value="1" /> Upon completion of detail and metal work, please check this box. <br>
+                            <?php 
+                            if($report->report_completed==1){
+                                echo '<input type="checkbox" name="completion-metal" value="1" checked/>';
+                            }else{
+                                echo '<input type="checkbox" name="completion-metal" value="1" />';
+                            }?>
+                            Upon completion of detail and metal work, please check this box. <br>
                         </div><br>
                         <img src="<?php echo bloginfo('template_url').'/'; ?>img/content/division-empleos.png" alt="divider" class="form-divider longwidth" style="height:2px"><br>
                         <div class="fieldnotes">
                             <text style="font-weight:700;font-size:19px">FIELD NOTES</text><br> 
                             Step 4: Provide details on any situations, weather issues or concerns encountered during the reporting period.<br>
-                            <textarea id="details-field-notes" name="details-field-notes"></textarea><br>
+                            <textarea id="details-field-notes" name="details-field-notes"><?php echo $report->report_field_notes; ?></textarea><br>
                         </div><br>
                         <img src="<?php echo bloginfo('template_url').'/'; ?>img/content/division-empleos.png" alt="divider" class="form-divider longwidth" style="height:2px"><br>
-                        <div class="imageupload">
+                        <div class="fieldnotes">
                             <text style="font-weight:700;font-size:19px">PHOTO DOCUMENTATION</text><br> 
                             Step 5: Provide photographs detailing various stages of the installation process for the reporting period.<br>
-                            <div class="loader-container">
-                                <div class="loader"></div>
-                            </div>
-                            <div class="upload-section">
-                                <button data-toggle="modal" data-target="#upload-modal" id="selectimgs">Select images...</button>
-                            </div>
-                            <div class="uploaded-images"></div>
-                            <input type="hidden" id="tmp-folder-delete" name="tmp-folder-delete">
-                            <button type="submit" name="save">Save</button>
+                            <input type="file" value="Add/Edit Pictures" name="add-pictures" id="pictures-button"><br>
+                            <div class="image-tumbnails">Image thumbnails</div><br>
                         </div><br>
                         <img src="<?php echo bloginfo('template_url').'/'; ?>img/content/division-empleos.png" alt="divider" class="form-divider longwidth" style="height:2px"><br>
                         <div class="fieldnotes">
@@ -149,29 +148,12 @@
                             Step 6: Provide the name of the submitter and click the button to submit the log.
                             <div class="signature">
                                 <text class="submitted-by">Submitted By: NAME</text><!--nombre de usuario-->
-                                <input type="submit" value="Submit Project Update" name="submit-project" id="submitproject-button">
+                                <input type="hidden" name="report-id" value="<?php echo $report->report_id; ?>">
+                                <input type="hidden" name="project-id" value="<?php echo $report->project_id; ?>">
+                                <input type="submit" value="Submit" name="edit-report" id="editreport-button">
                             </div>
                         </div><br>
                     </form>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="modal fade" role="dialog" tabindex="-1" id="upload-modal">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Image Selection</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form action="<?php echo home_url().'/'; ?>controller" method="POST" id="upload-form" enctype="multipart/form-data">
-                            <input type="file" id="pictures" name="pictures[]" multiple>
-                            <input type="hidden" id="tmp-folder" name="tmp-folder">
-                            <button type="submit">Done</button>
-                        </form>
-                    </div>
                 </div>
             </div>
         </div>
@@ -284,11 +266,6 @@
             },500);
         });
 
-        $('#selectimgs').click(function(f){
-            f.preventDefault();
-            
-        });
-        
         $('#save').submit(function(e) {
             e.preventDefault();
             /*var data = $this.data();
