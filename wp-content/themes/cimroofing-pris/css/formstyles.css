@@ -6,6 +6,8 @@
 
 .general-content{
     /*margin: 25px;*/
+    max-width: 1170px;
+    margin: 0 auto;
 }
 
 .logo{
@@ -43,7 +45,8 @@
     font-weight: 600;
     color: #ffffff;
     background-color: #004989;
-    /*width: 500px;*/
+    max-width: 500px;
+    width: 100%;
     height: 25px;
     margin-top:25px;
     margin-bottom: 20px;
@@ -150,10 +153,84 @@ table, th, td {
     height: 200px;
 }
 
+#facility, #date-maintenance,
+#inspected, #size-of-roof{
+    width:29%;
+    margin: 10px;
+}
+/*
+#project-owner,
+#project-address{
+    width: 60%;
+    margin: 10px;
+}
+
+#height-at-eave,
+#height-at-ridge{
+    width: 29%;
+    margin: 10px;
+}
+
+.content{
+    margin:10px;
+}
+
+
+#clearaccessposition{
+    width: 100px;
+    margin: 10px;
+}
+
+#flatmembraneselect,
+#slopedselect{
+    width:150px;
+}
+
+#location{
+    width: 60%;
+    margin: 10px;
+}
+
+#manufacturer{
+    width: 30%;
+    margin: 10px;
+}
+
+#year-installed,
+#year-manufactured{
+    margin: 10px;
+    width: 13%;
+}
+
+#inspected-by,
+#title {
+    margin: 10px;
+    width: 29%;
+}
+
+#signature {
+    margin: 10px 0;
+}
+
 #inspectionlist-button{
     display: block;
     margin-left: auto;
     margin-right: auto;
+}*/
+
+/* INSPECTION FORM */
+#reportform input[type=text] {
+    width: 100%;
+    margin: 10px 0;
+    max-width: 715px;
+}
+
+.one-line input[type=text] {
+    width: auto!important;
+}
+
+#reportform select {
+    min-width: 150px;
 }
 
 /* PROJECT FORM */
@@ -208,6 +285,10 @@ table, th, td {
 
 .signature{
     text-align: center;
+}
+
+#signature {
+    margin: 10px 0;
 }
 
 #submitproject-button{

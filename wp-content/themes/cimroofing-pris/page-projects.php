@@ -49,10 +49,10 @@ $x = 0;
                         </table>
                     </form>
                 </div>
-                <div style="margin-top:20px">
-                    <a href="inspectionform"><button type="button">New inspection list</button></a>
+                <div style="margin-top:20px; margin-left: 15px;">
+                    <a href="inspectionhistory"><button type="button">Inspection List</button></a>
                 </div>
             </div>
         </div>
     </div>
-<?php include('footer.php'); ?>
+<?php include('footer-projects.php'); ?>
