@@ -1,9 +1,7 @@
 <?php
 $user_id = get_current_user_id();
+
 if(isset($_POST['submit-project'])) {
-
-    //$report_id = $_GET['report_id'];
-
     $start_date = date('Y-m-d',strtotime($_POST['start-date']));
     $end_date = date('Y-m-d',strtotime($_POST['end-date']));
     $target_date = date('Y-m-d',strtotime($_POST['target-date']));
@@ -31,6 +29,47 @@ if(isset($_POST['submit-project'])) {
         }
     }
     $wpdb->query( $query_workitems );
+
+    $tmpFolder = $_POST['tmp-folder-delete'];
+
+    //  DELETE TEMPORARY FOLDER
+    $TmpDirToDelete = dirname(__FILE__) . '\\file_uploads\\' . $tmpFolder . '\\';
+
+    $files = glob($TmpDirToDelete.'/*'); // get all file names
+
+    print_r($files);
+
+    foreach($files as $file){ // iterate files
+        if(is_file($file))
+            unlink($file); // delete file
+    }
+
+    rmdir($TmpDirToDelete);
+
+    //  FOR THIS EXAMPLE I WILL HARDCODE $report_id
+    $report_id = '1';
+
+
+    $target_dir = dirname(__FILE__) . '\\file_uploads\\' . $report_id . '\\';
+    mkdir($target_dir);
+
+    //  PROCESO PARA SUBIR IMAGENES
+    $i = 1;
+    foreach( $_POST['img'] as $key => $img) {
+        list($type, $img) = explode(';', $img);
+        list(, $img)      = explode(',', $img);
+        $data = base64_decode($img);
+
+        $path = $target_dir.$i.'.jpg';
+
+        if(file_put_contents($path, $data)) {
+            echo 'uploaded';
+        } else {
+            echo 'fail';
+        }
+
+        $i++;
+    }
 }
 /* EMPIEZA IMAGENES */
 if(isset($_POST['tmp-folder'])) {
@@ -66,46 +105,7 @@ if(isset($_POST['tmp-folder'])) {
 }
 
 if(isset($_POST['tmp-folder-delete'])) {
-    $tmpFolder = $_POST['tmp-folder-delete'];
 
-    //  DELETE TEMPORARY FOLDER
-    $TmpDirToDelete = dirname(__FILE__) . '\\file_uploads\\' . $tmpFolder . '\\';
-
-    $files = glob($TmpDirToDelete.'/*'); // get all file names
-    
-    print_r($files);
-    
-    foreach($files as $file){ // iterate files
-        if(is_file($file))
-            unlink($file); // delete file
-    }
-
-    rmdir($TmpDirToDelete);
-
-    //  FOR THIS EXAMPLE I WILL HARDCODE $report_id
-    $report_id = '1';
-
-
-    $target_dir = dirname(__FILE__) . '\\file_uploads\\' . $report_id . '\\';
-    mkdir($target_dir);
-
-    //  PROCESO PARA SUBIR IMAGENES
-    $i = 1;
-    foreach( $_POST['img'] as $key => $img) {
-        list($type, $img) = explode(';', $img);
-        list(, $img)      = explode(',', $img);
-        $data = base64_decode($img);
-        
-        $path = $target_dir.$i.'.jpg';
-
-        if(file_put_contents($path, $data)) {
-            echo 'uploaded';
-        } else {
-            echo 'fail';
-        }
-
-        $i++;
-    }
 
 }
 /* TERMINA IMAGENES */
@@ -1252,11 +1252,16 @@ if(isset($_POST['submit-inspectionlist'])) {
 if(isset($_POST['submit-newproject'])) {
 
     $query_project = "INSERT INTO `projects` (`project_id`, `project_name`, `project_address`, `project_contract_amount`, `project_year`, `project_area`, `deleted_at`, `created_at`) VALUES (NULL, '".$_POST['newproject-name']."', '".$_POST['newproject-address']."', '".$_POST['newproject-amount']."', '".$_POST['newproject-year']."', '".$_POST['newproject-area']."', NULL, CURRENT_TIMESTAMP);";
-
-    /*echo $query_project;
-    return true;*/
-
     $wpdb->query( $query_project );
+
+    $assignedUsers = $_POST['newproject-assigned'];
+    $project_id = $wpdb->get_results('SELECT MAX(project_id) as id FROM projects')[0]->id;
+    foreach($assignedUsers as $user) {
+        $query_project_users = "INSERT INTO project_users (project_id, user_id) VALUES ($project_id,$user);";
+        $wpdb->query( $query_project_users );
+    }
+
+    wp_redirect(home_url().'/projects');
 
 }
 
@@ -1264,9 +1269,22 @@ if(isset($_POST['submit-newproject'])) {
 
 if(isset($_POST['edit-project'])){
 
-    $query_editproject = "UPDATE `projects` SET project_name = '".$_POST['project-name']."', project_address = '".$_POST['project-address']."',  project_contract_amount = '".$_POST['project-amount']."', project_year = '".$_POST['project-year']."', project_area = '".$_POST['project-area']."' WHERE project_id = '".$_POST['project-id']."';";
+    $project_id = $_POST['project-id'];
+
+    $query_editproject = "UPDATE `projects` SET project_name = '".$_POST['project-name']."', project_address = '".$_POST['project-address']."',  project_contract_amount = '".$_POST['project-amount']."', project_year = '".$_POST['project-year']."', project_area = '".$_POST['project-area']."' WHERE project_id = '".$project_id."';";
+
+    $assignedUsers = $_POST['project-assigned'];
+
+    $wpdb->query("DELETE FROM project_users WHERE project_id = ".$_POST['project-id']);
+
+    foreach($assignedUsers as $user) {
+        $query_project_users = "INSERT INTO project_users (project_id, user_id) VALUES ($project_id,$user);";
+        $wpdb->query( $query_project_users );
+    }
 
     $wpdb->query( $query_editproject );
+
+    wp_redirect(home_url().'/editproject/?id='.$project_id);
 }
 
 if(isset($_POST['edit-report'])){

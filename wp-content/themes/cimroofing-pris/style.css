@@ -323,7 +323,7 @@ Text Domain:
     bottom: 0px;
     top:0px;
     height: 100%;
-    max-width: calc(100%-10hv);
+    /*max-width: calc(100%-10hv);*/
 }
 
 #inicio2 .img-text{
@@ -491,7 +491,7 @@ Text Domain:
 
 .icons{
     max-width:50px;
-    max-height: auto;
+    /*max-height: auto;*/
     margin-top: 30px;
     margin-left:5px;
 }
@@ -1063,13 +1063,13 @@ Text Domain:
 #blog .link-blog{
     background-color: #26a990;
     color:#ffffff;
-    font: 25px;
+    /*font: 25px;*/
     font-family: Lato;
 }
 
 
 #singleblogpost .bg-asset{
-    max-height: auto;
+    /*max-height: auto;*/
     max-width: 100%;
     position: absolute;
 }
@@ -1214,7 +1214,7 @@ Text Domain:
         right: 20px;
         bottom: 20px;
         max-width: calc(100% - 650px);
-        min-width: auto;
+        /*min-width: auto;*/
     }
     #inicio3 .img-decoration{
         max-width: calc(100% - 300px); 
@@ -2601,7 +2601,7 @@ Text Domain:
     #inicio1 .img-text{
         left: 40px;
         bottom: 130px;
-        max-width: 55%s;
+        /*max-width: 55%s;*/
     }
 
     #inicio2 .img-text{
