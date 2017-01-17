@@ -13,7 +13,7 @@
             $('#fullpage-nosotros').fullpage({
                 verticalCentered: false,
                 anchors: ['section-nosotros', 'section-filosofia', 'section-valores', 'section-fabricantes',
-                          'section-responsabilidad', 'section-certificaciones', 'section-empleos'],
+                    'section-responsabilidad', 'section-certificaciones', 'section-empleos'],
                 afterLoad: function () {
                     activateDropdownLinks();
                 }
@@ -23,20 +23,16 @@
             $('#fullpage-servicios').fullpage({
                 verticalCentered: false,
                 anchors: ['section-impermeabilizacion', 'section-renovacion', 'section-reemplazo', 'section-reparacion',
-                          'section-preventivo', 'section-inspeccion', 'section-contrato'],
+                    'section-preventivo', 'section-inspeccion', 'section-contrato'],
                 afterLoad: function () {
                     activateDropdownLinks();
                 }
             });
         }
-        
+
         $('.scrollbar-inner').scrollbar();
     });
 </script>
-
-
-
-
 
 </body>
 </html>

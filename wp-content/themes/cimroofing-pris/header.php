@@ -5,10 +5,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>CIM Roofing</title>
         <link rel="stylesheet" href="<?php echo bloginfo('template_url').'/'; ?>css/bootstrap.min.css">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="<?php echo bloginfo('template_url').'/'; ?>style.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script type="text/javascript" src="<?php echo bloginfo('template_url').'/';?>js/jquery.fullPage.js"></script>
-        
     </head>
     <body>
         <nav class="navbar navbar-default navbar-fixed-top">
