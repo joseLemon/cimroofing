@@ -5,18 +5,18 @@ if(isset($_POST['submit-project'])) {
     $start_date = date('Y-m-d',strtotime($_POST['start-date']));
     $end_date = date('Y-m-d',strtotime($_POST['end-date']));
     $target_date = date('Y-m-d',strtotime($_POST['target-date']));
-    $query_report = "INSERT INTO `reports` (`report_id`, `report_start_date`, `report_end_date`, `report_square_feet_to_date`, `report_percentage_completed`, `report_completed`, `report_target_completion_date`, `report_field_notes`, `user_id`, `project_id`, deleted_at, created_at) VALUES (NULL, '".$start_date."', '".$end_date."', '".$_POST['square-feet-todate']."', '".$_POST['percentage-completed']."', '".$_POST['completion-metal']."', '".$target_date."', '".$_POST['details-field-notes']."', 1, '".$_POST['project-id']."', 'NULL', CURRENT_TIMESTAMP);";
+    $query_report = "INSERT INTO `reports` (`report_id`, `report_start_date`, `report_end_date`, `report_square_feet_to_date`, `report_percentage_completed`, `report_completed`, `report_target_completion_date`, `report_field_notes`, `user_id`, `project_id`, deleted_at, created_at) VALUES (NULL, '".$start_date."', '".$end_date."', '".$_POST['square-feet-todate']."', '".$_POST['percentage-completed']."', '".$_POST['completion-metal']."', '".$target_date."', '".$_POST['details-field-notes']."', ".$user_id.", '".$_POST['project-id']."', 'NULL', CURRENT_TIMESTAMP);";
 
     $wpdb->query( $query_report );
 
-    $report_id = $wpdb->query( 'SELECT MAX(roof_inspection_id) as id FROM reports where user_id = 1');
+    $report_id = $wpdb->get_results( 'SELECT MAX(roof_inspection_id) as id FROM reports where user_id = '.$user_id);
 
     $report_id = $report_id[0]->id;
 
 
     //FOR EACH DE CHECKBOXES
     $query_workitems = "INSERT INTO `report_work_items` (`report_id`, `work_item_id`) Values ";
-    $report_id = $wpdb->get_results('SELECT MAX(report_id) as id FROM reports where user_id = 1');
+    $report_id = $wpdb->get_results('SELECT MAX(report_id) as id FROM reports where user_id = '.$user_id);
     $cont = 0;
     if (is_array($_POST["workitems"])) { //lo puse pqe salia warning
         foreach($_POST["workitems"] as $workitem){
@@ -136,19 +136,19 @@ if(isset($_POST['submit-inspectionlist'])) {
         $slope='NULL';
 
 
-    $query_client = "INSERT INTO `clients` (`client_id`, `client_project_owner`, `client_project_address`, `client_height_at_eave`, `client_height_at_ridge`, `clear_access_id`, `type_roof_flat_id`, `type_roof_sloped_id`, `client_sloped`, `client_size_of_roof`, `client_manufacturer_and_brand`, `user_id`, `client_year_installed`, `client_year_manufactured`, `client_title`, `client_signature`, `client_date`, deleted_at, created_at) VALUES (NULL, '".$_POST['project-owner']."', '".$_POST['project-address']."', '".$_POST['height-at-eave']."', '".$_POST['height-at-ridge']."', $clear_access_id, $type_roof_flat, $type_roof_sloped , $slope, '".$_POST['size-of-roof']."', '".$_POST['manufacturer']."', 1, '".$_POST['year-installed']."', '".$_POST['year-manufactured']."', '".$_POST['title']."', '".$_POST['signature-input']."', $client_date, NULL, CURRENT_TIMESTAMP);";
+    $query_client = "INSERT INTO `clients` (`client_id`, `client_project_owner`, `client_project_address`, `client_height_at_eave`, `client_height_at_ridge`, `clear_access_id`, `type_roof_flat_id`, `type_roof_sloped_id`, `client_sloped`, `client_size_of_roof`, `client_manufacturer_and_brand`, `user_id`, `client_year_installed`, `client_year_manufactured`, `client_title`, `client_signature`, `client_date`, deleted_at, created_at) VALUES (NULL, '".$_POST['project-owner']."', '".$_POST['project-address']."', '".$_POST['height-at-eave']."', '".$_POST['height-at-ridge']."', $clear_access_id, $type_roof_flat, $type_roof_sloped , $slope, '".$_POST['size-of-roof']."', '".$_POST['manufacturer']."', ".$user_id.", '".$_POST['year-installed']."', '".$_POST['year-manufactured']."', '".$_POST['title']."', '".$_POST['signature-input']."', $client_date, NULL, CURRENT_TIMESTAMP);";
 
     $wpdb->query( $query_client );
     $programmed_date = date('Y-m-d H:i:s',strtotime($_POST['date-maintenance']));
 
-    $client_id = $wpdb->get_results('   SELECT MAX(client_id) as id FROM clients where user_id = 1')[0]->id;
+    $client_id = $wpdb->get_results('   SELECT MAX(client_id) as id FROM clients where user_id = '.$user_id)[0]->id;
 
-    $query_roof_inspection = "INSERT INTO `roof_inspections` (`roof_inspection_id`, `roof_inspection_facility`, `roof_inspection_location`, `roof_inspection_datetime`, `client_id`, `roof_inspection_core_sample`, `roof_inspection_comment`, `roof_inspection_plan`,`user_id`) VALUES (NULL, '".$_POST['facility']."', '".$_POST['location']."', '$programmed_date', $client_id, '".$_POST['core-sample']."', '".$_POST['comment']."', '".$_POST['sketch-input']."'', '1');";
+    $query_roof_inspection = "INSERT INTO `roof_inspections` (`roof_inspection_id`, `roof_inspection_facility`, `roof_inspection_location`, `roof_inspection_datetime`, `client_id`, `roof_inspection_core_sample`, `roof_inspection_comment`, `roof_inspection_plan`,`user_id`) VALUES (NULL, '".$_POST['facility']."', '".$_POST['location']."', '$programmed_date', $client_id, '".$_POST['core-sample']."', '".$_POST['comment']."', '".$_POST['sketch-input']."', ".$user_id.");";
 
     $wpdb->query( $query_roof_inspection );
 
     $query_materials = "INSERT INTO `roof_materials` (`roof_inspection_id`, `inspection_material_id`) Values ";
-    $roof_inspection_id = $wpdb->get_results('SELECT MAX(roof_inspection_id) as id FROM roof_inspections where user_id = 1');
+    $roof_inspection_id = $wpdb->get_results('SELECT MAX(roof_inspection_id) as id FROM roof_inspections where user_id = '.$user_id);
     $cont = 0;
     if (is_array($_POST["materials"])) { //lo puse pqe salia warning
         foreach($_POST["materials"] as $material){
@@ -165,7 +165,7 @@ if(isset($_POST['submit-inspectionlist'])) {
 
 
     $query_checklists = "INSERT INTO `roof_checklists` (`roof_inspection_id`, `inspection_checklist_id`, `roof_checklist_problem`, `roof_checklist_observation`, `roof_checklist_date_of_repair`) VALUES ";
-    $roof_inspection_id = $wpdb->get_results('SELECT MAX(roof_inspection_id) as id FROM roof_inspections where user_id = 1');
+    $roof_inspection_id = $wpdb->get_results('SELECT MAX(roof_inspection_id) as id FROM roof_inspections where user_id = '.$user_id);
 
     $count = 0;
 
