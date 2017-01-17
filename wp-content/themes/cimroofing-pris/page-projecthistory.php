@@ -8,7 +8,7 @@ $report = $wpdb->get_results("select * from reports WHERE project_id= '$id'");
 $project = $wpdb->get_results("select * from projects WHERE project_id= '$id'");
 $x = 0;
 ?>
-    <div id="projectform" class="container">
+    <div id="projectform" class="main">
         <div class="general-content">
             <img src="<?php echo bloginfo('template_url').'/'; ?>img/logo.png" alt="cim logo" class="logo"><br>
             <img src="<?php echo bloginfo('template_url').'/'; ?>img/content/division-empleos.png" alt="divider" class="form-divider"><br>

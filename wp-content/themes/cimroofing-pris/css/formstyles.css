@@ -222,7 +222,7 @@ table, th, td {
 #reportform input[type=text] {
     width: 100%;
     margin: 10px 0;
-    max-width: 715px;
+    max-width: 735px;
 }
 
 .one-line input[type=text] {
@@ -235,7 +235,7 @@ table, th, td {
 
 /* PROJECT FORM */
 .inside-content{
-    margin: 15px;
+    /**margin: 15px;*/
     padding: 10px;
     border: 1px solid black;
 }
@@ -302,7 +302,7 @@ table, th, td {
 }
 
 /* PROJECTS */
-#projects{
+#projects, .main {
     background: url(img/backgrounds/forms.png) no-repeat center center;
     background-size: cover;
     /*    position:fixed;*/
@@ -313,6 +313,7 @@ table, th, td {
     background-attachment: fixed;
     min-height: 100vh;
     /*min-width: 100vh;*/
+    padding-bottom: 30px;
 }
 
 .info-content{

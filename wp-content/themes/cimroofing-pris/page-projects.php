@@ -5,8 +5,8 @@ $count = $wpdb->get_var("SELECT COUNT(*) FROM projects");
 $project = $wpdb->get_results("select * from projects");
 $x = 0;
 ?>
-    <div id="projects" style="min-height: 100vh;">
-        <div class="container">
+    <div id="projects">
+        <div class="general-content">
             <a href="#login-modal" data-toggle="modal" data-target="#login-modal">LOGIN</a>
             <img src="<?php echo bloginfo('template_url').'/'; ?>img/logo.png" alt="cim logo" class="logo"><br>
             <img src="<?php echo bloginfo('template_url').'/'; ?>img/content/division-empleos.png" alt="divider" class="form-divider"><br>
@@ -28,23 +28,23 @@ $x = 0;
                             </tr>
                             </thead>
                             <tbody>
-                            <?php
-                            while($x<$count) {
-                                if($project[$x]->deleted_at == NULL){
-                                    echo '<tr class="no-border scrolltr">';
-                                    echo '<td class="no-border scrolltr">', $project[$x]->created_at, '</td>';
-                                    echo '<td class="no-border scrolltr">', $project[$x]->project_year, '</td>';
-                                    echo '<td class="no-border scrolltr ">
+							<?php
+							while($x<$count) {
+								if($project[$x]->deleted_at == NULL){
+									echo '<tr class="no-border scrolltr">';
+									echo '<td class="no-border scrolltr">', $project[$x]->created_at, '</td>';
+									echo '<td class="no-border scrolltr">', $project[$x]->project_year, '</td>';
+									echo '<td class="no-border scrolltr ">
                                      <a href="projecthistory/?id=', $project[$x]->project_id ,'">', $project[$x]->project_name, '</a></td>';
-                                    echo '<td class="no-border scrolltr">', $project[$x]->project_address, '</td>';
-                                    echo '<td class="no-border scrolltr">', $project[$x]->project_area, '</td>';
-                                    echo '<td class="no-border scrolltr">', $project[$x]->project_contract_amount, '</td>';
-                                    echo '<td class="no-border scrolltr"><a href="editproject/?id=', $project[$x]->project_id ,'">Edit</a>|<button type="submit" name="delete-project" value="', $project[$x]->project_id ,'" class="btn-link">Delete</button></td>';
-                                    echo '</tr>';
-                                }
-                                $x++;
-                            }
-                            ?>
+									echo '<td class="no-border scrolltr">', $project[$x]->project_address, '</td>';
+									echo '<td class="no-border scrolltr">', $project[$x]->project_area, '</td>';
+									echo '<td class="no-border scrolltr">', $project[$x]->project_contract_amount, '</td>';
+									echo '<td class="no-border scrolltr"><a href="editproject/?id=', $project[$x]->project_id ,'">Edit</a>|<button type="submit" name="delete-project" value="', $project[$x]->project_id ,'" class="btn-link">Delete</button></td>';
+									echo '</tr>';
+								}
+								$x++;
+							}
+							?>
                             </tbody>
                         </table>
                     </form>

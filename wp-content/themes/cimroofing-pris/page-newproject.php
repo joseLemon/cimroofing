@@ -1,7 +1,7 @@
 <?php $page = 'newproject'; ?>
 <?php include('header-projects.php'); ?>
     <div id="projects" class="new-project">
-        <div class="container simple-form">
+        <div class="simple-form">
             <img src="<?php echo bloginfo('template_url').'/'; ?>img/logo.png" alt="cim logo" class="logo"><br>
             <img src="<?php echo bloginfo('template_url').'/'; ?>img/content/division-empleos.png" alt="divider" class="form-divider"><br>
             <text class="title">CREATE NEW PROJECT</text>

@@ -10,7 +10,7 @@ $report = $report[0];
 
 ?>
 
-<div id="projectform" class="container">
+<div id="projectform">
     <div class="general-content">
         <img src="<?php echo bloginfo('template_url').'/'; ?>img/logo.png" alt="cim logo" class="logo"><br>
         <img src="<?php echo bloginfo('template_url').'/'; ?>img/content/division-empleos.png" alt="divider" class="form-divider"><br>

@@ -19,7 +19,7 @@ foreach ($project_users as $assigned) {
 $pre_select = json_encode($pre_select);
 ?>
     <div id="projects">
-        <div class="container simple-form">
+        <div class="simple-form">
             <img src="<?php echo bloginfo('template_url').'/'; ?>img/logo.png" alt="cim logo" class="logo"><br>
             <img src="<?php echo bloginfo('template_url').'/'; ?>img/content/division-empleos.png" alt="divider" class="form-divider"><br>
             <text class="title">EDIT PROJECT</text>
