@@ -6,6 +6,12 @@ $client = $wpdb->get_results("select * from clients where client_id = $id");
 $inspection = $wpdb->get_results("select * from roof_inspections where client_id = $id");
 $client = $client[0];
 $inspection = $inspection[0];
+
+if(get_user_meta($client->user_id, 'first_name',true) != null) {
+    $user_name = get_user_meta($client->user_id, 'first_name',true).' '.get_user_meta($client->user_id, 'last_name',true);
+} else {
+    $user_name = get_user_by('id', $client->user_id)->user_login;
+}
 ?>
 
     <div id="reportform">
@@ -212,7 +218,7 @@ $inspection = $inspection[0];
                         </div>
                     </div>
                     <div class="signature-canvas" style="margin-left:10px">
-                        Inspected by: NAME OF EMPLOYEE HERE<br>
+                        Inspected by: <?php echo $user_name ?><br>
                         Signature: <br>
                         <img src="<?php echo $client->client_signature; ?>" /><br>
                         <div class="canvas-area">
