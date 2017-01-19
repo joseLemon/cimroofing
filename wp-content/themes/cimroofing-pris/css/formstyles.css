@@ -267,11 +267,11 @@ table, th, td {
     margin-right: auto;
 }
 
-.fieldnotes .image-thumbs div[class*=col-] {
+.image-thumbs div[class*=col-] {
     padding: 15px;
 }
 
-.fieldnotes .image-thumbs div[class*=col-] img {
+.image-thumbs div[class*=col-] img {
     width: 100%;
     max-width: 400px;
 }
@@ -469,4 +469,314 @@ table, th, td {
 .uploaded-images .col-sm-4 {
     height: 300px;
     padding: 5px;
+}
+
+/* LOGIN MODAL */
+#login-modal .modal-dialog {
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #f1f1f1;
+    transform: translate(0)!important;
+    opacity: 1;
+}
+
+#login-modal .modal-login-form {
+    padding-top: 100px;
+}
+
+#login-modal .modal-content {
+    border-radius: 0;
+    border: 0;
+    height: 100%;
+    width: 400px;
+    margin: 0 auto;
+    background-color: transparent!important;
+    box-shadow: none!important;
+}
+
+#login-modal .modal-header {
+    border: 0;
+}
+
+#login-modal .modal-body {
+    width: 320px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 20px;
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.13);
+    box-shadow: 0 1px 3px rgba(0,0,0,.13);
+}
+
+#login-modal h3 {
+    font-size: 30px;
+    color: #004989;
+    margin-bottom: 15px;
+}
+
+#login-modal h3::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 2px;
+    background-color: #004989;
+    margin: 10px auto;
+}
+
+#login-modal input[type=text],
+#login-modal input[type=password] {
+    width: 100%;
+    padding: 5px 3px;
+    border: 1px solid #e3e3e3;
+}
+
+#login-modal .login-remember {
+    float: left;
+}
+
+#login-modal .login-remember input {
+    height: 20px;
+    width: 20px;
+    background: #fbfbfb;
+    -webkit-appearance: none;
+    border: 1px solid #b4b9be;
+    color: #555;
+    clear: none;
+    cursor: pointer;
+    display: inline-block;
+    line-height: 0;
+    margin: -4px 4px 0 0;
+    outline: 0;
+    padding: 0!important;
+    text-align: center;
+    vertical-align: middle;
+    min-width: 16px;
+    -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+    -webkit-transition: .05s border-color ease-in-out;
+    transition: .05s border-color ease-in-out;
+    position: relative;
+}
+
+#login-modal .login-remember input:focus {
+    border: 1px solid #1e8cbe;
+}
+
+#login-modal .login-remember input:checked::before {
+    content: '';
+    position: relative;
+    display: block;
+    top: 1px;
+    left: 6px;
+    width: 7px;
+    height: 14px;
+    border: solid #1e8cbe;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+
+}
+
+#login-modal .login-remember label {
+    font-size: 13px;
+    line-height: 19px;
+    color: #72777c;
+    font-weight: 100;
+}
+
+#login-modal .login-submit {
+    float: right;
+}
+
+#login-modal .login-submit input[type=submit] {
+    padding: 6px 14px;
+    line-height: normal;
+    font-size: 14px;
+    vertical-align: middle;
+    height: auto;
+    margin-bottom: 4px;background: #0085ba;
+    border-color: #0073aa #006799 #006799;
+    -webkit-box-shadow: 0 1px 0 #006799;
+    box-shadow: 0 1px 0 #006799;
+    color: #fff;
+    text-decoration: none;
+    text-shadow: 0 -1px 1px #006799, 1px 0 1px #006799, 0 1px 1px #006799, -1px 0 1px #006799;cursor: pointer;
+    border-width: 1px;
+    border-style: solid;
+    -webkit-appearance: none;
+    box-sizing: border-box;
+    border-radius: 3px;
+}
+
+#login-modal .login-submit input[type=submit]:active {
+    background: #0073aa;
+    border-color: #006799;
+    -webkit-box-shadow: inset 0 2px 0 #006799;
+    box-shadow: inset 0 2px 0 #006799;
+    vertical-align: top;
+}
+
+#login-modal a {
+    font-size: 14px;
+}
+
+#login-modal a.logo {
+    background: url(http://localhost/projects/cimroofing/wp-content/themes/cimroofing-pris/img/logo.png) no-repeat center center!important;
+    height: 120px;
+    width: 320px;
+}
+
+#login-modal .errors {
+    max-width: 320px;
+    margin: 20px auto;
+}
+
+#login-modal .errors .alert {
+    font-size: 14px;
+}
+
+.fade-scale {
+    opacity: 1;
+    /*transform: scale(0);*/
+    transform: translate(0)!important;
+    -webkit-transition: all .25s linear;
+    -o-transition: all .25s linear;
+    transition: all .25s linear;
+}
+
+.fade-scale.in {
+    opacity: 1;
+    /*transform: scale(1);*/
+    transform: translate(0)!important;
+}
+
+/* APP NAV */
+.app-nav {
+    width: 300px;
+    height: 100vh;
+    padding-top: 50px;
+    background-color: #fefefe;
+    position: absolute;
+    left: -300px;
+    -webkit-transition: left 300ms ease;
+    -moz-transition: left 300ms ease;
+    transition: left 300ms ease;
+}
+
+.app-nav::before,
+.app-nav::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    display: block;
+    height: 50px;
+}
+
+.app-nav::before {
+    width: 100%;
+    background-color: #414141;
+}
+
+/*.app-nav::after {
+    width: 56px;
+    right: 0;
+    border-left: 2px solid #888;
+    pointer-events: none;
+}*/
+
+.app-nav .navbar-toggle {
+    display: block;
+    margin: 10px;
+    width: 36px;
+    height: 30px;
+    position: absolute;
+    top: 0;
+    left: 300px;
+    -webkit-transition: left 300ms ease;
+    -moz-transition: left 300ms ease;
+    transition: left 300ms ease;
+}
+
+.app-nav .navbar-toggle span {
+    position: absolute;
+    left: 0;
+    overflow: hidden;
+    width: 100%;
+    height: 2px;
+    text-indent: 200%;
+    -webkit-transition: opacity 0.25s;
+    transition: opacity 0.25s;
+    background-color: #888;
+}
+
+.app-nav .navbar-toggle::before, .navbar-toggle::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    pointer-events: none;
+    -webkit-transition: -webkit-transform 0.25s;
+    transition: transform 0.25s;
+    -webkit-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    background-color: #888;
+}
+
+.app-nav .navbar-toggle::before {
+    -webkit-transform: translate3d(0, -10px, 0) scale3d(0.8, 1, 1);
+    transform: translate3d(0, -10px, 0) scale3d(0.8, 1, 1);
+}
+
+.app-nav .navbar-toggle::after {
+    -webkit-transform: translate3d(0, 10px, 0) scale3d(0.8, 1, 1);
+    transform: translate3d(0, 10px, 0) scale3d(0.8, 1, 1);
+}
+
+.app-nav>ul {
+    list-style: none;
+    padding: 0;
+}
+
+.app-nav>ul>li {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 15px;
+    border-bottom: 1px solid #e3e3e3;
+}
+
+.app-nav>ul>li:nth-of-type(1) {
+    border-top: 1px solid #e3e3e3;
+}
+
+.app-nav>ul>li>a {
+    text-decoration: none!important;
+}
+
+.app-nav>ul>li>a>img {
+    width: 22px;
+}
+
+/* OPEN EVENTS */
+.app-nav.open {
+    left: 0;
+    box-shadow: 1px 1px 10px 3px rgba(0,0,0,.3);
+}
+
+.app-nav.open .navbar-toggle {
+    left: 244px;
+}
+
+.app-nav.open .navbar-toggle::before {
+    -webkit-transform: rotate3d(0, 0, 1, 45deg);
+    transform: rotate3d(0, 0, 1, 45deg);
+}
+
+.app-nav.open .navbar-toggle::after {
+    -webkit-transform: rotate3d(0, 0, 1, -45deg);
+    transform: rotate3d(0, 0, 1, -45deg);
+}
+
+.app-nav.open .navbar-toggle span {
+    opacity: 0;
 }

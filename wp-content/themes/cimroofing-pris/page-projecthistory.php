@@ -2,11 +2,8 @@
 <?php include('header-projects.php'); ?>
 <?php
 $id = $_GET['id'];
-
-$count = $wpdb->get_var("SELECT COUNT(*) FROM reports WHERE project_id= '$id'");
-$report = $wpdb->get_results("select * from reports WHERE project_id= '$id'");
-$project = $wpdb->get_results("select * from projects WHERE project_id= '$id'");
-$x = 0;
+$reports = $wpdb->get_results("SELECT * FROM reports WHERE project_id = '$id' AND deleted_at IS NULL");
+$project = $wpdb->get_results("select * from projects WHERE project_id = '$id'");
 ?>
     <div id="projectform" class="main">
         <div class="general-content">
@@ -29,7 +26,9 @@ $x = 0;
                 <br>
                 <img src="<?php echo bloginfo('template_url').'/'; ?>img/content/division-empleos.png" alt="divider" class="form-divider longwidth" style="height:2px"><br>
                 <div class="log-reporting-period">
-                    <?php echo'<a href="reportform/?id=', $id ,'"><button name="new-report" style="margin-bottom:15px">New report</button></a>'; ?><br>
+					<?php if ( current_user_can('manage_options') ) { ?>
+						<?php echo'<a href="reportform/?id=', $id ,'"><button name="new-report" style="margin-bottom:15px">New report</button></a>'; ?><br>
+					<?php } ?>
                     <table style="margin-left:0;width:100%" class="no-border persist-area scrolltable">
                         <thead>
                         <tr class="no-border row-color persist-header">
@@ -41,19 +40,18 @@ $x = 0;
                             <th class="no-border scrollth"></th>
                         </tr>
                         </thead>
-                        <?php
-                        while($x<$count) {
-                            echo '<tr class="no-border sctolltr">';
-                            echo '<td class="no-border sctolltr center-element">', $report[$x]->created_at, '</td>';
-                            echo '<td class="no-border sctolltr center-element">', $report[$x]->user_id, '</td>'; //checar
-                            echo '<td class="no-border sctolltr center-element ">', $report[$x]->report_start_date, '</td>';
-                            echo '<td class="no-border sctolltr center-element">', $report[$x]->report_end_date, '</td>';
-                            echo '<td class="no-border sctolltr center-element">', $report[$x]->report_square_feet_to_date, '</td>';
-                            echo '<td class="no-border sctolltr center-element"><a href="editreport?id=', $report[$x]->project_id ,'&rid=',  $report[$x]->report_id,'">Edit</a>|<a href="">View</a></td>';
-                            echo '</tr>';
-                            $x++;
-                        }
-                        ?>
+						<?php
+						foreach($reports as $report) {
+							echo '<tr class="no-border sctolltr">';
+							echo '<td class="no-border sctolltr center-element">', $report->created_at, '</td>';
+							echo '<td class="no-border sctolltr center-element">', $report->user_id, '</td>'; //checar
+							echo '<td class="no-border sctolltr center-element ">', $report->report_start_date, '</td>';
+							echo '<td class="no-border sctolltr center-element">', $report->report_end_date, '</td>';
+							echo '<td class="no-border sctolltr center-element">', $report->report_square_feet_to_date, '</td>';
+							echo '<td class="no-border sctolltr center-element"><a href="editreport?id=', $report->project_id ,'&rid=',  $report->report_id,'">Edit</a>|<a href="">View</a></td>';
+							echo '</tr>';
+						}
+						?>
                         </tbody>
                     </table>
                 </div>

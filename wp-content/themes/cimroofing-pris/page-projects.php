@@ -1,19 +1,24 @@
 <?php $page = 'projects'; ?>
 <?php include('header-projects.php'); ?>
 <?php
-$count = $wpdb->get_var("SELECT COUNT(*) FROM projects");
-$project = $wpdb->get_results("select * from projects");
-$x = 0;
+$user_id = get_current_user_id();
+if ( current_user_can('manage_options') ) {
+	$projects = $wpdb->get_results("SELECT * FROM projects LEFT JOIN project_users ON projects.project_id = project_users.project_id WHERE deleted_at IS NULL GROUP BY projects.project_id");
+} else {
+	$projects = $wpdb->get_results("SELECT * FROM projects LEFT JOIN project_users ON projects.project_id = project_users.project_id WHERE deleted_at IS NULL AND user_id = '$user_id' GROUP BY projects.project_id");
+}
 ?>
+<?php if(is_user_logged_in()) { ?>
     <div id="projects">
         <div class="general-content">
-            <a href="#login-modal" data-toggle="modal" data-target="#login-modal">LOGIN</a>
             <img src="<?php echo bloginfo('template_url').'/'; ?>img/logo.png" alt="cim logo" class="logo"><br>
             <img src="<?php echo bloginfo('template_url').'/'; ?>img/content/division-empleos.png" alt="divider" class="form-divider"><br>
             <text class="title">ACTIVE PROJECTS</text>
             <div class="info-content" style="background-color:transparent">
                 <div class="inside-content">
-                    <a href="<?php echo home_url().'/'; ?>newproject"><button type="button">New project</button></a><br>
+					<?php if ( current_user_can('manage_options') ) { ?>
+                        <a href="<?php echo home_url().'/'; ?>newproject"><button type="button">New project</button></a><br>
+					<?php } ?>
                     <form method="POST" action="<?php echo home_url().'/'; ?>controller">
                         <table style="margin-left:0;width:100%" class="no-border persist-area scrolltable">
                             <thead>
@@ -24,25 +29,26 @@ $x = 0;
                                 <th class="no-border scrollth">Address</th>
                                 <th class="no-border scrollth">Area</th>
                                 <th class="no-border scrollth">Contract $</th> <!-- checar permisos -->
-                                <th class="no-border scrollth"></th>
+								<?php if ( current_user_can('manage_options') ) { ?>
+                                    <th class="no-border scrollth"></th>
+								<?php } ?>
                             </tr>
                             </thead>
                             <tbody>
 							<?php
-							while($x<$count) {
-								if($project[$x]->deleted_at == NULL){
-									echo '<tr class="no-border scrolltr">';
-									echo '<td class="no-border scrolltr">', $project[$x]->created_at, '</td>';
-									echo '<td class="no-border scrolltr">', $project[$x]->project_year, '</td>';
-									echo '<td class="no-border scrolltr ">
-                                     <a href="projecthistory/?id=', $project[$x]->project_id ,'">', $project[$x]->project_name, '</a></td>';
-									echo '<td class="no-border scrolltr">', $project[$x]->project_address, '</td>';
-									echo '<td class="no-border scrolltr">', $project[$x]->project_area, '</td>';
-									echo '<td class="no-border scrolltr">', $project[$x]->project_contract_amount, '</td>';
-									echo '<td class="no-border scrolltr"><a href="editproject/?id=', $project[$x]->project_id ,'">Edit</a>|<button type="submit" name="delete-project" value="', $project[$x]->project_id ,'" class="btn-link">Delete</button></td>';
-									echo '</tr>';
+							foreach($projects as $project) {
+								echo '<tr class="no-border scrolltr">';
+								echo '<td class="no-border scrolltr">', $project->created_at, '</td>';
+								echo '<td class="no-border scrolltr">', $project->project_year, '</td>';
+								echo '<td class="no-border scrolltr ">
+                                     <a href="projecthistory/?id=', $project->project_id ,'">', $project->project_name, '</a></td>';
+								echo '<td class="no-border scrolltr">', $project->project_address, '</td>';
+								echo '<td class="no-border scrolltr">', $project->project_area, '</td>';
+								echo '<td class="no-border scrolltr">', $project->project_contract_amount, '</td>';
+								if ( current_user_can('manage_options') ) {
+									echo '<td class="no-border scrolltr"><a href="editproject/?id=', $project->project_id, '">Edit</a>|<button type="submit" name="delete-project" value="', $project->project_id, '" class="btn-link">Delete</button></td>';
 								}
-								$x++;
+								echo '</tr>';
 							}
 							?>
                             </tbody>
@@ -50,9 +56,12 @@ $x = 0;
                     </form>
                 </div>
                 <div style="margin-top:20px; margin-left: 15px;">
-                    <a href="inspectionhistory"><button type="button">Inspection List</button></a>
+					<?php if ( current_user_can('manage_options') ) { ?>
+                        <a href="inspectionhistory"><button type="button">Inspection List</button></a>
+					<?php } ?>
                 </div>
             </div>
         </div>
     </div>
+<?php } ?>
 <?php include('footer-projects.php'); ?>
