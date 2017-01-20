@@ -150,9 +150,11 @@ $project = $wpdb->get_results("select * from projects where project_id = $id");
             </div>
             <div class="modal-body">
                 <form action="<?php echo home_url().'/'; ?>controller" method="POST" id="upload-form" enctype="multipart/form-data">
-                    <input type="file" id="pictures" name="pictures[]" multiple>
+                    <input class="hidden" type="file" id="pictures" name="pictures[]" multiple value="Select files">
+                    <a href="#" class="btn btn-default" onclick="document.getElementById('pictures').click(); return false;" />Select images</a>
+                    <button class="btn btn-success" type="submit">Upload images</button>
+                    <input type="file" id="fileID" style="visibility: hidden;" />
                     <input type="hidden" id="tmp-folder" name="tmp-folder">
-                    <button type="submit">Upload images</button>
                 </form>
             </div>
         </div>
@@ -233,6 +235,7 @@ $project = $wpdb->get_results("select * from projects where project_id = $id");
             $.ajax({
                 url: imgDir,
                 success: function(data) {
+                    $('#upload-modal').modal('hide');
                     $('.uploaded-images').empty();
                     //List all .png file names in the page
                     //var $img_counter = 0;
@@ -243,7 +246,7 @@ $project = $wpdb->get_results("select * from projects where project_id = $id");
                         //$img_counter++;
                     });
                     $('.uploaded-images .col-sm-4 > img').cropper({
-                        aspectRatio: 16 / 9,
+                        aspectRatio: 4 / 3,
                     });
                 }
             });
@@ -284,3 +287,4 @@ $project = $wpdb->get_results("select * from projects where project_id = $id");
         $(this)[0].submit();
     });
 </script>
+<?php include('footer-projects.php'); ?>

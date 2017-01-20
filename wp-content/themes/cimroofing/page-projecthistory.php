@@ -48,7 +48,9 @@ $project = $wpdb->get_results("select * from projects WHERE project_id = '$id'")
 							echo '<td class="no-border sctolltr center-element ">', $report->report_start_date, '</td>';
 							echo '<td class="no-border sctolltr center-element">', $report->report_end_date, '</td>';
 							echo '<td class="no-border sctolltr center-element">', $report->report_square_feet_to_date, '</td>';
-							echo '<td class="no-border sctolltr center-element"><a href="editreport?id=', $report->project_id ,'&rid=',  $report->report_id,'">Edit</a>|<a href="">View</a></td>';
+							echo '<td class="no-border sctolltr center-element">
+                            <a href="editreport?id=', $report->project_id ,'&rid=', $report->report_id,'">Edit</a>
+                            |<a href="pdfreport?id='.$report->project_id.'&rid='.$report->report_id.'">View</a></td>';
 							echo '</tr>';
 						}
 						?>

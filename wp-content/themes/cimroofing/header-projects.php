@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,7 +26,9 @@
     <ul>
         <li><a href="<?php echo home_url();?>"><img src="<?php echo bloginfo('template_url').'/'; ?>img/svg/home.svg" alt="Home"> Home</a></li>
         <li><a href="<?php echo home_url();?>/projects"><img src="<?php echo bloginfo('template_url').'/'; ?>img/svg/project.svg" alt="Home"> Projects</a></li>
+	    <?php if ( current_user_can('manage_options') ) { ?>
         <li><a href="<?php echo home_url();?>/inspectionhistory"><img src="<?php echo bloginfo('template_url').'/'; ?>img/svg/list.svg" alt="Home"> Inspection Lists</a></li>
+        <?php } ?>
         <li><a href="<?php echo wp_logout_url();?>"><img src="<?php echo bloginfo('template_url').'/'; ?>img/svg/logout.svg" alt="Logout"> Logout</a></li>
     </ul>
 </nav>

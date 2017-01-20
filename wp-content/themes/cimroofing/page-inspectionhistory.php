@@ -17,8 +17,6 @@ $x = 0;
             <div class="info-content">
                 <div class="inside-content">
 
-                    <!--                    <form method="POST" action="controller.php">-->
-
                     <div class="log-reporting-period">
                         <a href="inspectionform"><button name="new-inspection" style="margin-bottom:15px">New inspection list</button></a>
                         <table style="margin-left:0;width:100%" class="no-border persist-area scrolltable">
@@ -49,7 +47,9 @@ $x = 0;
 								echo '<td class="no-border sctolltr center-element ">', $client[$x]->client_size_of_roof, 'ft&sup2;</td>';
 								echo '<td class="no-border sctolltr center-element">', $result ,'</td>';
 								echo '<td class="no-border sctolltr center-element">', $inspection[$x]->roof_inspection_datetime ,'</td>';
-								echo '<td class="no-border sctolltr center-element"><a href="editinspectionform/?id=', $client[$x]->client_id ,'">Edit</a>|<a href="">View</a></td>';
+								echo '<td class="no-border sctolltr center-element">
+                                <a href="editinspectionform/?id=', $client[$x]->client_id ,'">Edit</a>
+                                |<a href="pdfinspectionform/?id='.$client[$x]->client_id.'">View</a></td>';
 								echo '</tr>';
 								$x++;
 							}

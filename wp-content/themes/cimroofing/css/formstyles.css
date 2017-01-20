@@ -237,7 +237,6 @@ table, th, td {
 .inside-content{
     /**margin: 15px;*/
     padding: 10px;
-    border: 1px solid black;
 }
 
 .project-info{
@@ -317,7 +316,6 @@ table, th, td {
 }
 
 .info-content{
-    background-color: white;
     /*width: 900px;*/
     /* top: 50%;
      left: 50%;
@@ -325,6 +323,8 @@ table, th, td {
      position: absolute;*/
     padding: 15px;
     margin:auto;
+    border: 1px solid #1a1a1a;
+    background-color: #fefefe;
 }
 
 .row-color{

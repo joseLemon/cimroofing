@@ -128,9 +128,9 @@ $report = $report[0];
                     <div class="image-tumbnails">Image thumbnails</div><br>
                     <div class="image-thumbs">
                         <?php
-                        $directory = dirname(__FILE__) . '\\file_uploads\\' . $_GET['id'] . '\\';
+                        $directory = dirname(__FILE__) . '\\file_uploads\\' . $_GET['rid'] . '\\';
                         $images = glob($directory.'*.jpg');
-
+                        $counter = 0;
                         foreach($images as $image) {
                             ?>
                             <div class="col-sm-4">
@@ -139,6 +139,10 @@ $report = $report[0];
                                 ?>
                             </div>
                             <?php
+                            $counter++;
+                            if($counter%3 == 0){
+                                echo '<div class="clearfix"></div>';
+                            }
                         }
                         ?>
                     </div>

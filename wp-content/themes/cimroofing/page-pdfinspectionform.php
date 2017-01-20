@@ -1,5 +1,61 @@
 <?php $page = 'editinspectionform'; ?>
 <?php include('header-projects.php'); ?>
+    <style type="text/css" media="print">
+        @page {
+            size: auto;   /* auto is the initial value */
+            margin: 0;  /* this affects the margin in the printer settings */
+        }
+    </style>
+    <style>
+        .body {
+            -webkit-print-color-adjust:exact;
+        }
+        .app-nav {
+            display: none;
+        }
+        .pdf-page,
+        .long-pdf-page {
+            width: 21cm;
+            height: 29.7cm;
+            padding: 5px;
+        }
+        .long-pdf-page {
+            height: auto;
+        }
+        .table-info,
+        .table-info td {
+            border: 0;
+        }
+    </style>
+    <script type="text/javascript">
+
+        window.onload = function() {
+            //setTimeout("window.print();", 500);
+        };
+
+        (function() {
+            var beforePrint = function() {
+                console.log('Functionality to run before printing.');
+            };
+            var afterPrint = function() {
+                //window.history.back();
+            };
+
+            if (window.matchMedia) {
+                var mediaQueryList = window.matchMedia('print');
+                mediaQueryList.addListener(function(mql) {
+                    if (mql.matches) {
+                        beforePrint();
+                    } else {
+                        afterPrint();
+                    }
+                });
+            }
+
+            window.onbeforeprint = beforePrint;
+            window.onafterprint = afterPrint;
+        }());
+    </script>
 <?php
 $id = $_GET['id'];
 $client = $wpdb->get_results("select * from clients where client_id = $id");
@@ -7,20 +63,20 @@ $inspection = $wpdb->get_results("select * from roof_inspections where client_id
 $client = $client[0];
 $inspection = $inspection[0];
 if(get_user_meta($client->user_id, 'first_name',true) != null) {
-    $user_name = get_user_meta($client->user_id, 'first_name',true).' '.get_user_meta($client->user_id, 'last_name',true);
+	$user_name = get_user_meta($client->user_id, 'first_name',true).' '.get_user_meta($client->user_id, 'last_name',true);
 } else {
-    $user_name = get_user_by('id', $client->user_id)->user_login;
+	$user_name = get_user_by('id', $client->user_id)->user_login;
 }
 ?>
 
     <div id="reportform">
 
-        <img src="<?php echo bloginfo('template_url').'/'; ?>img/logo.png" alt="cim logo" class="logo"><br>
-        <img src="<?php echo bloginfo('template_url').'/'; ?>img/content/division-empleos.png" alt="divider" class="form-divider"><br>
-        <text class="title">ROOF INSPECTION LIST</text><br>
-
         <div class="general-content">
-            <div class="inside-content">
+
+            <div class="pdf-page">
+                <img src="<?php echo bloginfo('template_url').'/'; ?>img/logo.png" alt="cim logo" class="logo"><br>
+                <img src="<?php echo bloginfo('template_url').'/'; ?>img/content/division-empleos.png" alt="divider" class="form-divider"><br>
+                <text class="title">ROOF INSPECTION LIST</text><br>
                 <div class="info-section">
                     <img src="<?php echo bloginfo('template_url').'/'; ?>img/content/BACKGROUND.png" alt="divider" style="width: 621px" class=""><br>
                     <p class="content">Roof systems can deteriorate from: normal wear; severe weather conditions (e.g. wind and snow loads); building movement (e.g., settlement, material contraction/expansion); and improper design, construction, and maintenance.</p>
@@ -50,92 +106,83 @@ if(get_user_meta($client->user_id, 'first_name',true) != null) {
                     </ul>
                 </div>
                 <text class="content" style="color: #004989;text-align:center;display: inherit">To set up roof inspections or existing conditions inspections contact    IOCHOA@CIMROOFING.COM</text><br>
-                <div class="row no-margin">
-                    <div class="col-md-8 col-sm-12">
-                        <div><strong>Project Owner</strong> <?php echo $client->client_project_owner; ?></div><br>
-                    </div>
-                </div>
-                <div class="row no-margin">
-                    <div class="col-md-8 col-sm-12">
-                        <div><strong>Project Address</strong> <?php echo $client->client_project_address; ?></div><br>
-                    </div>
-                </div>
-                <div class="row no-margin">
-                    <div class="col-md-4 col-sm-6">
-                        <div><strong>Height at Eave</strong> <?php echo $client->client_height_at_eave; ?></div>
-                    </div>
-                    <div class="col-md-4 col-sm-6">
-                        <div><strong>Height at ridge</strong> <?php echo $client->client_height_at_ridge; ?></div><br>
-                    </div>
-                </div>
-                <div class="row no-margin">
-                    <div class="col-sm-12">
-                        <text class="content"><strong>Clear access </strong>
-                            <?php
-                            if($client->clear_access_id == NULL){
-                                echo ' No ';
-                            }else{
-                                echo ' Yes ';
-                                $clearSelect = $wpdb->get_results("select clear_access_id, clear_access_name from clear_access");
-                                foreach($clearSelect as $clear){
-                                    if($client->clear_access_id == $clear->clear_access_id)
-                                        echo '<strong>Front </strong> '.$clear->clear_access_name ;
-                                }
-                            }
-                            ?>
-                        </text>
-                    </div>
-                </div>
-                <div class="row no-margin">
-                    <div class="col-sm-12 one-line">
-                        <text class="content"><strong>Type of roof</strong><?php
-                            if($client->type_roof_sloped_id == NULL){
-                                echo ' Flat/Membrane ';
-                                $flatMembrane = $wpdb->get_results("select type_roof_flat_id, type_roof_flat_name from type_roof_flat");
-                                foreach($flatMembrane as $flat){
-                                    if($client->type_roof_flat_id == $flat->type_roof_flat_id)
-                                        echo $flat->type_roof_flat_name;
-                                }
-                            }else{
-                                echo ' Sloped ';
-                                $slopedSelect = $wpdb->get_results("select type_roof_sloped_id, type_roof_sloped_name from type_roof_sloped");
-                                foreach($slopedSelect as $sloped){
-                                    if($client->type_roof_sloped_id == $sloped->type_roof_sloped_id)
-                                        echo $sloped->type_roof_sloped_name." <strong>Slope </strong> ".$client->client_sloped. " in 12";
-                                }
-                            }
-                            ?>
-                        </text>
-                    </div>
-                </div>
-                <div class="row no-margin">
-                    <div class="col-sm-12">
-                        <div><strong>Size of roof </strong><?php echo $client->client_size_of_roof; ?> ft&sup2;</div>
-                    </div>
-                </div>
-                <div class="row no-margin">
-                    <div class="col-sm-6">
-                        <div><strong> Manufacturer and brand </strong><?php echo $client->client_manufacturer_and_brand; ?></div>
-                    </div>
-                    <div class="col-sm-6">
-                        <strong> Year installed:&nbsp;</strong><?php echo $client->client_year_installed; ?>
-                        <strong>&nbsp;Year manufactured&nbsp;</strong><?php echo $client->client_year_manufactured; ?><br>
-                    </div>
-                </div>
-                <div class="row no-margin">
-                    <div class="col-sm-6">
-                        <strong>Title" value </strong><?php echo $client->client_title; ?>
-                    </div>
-                    <div class="col-sm-6">
-                        Date of inspection:&nbsp;<?php echo date('m/d/Y H:i:s', strtotime($client->client_date)); ?><br>
-                    </div>
-                </div>
-                <div class="signature-canvas" style="margin-left:10px">
-                    Inspected by: <?php echo $user_name ?><br>
-                    Signature: <br>
-                    <img src="<?php echo $client->client_signature; ?>" /><br>
-                </div>
+            </div>
 
+            <div class="pdf-page">
+                <table style="width: 100%" class="table-info">
+                    <colgroup>
+                        <col style="width: 50%;">
+                        <col style="width: 50%;">
+                    </colgroup>
+                    <tbody>
+                    <tr>
+                        <td><strong>Project Owner</strong>: <?php echo $client->client_project_owner; ?></td>
+                        <td><strong>Project Address</strong>: <?php echo $client->client_project_address; ?></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Height at Eave</strong>: <?php echo $client->client_height_at_eave; ?></td>
+                        <td><strong>Height at ridge</strong>: <?php echo $client->client_height_at_ridge; ?></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <text class="content"><strong>Clear access: </strong>
+								<?php
+								if($client->clear_access_id == NULL){
+									echo ' No ';
+								}else{
+									echo ' Yes ';
+									$clearSelect = $wpdb->get_results("select clear_access_id, clear_access_name from clear_access");
+									foreach($clearSelect as $clear){
+										if($client->clear_access_id == $clear->clear_access_id)
+											echo '<strong>Front </strong> '.$clear->clear_access_name ;
+									}
+								}
+								?>
+                            </text>
+                        </td>
+                        <td>
+                            <text class="content"><strong>Type of roof</strong>:
+								<?php
+								if($client->type_roof_sloped_id == NULL){
+									echo ' Flat/Membrane ';
+									$flatMembrane = $wpdb->get_results("select type_roof_flat_id, type_roof_flat_name from type_roof_flat");
+									foreach($flatMembrane as $flat){
+										if($client->type_roof_flat_id == $flat->type_roof_flat_id)
+											echo $flat->type_roof_flat_name;
+									}
+								}else{
+									echo ' Sloped ';
+									$slopedSelect = $wpdb->get_results("select type_roof_sloped_id, type_roof_sloped_name from type_roof_sloped");
+									foreach($slopedSelect as $sloped){
+										if($client->type_roof_sloped_id == $sloped->type_roof_sloped_id)
+											echo $sloped->type_roof_sloped_name." <strong>Slope </strong> ".$client->client_sloped. " in 12";
+									}
+								}
+								?>
+                            </text>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Size of roof: </strong><?php echo $client->client_size_of_roof; ?> ft&sup2;</td>
+                        <td><strong> Manufacturer and brand </strong><?php echo $client->client_manufacturer_and_brand; ?></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Year installed: </strong><?php echo $client->client_year_installed; ?></td>
+                        <td> <strong>Year manufactured: </strong><?php echo $client->client_year_manufactured; ?></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Title: </strong><?php echo $client->client_title; ?></td>
+                        <td><strong>Date of inspection: </strong>&nbsp;<?php echo date('m/d/Y H:i:s', strtotime($client->client_date)); ?><br></td>
+                    </tr>
+                    <tr>
+                        <td>Inspected by: <?php echo $user_name ?></td>
+                        <td>
+                            Signature: <br>
+                            <img src="<?php echo $client->client_signature; ?>" />
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
                 <!-- checar el titulo -->
                 <div id="inspection-checklist">
                     <img src="<?php echo bloginfo('template_url').'/'; ?>img/content/Semiannual.png" alt="divider" style="width: 621px" class=""><br>
@@ -144,7 +191,7 @@ if(get_user_meta($client->user_id, 'first_name',true) != null) {
                             <div><strong>Facility </strong><?php echo $inspection->roof_inspection_facility; ?></div>
                         </div>
                         <div class="col-sm-6">
-                            <strong>&nbsp;Programmed date:&nbsp;</strong><?php echo  date('m/d/Y H:i:s', strtotime($inspection->roof_inspection_datetime)); ?><br>
+                            <strong>Programmed date:&nbsp;</strong><?php echo  date('m/d/Y H:i:s', strtotime($inspection->roof_inspection_datetime)); ?><br>
                         </div>
                     </div>
                     <div class="row no-margin">
@@ -159,72 +206,100 @@ if(get_user_meta($client->user_id, 'first_name',true) != null) {
                 <div id="materials-checklist">
                     <img src="<?php echo bloginfo('template_url').'/'; ?>img/content/INSPECTIONMATERIALSCHECKLIST.png" alt="divider" style="width: 621px" class=""><br>
                     <ul class="checkbox-grid">
-                        <?php
-                        $rid = $inspection->roof_inspection_id;
-                        $count = $wpdb->get_var("SELECT COUNT(*) FROM roof_materials WHERE roof_inspection_id= '$rid'");
-                        $material = $wpdb->get_results("select inspection_material_id from roof_materials where roof_inspection_id = '$rid'");
-                        $material_name = $wpdb->get_results("select inspection_material_name from inspection_materials");
-                        for($i=1;$i<=19;$i++){
-                            $found = false;
+						<?php
+						$rid = $inspection->roof_inspection_id;
+						$count = $wpdb->get_var("SELECT COUNT(*) FROM roof_materials WHERE roof_inspection_id= '$rid'");
+						$material = $wpdb->get_results("select inspection_material_id from roof_materials where roof_inspection_id = '$rid'");
+						$material_name = $wpdb->get_results("select inspection_material_name from inspection_materials");
+						for($i=1;$i<=19;$i++){
+							$found = false;
 
 
-                            for($n=0;$n<$count;$n++){
-                                if($material[$n]->inspection_material_id == $i)
-                                    $found = true;
-                            }
+							for($n=0;$n<$count;$n++){
+								if($material[$n]->inspection_material_id == $i)
+									$found = true;
+							}
 
-                            if($found==true)
-                                echo '<li><input type="checkbox" name="materials[]" value="',$i,'" checked /><text class="content">',$material_name[($i-1)]->inspection_material_name,' </text></li>';
-                            else
-                                echo '<li><input type="checkbox" name="materials[]" value="',$i,'" /><text class="content">',$material_name[($i-1)]->inspection_material_name,' </text></li>';
+							if($found==true)
+								echo '<li><input type="checkbox" name="materials[]" value="',$i,'" checked /><text class="content">',$material_name[($i-1)]->inspection_material_name,' </text></li>';
+							else
+								echo '<li><input type="checkbox" name="materials[]" value="',$i,'" /><text class="content">',$material_name[($i-1)]->inspection_material_name,' </text></li>';
 
 
-                        }
+						}
 
-                        ?>
+						?>
                     </ul>
                 </div>
-                <br>
+            </div>
 
+            <div class="long-pdf-page">
                 <div id="inspection-checklist-section">
                     <div class="text-left">
                         <img src="<?php echo bloginfo('template_url').'/'; ?>img/content/INSPECTIONCHECKLIST.png" alt="divider" style="width: 621px;" class=""><br>
                     </div>
-                    <table style="width:100%" id="checklist-table">
-                        <colgroup>
-                            <col style="width: 30%">
-                            <col style="width: 4%">
-                            <col style="width: 4%">
-                            <col style="width: 4%">
-                            <col style="width: 30%">
-                            <col style="width: 30%">
-                        </colgroup>
-                        <?php
-                        $checklist = $wpdb->get_results("SELECT * FROM roof_checklists WHERE roof_inspection_id='$rid'");
-                        $count = $wpdb->get_var("SELECT COUNT(*) FROM roof_checklists WHERE roof_inspection_id= '$rid'");
+					<?php
+					$checklist = $wpdb->get_results("SELECT * FROM roof_checklists WHERE roof_inspection_id='$rid'");
+					$count = $wpdb->get_var("SELECT COUNT(*) FROM roof_checklists WHERE roof_inspection_id= '$rid'");
 
-                        $result = array_fill(1, 90, false);
+					$result = array_fill(1, 90, false);
 
-                        for($i=0;$i<$count;$i++){
-                            for($n=1;$n<=90;$n++){
-                                if($checklist[$i]->inspection_checklist_id == $n)
-                                    $result[$n] = true;
-                            }
-                        }
+					for($i=0;$i<$count;$i++){
+						for($n=1;$n<=90;$n++){
+							if($checklist[$i]->inspection_checklist_id == $n)
+								$result[$n] = true;
+						}
+					}
 
-                        ?>
+					?>
 
-                        <?php
-                        $counter = 1;
+					<?php
+					$counter = 1;
+					$pageCounter = 0;
 
-                        for($cat=1;$cat<=15;$cat++){
-                            $count_per_cat = $wpdb->get_var("SELECT COUNT(*) FROM inspection_checklists WHERE inspection_checklist_category_id= '$cat'");
+					for($cat=1;$cat<=15;$cat++) {
 
-                            $category_name = $wpdb->get_results("SELECT inspection_checklist_category_name FROM inspection_checklist_categories");
+						if($pageCounter%1 == 0 || $pageCounter == 0) {
+						    if($pageCounter == 0) {
+							    echo '<table style="width:100%; margin-bottom: 50px;" id="checklist-table">
+                                        <colgroup>
+                                            <col style="width: 30%">
+                                            <col style="width: 4%">
+                                            <col style="width: 4%">
+                                            <col style="width: 4%">
+                                            <col style="width: 30%">
+                                            <col style="width: 30%">
+                                        </colgroup>';
+                            } else if($pageCounter == 14) {
+							    echo '<table style="width:100%; margin-top: 100px;" id="checklist-table">
+                                        <colgroup>
+                                            <col style="width: 30%">
+                                            <col style="width: 4%">
+                                            <col style="width: 4%">
+                                            <col style="width: 4%">
+                                            <col style="width: 30%">
+                                            <col style="width: 30%">
+                                        </colgroup>';
+                            } else {
+							    echo '<table style="width:100%; margin: 50px 0;" id="checklist-table">
+                                        <colgroup>
+                                            <col style="width: 30%">
+                                            <col style="width: 4%">
+                                            <col style="width: 4%">
+                                            <col style="width: 4%">
+                                            <col style="width: 30%">
+                                            <col style="width: 30%">
+                                        </colgroup>';
+						    }
+						}
 
-                            $type_name = $wpdb->get_results("SELECT inspection_checklist_name FROM inspection_checklists WHERE inspection_checklist_category_id='$cat'");
-                            if($cat == 1){
-                                echo '<tr>
+						$count_per_cat = $wpdb->get_var("SELECT COUNT(*) FROM inspection_checklists WHERE inspection_checklist_category_id= '$cat'");
+
+						$category_name = $wpdb->get_results("SELECT inspection_checklist_category_name FROM inspection_checklist_categories");
+
+						$type_name = $wpdb->get_results("SELECT inspection_checklist_name FROM inspection_checklists WHERE inspection_checklist_category_id='$cat'");
+						if($cat == 1){
+							echo '<tr>
                                     <th>',$category_name[($cat-1)]->inspection_checklist_category_name,'</th>
                                     <th>OK</th>
                                     <th>Minor problem</th>
@@ -232,40 +307,45 @@ if(get_user_meta($client->user_id, 'first_name',true) != null) {
                                     <th>Observation</th>
                                     <th>Date of repair</th>
                                     </tr>';
-                            }else{
-                                echo '<tr><th>',$category_name[($cat-1)]->inspection_checklist_category_name,'</th></tr>';
-                            }
+						} else {
+							echo '<tr><th>',$category_name[($cat-1)]->inspection_checklist_category_name,'</th></tr>';
+						}
 
-                            for($type=0;$type<$count_per_cat;$type++){
-                                echo'<tr>
+						for($type=0;$type<$count_per_cat;$type++){
+							echo'<tr>
                                 <td>',$type_name[$type]->inspection_checklist_name,'</td>';
 
-                                if($result[$counter] == false){
-                                    echo '<td><input type="radio" name="status-',$counter,'" value="0" checked></td>
+							if($result[$counter] == false){
+								echo '<td><input type="radio" name="status-',$counter,'" value="0" checked></td>
                                 <td><input type="radio" name="status-',$counter,'" value="1"></td>
                                 <td><input type="radio" name="status-',$counter,'" value="2"></td>
                                 <td><input type="text" name="observation-',$counter,'" id="observation',$counter,'" style="width: 100%;" disabled></td>
                                 <td><input type="text" name="daterepair-',$counter,'" id="daterepair',$counter,'" style="width: 100%;" disabled></td></tr>';
-                                }else{
-                                    $r = $wpdb->get_results("SELECT * FROM roof_checklists WHERE inspection_checklist_id= '$counter' AND roof_inspection_id = '$rid'");
-                                    echo '<td><input type="radio" name="status-',$counter,'" value="0"></td>';
-                                    if($r[0]->roof_checklist_problem == $counter){
-                                        echo '<td><input type="radio" name="status-',$counter,'" value="1" checked></td>
+							}else{
+								$r = $wpdb->get_results("SELECT * FROM roof_checklists WHERE inspection_checklist_id= '$counter' AND roof_inspection_id = '$rid'");
+								echo '<td><input type="radio" name="status-',$counter,'" value="0"></td>';
+								if($r[0]->roof_checklist_problem == $counter){
+									echo '<td><input type="radio" name="status-',$counter,'" value="1" checked></td>
                                         <td><input type="radio" name="status-',$counter,'" value="2"></td>';
-                                    } else{
-                                        echo '<td><input type="radio" name="status-',$counter,'" value="1"></td>
+								} else{
+									echo '<td><input type="radio" name="status-',$counter,'" value="1"></td>
                                         <td><input type="radio" name="status-',$counter,'" value="2" checked></td>';
-                                    }
-                                    echo'<td><input type="text" name="observation-',$counter,'" id="observation',$counter,'" value="',$r[0]->roof_checklist_observation,'"></td>
+								}
+								echo'<td><input type="text" name="observation-',$counter,'" id="observation',$counter,'" value="',$r[0]->roof_checklist_observation,'"></td>
                                 <td><input type="date" name="daterepair-',$counter,'" id="daterepair',$counter,'" value="',$r[0]->roof_checklist_date_of_repair,'"></td></tr>';
-                                }
-                                $counter++;
+							}
 
-                            }
-                        }
+							$counter++;
 
-                        ?>
-                    </table>
+						}
+						$pageCounter++;
+
+						if($pageCounter%1 == 0 || $pageCounter == 15) {
+							echo '</table>';
+						}
+					}
+
+					?>
                     <script>
                         $('#checklist-table input[type=radio]').change(function() {
                             if( $(this).val() == 0 ) {
@@ -278,6 +358,10 @@ if(get_user_meta($client->user_id, 'first_name',true) != null) {
                         });
                     </script>
                 </div>
+                <br><br><br><br><br><br><br><br><br><br><br>
+            </div>
+
+            <div class="long-pdf-page">
                 <div class="blueparagraph">
                     Comment on changes from previous inspections, and overall roof condition. Indicate recommended action of roof repair and/or further assessment, and estimated remaining life  expectancy of roof system. Include any photographs and thermography records in this report
                 </div>
@@ -286,17 +370,18 @@ if(get_user_meta($client->user_id, 'first_name',true) != null) {
                     Core sample
                 </div>
                 <textarea class="textarea-coresample" name="core-sample"><?php echo $inspection->roof_inspection_core_sample ?></textarea>
+
                 <div class="blueparagraph smallfont">
                     <p class ="title-centered">ROOF PLAN AND DETAILS</p>
                     <p><text class="title-centered">- USE THIS AREA ONLY IF DEFICIENCIES ARE OBSERVED -</text><br>Sketch roof plan. Include north arrow, the location of the items listed below, approximate dimensions of building, roofing materials, and other relevant items located on the roof. Show changes in roof elevations in a separate sketch.</p>
                 </div>
                 <div class="drawingarea">
-                    <?php
-                    if($inspection->roof_inspection_plan != NULL)
-                        echo '<img src=',$inspection->roof_inspection_plan,' style="display:block;margin: 0 auto;" /><br>';
-                    else
-                        echo '<p style="text-align:center;font-style:italic">NO SKETCH YET</text></p>'
-                    ?>
+					<?php
+					if($inspection->roof_inspection_plan != NULL)
+						echo '<img src=',$inspection->roof_inspection_plan,' style="display:block;margin: 0 auto;" /><br>';
+					else
+						echo '<p style="text-align:center;font-style:italic">NO SKETCH YET</text></p>'
+					?>
                 </div>
                 <img src="<?php echo bloginfo('template_url').'/'; ?>img/content/division-empleos.png" alt="divider" class="form-divider longwidth"><br>
                 <table style="width:100%" class="glossary">
@@ -325,6 +410,8 @@ if(get_user_meta($client->user_id, 'first_name',true) != null) {
                         <td class="glossary" style="font-size:13px"><text style="font-weight:600">W -</text> Ponded Water</td>
                     </tr>
                 </table>
+
+
                 <img src="<?php echo bloginfo('template_url').'/'; ?>img/content/GLOSSARY.png" alt="divider" style="width: 621px" class=""><br>
                 <table style="width:100%" class="glossary">
                     <tr class="glossary">
@@ -553,6 +640,7 @@ if(get_user_meta($client->user_id, 'first_name',true) != null) {
                 </ul>
             </div>
         </div>
+    </div>
     </div>
     </body>
     <link rel="stylesheet" href="<?php echo bloginfo('template_url').'/'; ?>/css/jquery.periodpicker.min.css">

@@ -6,12 +6,24 @@
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<link rel="stylesheet" href="<?php echo bloginfo('template_url').'/'; ?>style.css">
-	<style>
+    <title>REPORT PDF</title>
+    <style type="text/css" media="print">
+        @page {
+            size: auto;   /* auto is the initial value */
+            margin: 0;  /* this affects the margin in the printer settings */
+        }
+    </style>
+    <style>
+        body {
+            margin: 0;
+        }
 		/* PDF STYLES */
 		.pdf-page {
 			width: 21cm;
 			height: 29.7cm;
 			font-family: Lato, sans-serif;
+            pointer-events: none;
+            padding: 5px;
 		}
 
 		.table-container div[class*=col-] {
@@ -28,8 +40,13 @@
 			width: 100%;
 		}
 
-		.pdf-page th, .pdf-page td {
+		.pdf-page table th, .pdf-page table td {
+            padding: 5px 0;
 		}
+
+        .pdf-page table.table-container td {
+            padding: 0!important;
+        }
 
 		.pdf-page .black {
 			background-color: #1a1a1a!important;
@@ -44,11 +61,11 @@
 
 		.pdf-page .img-table tr {
 			border: 0;
-		}
+        }
 
 		.pdf-page .img-table td {
-			padding: 5px;
-		}
+            padding: 5px;
+        }
 
 		.pdf-page .img-table img {
 			padding: 30px 0;
@@ -63,7 +80,35 @@
 			font-weight: bold;
 		}
 	</style>
-	<title>REPORT PDF</title>
+    <script type="text/javascript">
+
+        window.onload = function() {
+            setTimeout("window.print();", 500);
+        };
+
+        (function() {
+            var beforePrint = function() {
+                console.log('Functionality to run before printing.');
+            };
+            var afterPrint = function() {
+                //window.history.back();
+            };
+
+            if (window.matchMedia) {
+                var mediaQueryList = window.matchMedia('print');
+                mediaQueryList.addListener(function(mql) {
+                    if (mql.matches) {
+                        beforePrint();
+                    } else {
+                        afterPrint();
+                    }
+                });
+            }
+
+            window.onbeforeprint = beforePrint;
+            window.onafterprint = afterPrint;
+        }());
+    </script>
 </head>
 <body style="-webkit-print-color-adjust:exact;">
 <?php
@@ -96,7 +141,7 @@ if(get_user_meta($user_name, 'first_name',true) != null) {
 	<!--<div class="table-row">
 		Client:
 	</div>-->
-	<table>
+	<table class="table-container">
 		<tbody>
 		<colgroup>
 			<col style="width: 58.33%;">
@@ -144,7 +189,7 @@ if(get_user_meta($user_name, 'first_name',true) != null) {
 					</tr>
 				</table>
 			</td>
-			<td style="text-align: center;">
+			<td style="text-align: center;" class="black">
 				<img src="<?php echo bloginfo('template_url').'/'; ?>img/content/project-img-example.png" alt="imagen proyecto" class="project-img">
 			</td>
 		</tr>
@@ -162,6 +207,37 @@ if(get_user_meta($user_name, 'first_name',true) != null) {
 		</tr>
 		</thead>
 	</table>
+    <table>
+        <tr class="no-border">
+			<?php
+			$count = $wpdb->get_var("SELECT COUNT(*) FROM report_work_items WHERE report_id= '$rid'");
+			$work = $wpdb->get_results("select work_item_id from report_work_items where report_id = $rid");
+			$work_name = $wpdb->get_results("select work_item_name from work_items");
+
+			for($i=1;$i<=20;$i++){
+				$found = false;
+
+				for($n=0;$n<$count;$n++){
+					if($work[$n]->work_item_id == $i)
+						$found = true;
+				}
+
+				if($found==true)
+					echo '<td class="no-border"><input type="checkbox" name="workitems[]" value="', $i ,'" id="workitems" checked />', $work_name[($i-1)]->work_item_name ,'</td>';
+				else
+					echo '<td class="no-border"><input type="checkbox" name="workitems[]" value="', $i ,'" id="workitems" />', $work_name[($i-1)]->work_item_name ,'</td>';
+
+
+				if((($i % 3) == 0) && $i!=1){
+					echo '</tr><tr class="no-border">';
+				}
+
+			}
+
+			?>
+            <td></td>
+        <tr class="no-border">
+    </table>
 	<div class="text-divider bold">
 		Notes
 	</div>
@@ -172,7 +248,7 @@ if(get_user_meta($user_name, 'first_name',true) != null) {
 
 
 <?php
-$directory = dirname(__FILE__) . '\\file_uploads\\' . $_GET['id'] . '\\';
+$directory = dirname(__FILE__) . '\\file_uploads\\' . $_GET['rid'] . '\\';
 $images = glob($directory.'*.jpg');
 $arraySize = count($images);
 $counter = 0;

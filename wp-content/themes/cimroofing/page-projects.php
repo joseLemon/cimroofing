@@ -3,7 +3,7 @@
 <?php
 $user_id = get_current_user_id();
 if ( current_user_can('manage_options') ) {
-	$projects = $wpdb->get_results("SELECT * FROM projects LEFT JOIN project_users ON projects.project_id = project_users.project_id WHERE deleted_at IS NULL GROUP BY projects.project_id");
+	$projects = $wpdb->get_results("SELECT *, projects.project_id as id FROM projects LEFT JOIN project_users ON projects.project_id = project_users.project_id WHERE deleted_at IS NULL GROUP BY projects.project_id");
 } else {
 	$projects = $wpdb->get_results("SELECT * FROM projects LEFT JOIN project_users ON projects.project_id = project_users.project_id WHERE deleted_at IS NULL AND user_id = '$user_id' GROUP BY projects.project_id");
 }
@@ -14,7 +14,7 @@ if ( current_user_can('manage_options') ) {
             <img src="<?php echo bloginfo('template_url').'/'; ?>img/logo.png" alt="cim logo" class="logo"><br>
             <img src="<?php echo bloginfo('template_url').'/'; ?>img/content/division-empleos.png" alt="divider" class="form-divider"><br>
             <text class="title">ACTIVE PROJECTS</text>
-            <div class="info-content" style="background-color:transparent">
+            <div class="info-content">
                 <div class="inside-content">
 					<?php if ( current_user_can('manage_options') ) { ?>
                         <a href="<?php echo home_url().'/'; ?>newproject"><button type="button">New project</button></a><br>
@@ -40,8 +40,7 @@ if ( current_user_can('manage_options') ) {
 								echo '<tr class="no-border scrolltr">';
 								echo '<td class="no-border scrolltr">', $project->created_at, '</td>';
 								echo '<td class="no-border scrolltr">', $project->project_year, '</td>';
-								echo '<td class="no-border scrolltr ">
-                                     <a href="projecthistory/?id=', $project->project_id ,'">', $project->project_name, '</a></td>';
+								echo '<td class="no-border scrolltr "><a href="projecthistory/?id=',$project->id,'">', $project->project_name, '</a></td>';
 								echo '<td class="no-border scrolltr">', $project->project_address, '</td>';
 								echo '<td class="no-border scrolltr">', $project->project_area, '</td>';
 								echo '<td class="no-border scrolltr">', $project->project_contract_amount, '</td>';
