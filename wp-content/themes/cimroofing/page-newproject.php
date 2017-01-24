@@ -71,10 +71,11 @@
                     <h4 class="modal-title">Image Selection</h4>
                 </div>
                 <div class="modal-body">
-                    <form action="<?php echo home_url().'/?id='; ?>controller" method="POST" id="upload-form" enctype="multipart/form-data">
+                    <form action="<?php echo home_url().'/'; ?>controller" method="POST" id="upload-form" enctype="multipart/form-data">
                         <input class="hidden" type="file" id="pictures" name="pictures" value="Select file">
                         <a href="#" class="btn btn-default" onclick="document.getElementById('pictures').click(); return false;" />Select image</a>
                         <button class="btn btn-success" type="submit">Upload images</button>
+                        <!-- HERE DETECT THE UPLOAD FOR PROJECT -->
                         <input type="file" id="fileID" style="visibility: hidden;" />
                         <input type="hidden" id="tmp-folder" name="tmp-folder">
                     </form>
