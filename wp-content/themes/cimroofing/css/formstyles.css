@@ -468,8 +468,12 @@ table, th, td {
 }
 
 .uploaded-images .col-sm-4 {
-    height: 300px;
     padding: 5px;
+}
+
+.img-desc {
+    width: 100%;
+    margin-top: 10px;
 }
 
 /* LOGIN MODAL */
