@@ -237,11 +237,13 @@ $project = $wpdb->get_results("select * from projects where project_id = $id");
                     $('.uploaded-images').empty();
                     //List all .png file names in the page
                     //var $img_counter = 0;
+                    var cont = 0;
                     $(data).find('a[href$="'+fileExt1+'"], a[href$="'+fileExt2+'"], a[href$="'+fileExt3+'"]').each(function () {
                         var $imgSrc = imgDir+'/'+$(this).attr('href');
                         $imgSrc = $imgSrc.replace('./', homeUrl);
-                        $('.uploaded-images').append("<div class='col-sm-4'><img src='" + $imgSrc + "' class='img-responsive'><input type='hidden' name='img[]'></div>");
+                        $('.uploaded-images').append("<div class='col-sm-4'><img src='" + $imgSrc + "' class='img-responsive'><input type='hidden' name='img[]'><input type='text' placeholder='Type here the description' class='img-desc' name='"+cont+"'></div>");
                         //$img_counter++;
+                        cont++;
                     });
                     $('.uploaded-images .col-sm-4 > img').cropper({
                         aspectRatio: 4 / 3,
