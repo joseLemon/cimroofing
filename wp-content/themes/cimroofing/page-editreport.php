@@ -135,7 +135,7 @@ $report = $report[0];
                             ?>
                             <div class="col-sm-4">
                                 <?php
-                                echo '<img src="'.get_bloginfo('template_url').'/file_uploads/reports/'.$_GET['id'].'/'.basename($image).'" class="center-block">';
+                                echo '<img src="'.get_bloginfo('template_url').'/file_uploads/reports/'.$_GET['rid'].'/'.basename($image).'" class="center-block">';
                                 ?>
                             </div>
                             <?php
