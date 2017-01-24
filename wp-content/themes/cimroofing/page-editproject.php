@@ -30,7 +30,7 @@ $pre_select = json_encode($pre_select);
                     </div>
                 </div>
                 <form method="POST" action="<?php echo home_url().'/'; ?>controller">
-                    <div class="inside-content">
+                    <div class="">
                         <div class="row no-margin">
                             <div class="col-sm-6">
                                 <b><label for="projec-name">Project name:</label></b><input type="text" name="project-name" id="projec-name" value="<?php echo $project->project_name; ?>">

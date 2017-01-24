@@ -15,7 +15,7 @@ $x = 0;
             <img src="<?php echo bloginfo('template_url').'/'; ?>img/content/division-empleos.png" alt="divider" class="form-divider"><br>
             <text class="title" style="font-size=18px;line-height:0px">Inspection Lists History</text><br>
             <div class="info-content">
-                <div class="inside-content">
+                <div class="">
 
                     <div class="log-reporting-period">
                         <a href="inspectionform"><button name="new-inspection" style="margin-bottom:15px">New inspection list</button></a>

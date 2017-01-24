@@ -237,6 +237,7 @@ table, th, td {
 .inside-content{
     /**margin: 15px;*/
     padding: 10px;
+    border: 1px solid black;
 }
 
 .project-info{
@@ -660,6 +661,7 @@ table, th, td {
     -webkit-transition: left 300ms ease;
     -moz-transition: left 300ms ease;
     transition: left 300ms ease;
+    z-index: 99999;
 }
 
 .app-nav::before,

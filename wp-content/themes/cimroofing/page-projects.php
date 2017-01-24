@@ -15,7 +15,7 @@ if ( current_user_can('manage_options') ) {
             <img src="<?php echo bloginfo('template_url').'/'; ?>img/content/division-empleos.png" alt="divider" class="form-divider"><br>
             <text class="title">ACTIVE PROJECTS</text>
             <div class="info-content">
-                <div class="inside-content">
+                <div class="">
 					<?php if ( current_user_can('manage_options') ) { ?>
                         <a href="<?php echo home_url().'/'; ?>newproject"><button type="button">New project</button></a><br>
 					<?php } ?>

@@ -7,7 +7,7 @@
             <text class="title">CREATE NEW PROJECT</text>
             <div class="info-content">
                 <form method="POST" action="<?php echo home_url().'/'; ?>controller">
-                    <div class="inside-content">
+                    <div class="">
                         <div class="row no-margin">
                             <div class="col-sm-6">
                                 <input type="text" name="newproject-name" placeholder="Project name" id="long-text"><br>
