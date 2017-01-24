@@ -248,7 +248,7 @@ if(get_user_meta($user_name, 'first_name',true) != null) {
 
 
 <?php
-$directory = dirname(__FILE__) . '\\file_uploads\\' . $_GET['rid'] . '\\';
+$directory = dirname(__FILE__) . '\\file_uploads\\reports\\' . $_GET['rid'] . '\\';
 $images = glob($directory.'*.jpg');
 $arraySize = count($images);
 $counter = 0;
@@ -275,7 +275,7 @@ foreach($images as $image) {
 	?>
 	<td>
 		<?php
-		echo '<img src="'.get_bloginfo('template_url').'/file_uploads/'.$_GET['id'].'/'.basename($image).'" class="center-block">';
+		echo '<img src="'.get_bloginfo('template_url').'/file_uploads/reports/'.$_GET['id'].'/'.basename($image).'" class="center-block">';
 		?>
 	</td>
 	<?php

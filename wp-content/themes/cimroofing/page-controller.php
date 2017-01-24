@@ -5,18 +5,16 @@ if(isset($_POST['submit-project'])) {
     $start_date = date('Y-m-d',strtotime($_POST['start-date']));
     $end_date = date('Y-m-d',strtotime($_POST['end-date']));
     $target_date = date('Y-m-d',strtotime($_POST['target-date']));
-    $query_report = "INSERT INTO `reports` (`report_id`, `report_start_date`, `report_end_date`, `report_square_feet_to_date`, `report_percentage_completed`, `report_completed`, `report_target_completion_date`, `report_field_notes`, `user_id`, `project_id`, deleted_at, created_at) VALUES (NULL, '".$start_date."', '".$end_date."', '".$_POST['square-feet-todate']."', '".$_POST['percentage-completed']."', '".$_POST['completion-metal']."', '".$target_date."', '".$_POST['details-field-notes']."', ".$user_id.", '".$_POST['project-id']."', 'NULL', CURRENT_TIMESTAMP);";
+    $query_report = "INSERT INTO `reports` (`report_id`, `report_start_date`, `report_end_date`, `report_square_feet_to_date`, `report_percentage_completed`, `report_completed`, `report_target_completion_date`, `report_field_notes`, `user_id`, `project_id`, created_at) VALUES (NULL, '".$start_date."', '".$end_date."', '".$_POST['square-feet-todate']."', '".$_POST['percentage-completed']."', '".$_POST['completion-metal']."', '".$target_date."', '".$_POST['details-field-notes']."', ".$user_id.", '".$_POST['project-id']."', CURRENT_TIMESTAMP);";
 
     $wpdb->query( $query_report );
-
-    $report_id = $wpdb->get_results( 'SELECT MAX(roof_inspection_id) as id FROM reports where user_id = '.$user_id);
-
-    $report_id = $report_id[0]->id;
-
 
     //FOR EACH DE CHECKBOXES
     $query_workitems = "INSERT INTO `report_work_items` (`report_id`, `work_item_id`) Values ";
     $report_id = $wpdb->get_results('SELECT MAX(report_id) as id FROM reports where user_id = '.$user_id);
+
+    $report_id = $report_id[0]->id;
+
     $cont = 0;
     if (is_array($_POST["workitems"])) { //lo puse pqe salia warning
         foreach($_POST["workitems"] as $workitem){
@@ -33,7 +31,7 @@ if(isset($_POST['submit-project'])) {
     $tmpFolder = $_POST['tmp-folder-delete'];
 
     //  DELETE TEMPORARY FOLDER
-    $TmpDirToDelete = dirname(__FILE__) . '\\file_uploads\\' . $tmpFolder . '\\';
+    $TmpDirToDelete = dirname(__FILE__) . '\\file_uploads\\reports\\' . $tmpFolder . '\\';
 
     $files = glob($TmpDirToDelete.'/*'); // get all file names
 
@@ -46,11 +44,7 @@ if(isset($_POST['submit-project'])) {
 
     rmdir($TmpDirToDelete);
 
-    //  FOR THIS EXAMPLE I WILL HARDCODE $report_id
-    $report_id = '1';
-
-
-    $target_dir = dirname(__FILE__) . '\\file_uploads\\' . $report_id . '\\';
+    $target_dir = dirname(__FILE__) . '\\file_uploads\\reports\\' . $report_id . '\\';
     mkdir($target_dir);
 
     //  PROCESO PARA SUBIR IMAGENES
@@ -70,6 +64,8 @@ if(isset($_POST['submit-project'])) {
 
         $i++;
     }
+
+    wp_redirect(home_url().'/projecthistory?id'.$_GET['id']);
 }
 /* EMPIEZA IMAGENES */
 if(isset($_POST['tmp-folder'])) {
@@ -82,7 +78,7 @@ if(isset($_POST['tmp-folder'])) {
     }
 
     $counter = 0;
-    $target_dir = dirname(__FILE__) . '\\file_uploads\\' . $tmpFolder . '\\';
+    $target_dir = dirname(__FILE__) . '\\file_uploads\\reports\\' . $tmpFolder . '\\';
     //  Create temporary directory
     mkdir($target_dir);
 

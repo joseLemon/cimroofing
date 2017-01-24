@@ -128,14 +128,14 @@ $report = $report[0];
                     <div class="image-tumbnails">Image thumbnails</div><br>
                     <div class="image-thumbs">
                         <?php
-                        $directory = dirname(__FILE__) . '\\file_uploads\\' . $_GET['rid'] . '\\';
+                        $directory = dirname(__FILE__) . '\\file_uploads\\reports\\' . $_GET['rid'] . '\\';
                         $images = glob($directory.'*.jpg');
                         $counter = 0;
                         foreach($images as $image) {
                             ?>
                             <div class="col-sm-4">
                                 <?php
-                                echo '<img src="'.get_bloginfo('template_url').'/file_uploads/'.$_GET['id'].'/'.basename($image).'" class="center-block">';
+                                echo '<img src="'.get_bloginfo('template_url').'/file_uploads/reports/'.$_GET['id'].'/'.basename($image).'" class="center-block">';
                                 ?>
                             </div>
                             <?php

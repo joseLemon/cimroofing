@@ -19,7 +19,7 @@ $project = $wpdb->get_results("select * from projects where project_id = $id");
         <div class="inside-content">
             <p class="content">Contractor work log: Please submit the following log at the specified frequency identified by Roof Management during the preconstruction meeting. The log should provide an accurate account of the work items completed, progress to completion, issues encountered and photo representation of various stages of work during the reporting period.</p>
 
-            <form method="POST" action="<?php echo home_url().'/'; ?>controller" id="save" name="save">
+            <form method="POST" action="<?php echo home_url().'/'; ?>controller/?id=<?php echo $_GET['id']; ?>" id="save" name="save">
                 <div class="project-info">
                     <img src="<?php echo bloginfo('template_url').'/'; ?>img/content/project-img-example.png" alt="imagen proyecto" class="project-img">
                     <div class="information">
@@ -149,7 +149,7 @@ $project = $wpdb->get_results("select * from projects where project_id = $id");
                 <h4 class="modal-title">Image Selection</h4>
             </div>
             <div class="modal-body">
-                <form action="<?php echo home_url().'/'; ?>controller" method="POST" id="upload-form" enctype="multipart/form-data">
+                <form action="<?php echo home_url().'/?id='; ?>controller" method="POST" id="upload-form" enctype="multipart/form-data">
                     <input class="hidden" type="file" id="pictures" name="pictures[]" multiple value="Select files">
                     <a href="#" class="btn btn-default" onclick="document.getElementById('pictures').click(); return false;" />Select images</a>
                     <button class="btn btn-success" type="submit">Upload images</button>
@@ -165,7 +165,7 @@ $project = $wpdb->get_results("select * from projects where project_id = $id");
 <script>
     var home = '<?php echo bloginfo('template_url');?>',
         tmpFolder = makeid(),
-        imgDir = home+'/file_uploads/'+tmpFolder,
+        imgDir = home+'/file_uploads/reports/'+tmpFolder,
         fileExt1 = '.png',
         fileExt2 = '.jpg',
         fileExt3 = '.jpeg',
@@ -206,8 +206,6 @@ $project = $wpdb->get_results("select * from projects where project_id = $id");
          });*/
 
         //$form_data.append('file', $file_data);
-
-        console.log($(this)[0]);
 
         $inputs.prop('disabled', true);
         $('.loader-container').addClass('active');
