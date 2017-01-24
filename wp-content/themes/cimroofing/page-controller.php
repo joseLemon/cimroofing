@@ -28,24 +28,24 @@ if(isset($_POST['submit-project'])) {
     }
     $wpdb->query( $query_workitems );
 
-    $tmpFolder = $_POST['tmp-folder-delete'];
+    /*$tmpFolder = $_POST['tmp-folder-delete'];
 
     //  DELETE TEMPORARY FOLDER
     $TmpDirToDelete = dirname(__FILE__) . '\\file_uploads\\reports\\' . $tmpFolder . '\\';
 
     $files = glob($TmpDirToDelete.'/*'); // get all file names
 
-    print_r($files);
-
     foreach($files as $file){ // iterate files
         if(is_file($file))
             unlink($file); // delete file
     }
 
-    rmdir($TmpDirToDelete);
+    rmdir($TmpDirToDelete);*/
 
     $target_dir = dirname(__FILE__) . '\\file_uploads\\reports\\' . $report_id . '\\';
-    mkdir($target_dir);
+    if(!is_dir($target_dir) && !file_exists($target_dir)) {
+        mkdir($target_dir);
+    }
 
     //  PROCESO PARA SUBIR IMAGENES
     $i = 1;
@@ -67,7 +67,7 @@ if(isset($_POST['submit-project'])) {
         $i++;
     }
 
-    wp_redirect(home_url().'/projecthistory?id'.$_GET['id']);
+    wp_redirect(home_url().'/projecthistory?id='.$_GET['id']);
 }
 /* EMPIEZA IMAGENES */
 if(isset($_POST['tmp-folder'])) {
@@ -80,10 +80,34 @@ if(isset($_POST['tmp-folder'])) {
     }
 
     $counter = 0;
-    $target_dir = dirname(__FILE__) . '\\file_uploads\\reports\\' . $tmpFolder . '\\';
-    //  Create temporary directory
-    mkdir($target_dir);
 
+    if(isset($_POST['projects'])) {
+        $target_dir = dirname(__FILE__) . '\\file_uploads\\projects\\' . $tmpFolder . '\\';
+    } else {
+        $target_dir = dirname(__FILE__) . '\\file_uploads\\reports\\' . $tmpFolder . '\\';
+    }
+
+    //  Create temporary directory
+    if(!is_dir($target_dir) && !file_exists($target_dir)) {
+        mkdir($target_dir);
+    }
+
+    if(isset($_POST['projects'])) {
+        if ($_FILES["pictures"]["size"][$i] > 25000000) {
+            echo "The image exceeds 25Mb.";
+            return true;
+        } else {
+            if(move_uploaded_file($_FILES["pictures"]["tmp_name"],$target_dir . 'project_image' . '.tmp')) {
+                // Resize it
+                GenerateThumbnail($target_dir . 'project_image' . '.tmp',$target_dir . 'project_image' . '.jpg',700,412,0.80);
+                // Delete full size
+                unlink($target_dir . 'project_image' . '.tmp');
+            }
+        }
+        return true;
+    }
+
+    //  Delete files if they exist
     $files = glob($target_dir.'/*'); // get all file names
     foreach($files as $file){ // iterate files
         if(is_file($file))
@@ -91,15 +115,48 @@ if(isset($_POST['tmp-folder'])) {
     }
 
     for ($i = 0; $i < $total; $i++) {
-        $target_file = $target_dir . basename($_FILES["pictures"]["name"][$i]);
+
         if ($_FILES["pictures"]["size"][$i] > 25000000) {
             echo "The image exceeds 25Mb.";
+            continue;
         }
         if ($counter == 40) {
             return true;
         }
-        move_uploaded_file($_FILES["pictures"]["tmp_name"][$i], $target_dir . $i . '.png');
+
+        if(move_uploaded_file($_FILES["pictures"]["tmp_name"][$i], $target_dir . $i . '.tmp')) {
+            // Resize it
+            GenerateThumbnail($target_dir . $i . '.tmp',$target_dir . $i . '.png',700,394,0.80);
+            // Delete full size
+            unlink($target_dir . $i . '.tmp');
+            echo 'file uploaded succesfully';
+        } else {
+            echo 'an error occurred';
+        }
     }
+}
+
+if(isset($_POST['tmp-folder-unload'])) {
+    $tmpFolder = $_POST['tmp-folder-unload'];
+    echo $tmpFolder;
+    //  DELETE TEMPORARY FOLDER
+    if(isset($_POST['projects'])) {
+        $TmpDirToDelete = dirname(__FILE__) . '\\file_uploads\\projects\\' . $tmpFolder . '\\';
+    }
+    if(isset($_POST['reports'])) {
+        $TmpDirToDelete = dirname(__FILE__) . '\\file_uploads\\reports\\' . $tmpFolder . '\\';
+    }
+
+    $files = glob($TmpDirToDelete.'/*'); // get all file names
+
+    print_r($files);
+
+    foreach($files as $file){ // iterate files
+        if(is_file($file))
+            unlink($file); // delete file
+    }
+
+    rmdir($TmpDirToDelete);
 }
 
 if(isset($_POST['tmp-folder-delete'])) {
@@ -1259,8 +1316,29 @@ if(isset($_POST['submit-newproject'])) {
         $wpdb->query( $query_project_users );
     }
 
-    wp_redirect(home_url().'/projects');
+    $target_dir = dirname(__FILE__) . '\\file_uploads\\projects\\' . $project_id . '\\';
+    if(!is_dir(!$target_dir) && !file_exists($target_dir)) {
+        mkdir($target_dir);
+    }
 
+    //  PROCESO PARA SUBIR IMAGENES
+    $i = 1;
+
+    $img = $_POST['img'];
+
+    list($type, $img) = explode(';', $img);
+    list(, $img)      = explode(',', $img);
+    $data = base64_decode($img);
+
+    $path = $target_dir.'project_image'.'.jpg';
+
+    if(file_put_contents($path, $data)) {
+        echo 'uploaded';
+    } else {
+        echo 'fail';
+    }
+
+    wp_redirect(home_url().'/projects');
 }
 
 /* UPDATES */
@@ -1281,6 +1359,26 @@ if(isset($_POST['edit-project'])){
     }
 
     $wpdb->query( $query_editproject );
+
+    $target_dir = dirname(__FILE__) . '\\file_uploads\\projects\\' . $project_id . '\\';
+    if(!is_dir(!$target_dir) && !file_exists($target_dir)) {
+        mkdir($target_dir);
+    }
+
+    //  PROCESO PARA SUBIR IMAGENES
+    $img = $_POST['img'];
+
+    list($type, $img) = explode(';', $img);
+    list(, $img)      = explode(',', $img);
+    $data = base64_decode($img);
+
+    $path = $target_dir.'project_image'.'.jpg';
+
+    if(file_put_contents($path, $data)) {
+        echo 'uploaded';
+    } else {
+        echo 'fail';
+    }
 
     wp_redirect(home_url().'/editproject/?id='.$project_id);
 }
@@ -2528,6 +2626,8 @@ if(isset($_POST['delete-project'])){
     $q_deleteproject = "UPDATE `projects` SET deleted_at = CURRENT_TIMESTAMP WHERE project_id = '".$_POST['delete-project']."' ;";
 
     $wpdb->query($q_deleteproject);
+
+    wp_redirect(home_url().'/projects');
 }
 
 //return print_r($_POST);

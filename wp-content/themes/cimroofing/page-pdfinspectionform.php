@@ -30,7 +30,7 @@
     <script type="text/javascript">
 
         window.onload = function() {
-            //setTimeout("window.print();", 500);
+            setTimeout("window.print();", 500);
         };
 
         (function() {
@@ -38,7 +38,7 @@
                 console.log('Functionality to run before printing.');
             };
             var afterPrint = function() {
-                //window.history.back();
+                window.history.back();
             };
 
             if (window.matchMedia) {

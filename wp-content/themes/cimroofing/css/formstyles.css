@@ -246,7 +246,9 @@ table, th, td {
 }
 
 .project-img{
-    margin: 20px;
+    margin: 15px;
+    max-width: 372px;
+    width: 100%;
 }
 
 .information{
@@ -469,6 +471,10 @@ table, th, td {
 
 .uploaded-images .col-sm-4 {
     padding: 5px;
+}
+
+.cropper-height {
+    height: 300px;
 }
 
 .img-desc {

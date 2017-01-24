@@ -6,7 +6,7 @@
             <img src="<?php echo bloginfo('template_url').'/'; ?>img/content/division-empleos.png" alt="divider" class="form-divider"><br>
             <text class="title">CREATE NEW PROJECT</text>
             <div class="info-content">
-                <form method="POST" action="<?php echo home_url().'/'; ?>controller">
+                <form method="POST" action="<?php echo home_url().'/'; ?>controller" id="save">
                     <div class="">
                         <div class="row no-margin">
                             <div class="imageupload col-sm-12">
@@ -57,7 +57,8 @@
                             </div>
                         </div>
                     </div>
-                    <input type="submit" value="Submit Project" name="submit-newproject" id="button-newproject">
+                    <input type="hidden" name="submit-newproject">
+                    <input type="submit" value="Submit Project" id="button-newproject">
                 </form>
             </div>
         </div>
@@ -78,10 +79,18 @@
                         <!-- HERE DETECT THE UPLOAD FOR PROJECT -->
                         <input type="file" id="fileID" style="visibility: hidden;" />
                         <input type="hidden" id="tmp-folder" name="tmp-folder">
+                        <input type="hidden" name="projects">
                     </form>
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="hidden">
+        <form action="<?php echo home_url().'/'; ?>controller" method="POST" id="unload">
+            <input type="hidden" name="tmp-folder-unload" id="tmp-folder-unload">
+            <input type="hidden" name="projects">
+        </form>
     </div>
 
     <script src="<?php echo bloginfo('template_url').'/'; ?>/js/cropper.js"></script>
@@ -98,6 +107,7 @@
 
         $('#tmp-folder').val(tmpFolder);
         $('#tmp-folder-delete').val(tmpFolder);
+        $('#tmp-folder-unload').val(tmpFolder);
 
         function makeid() {
             var text = "";
@@ -122,15 +132,7 @@
 
             var $form = $(this),
                 $inputs = $form.find('input'),
-                $serialiazedData = $form.serialize(),
-                //$files = $('#pictures').prop('files'),
                 $data = new FormData($(this)[0]);
-
-            /*$.each($files, function(key, value) {
-             data.append(key, value);
-             });*/
-
-            //$form_data.append('file', $file_data);
 
             $inputs.prop('disabled', true);
             $('.loader-container').addClass('active');
@@ -151,8 +153,6 @@
                 processData: false
             });
 
-            //console.log($serialiazedData);
-
             request.done(function (response, textStatus, jqXHR) {
                 console.log('Images saved successfully');
                 $.ajax({
@@ -161,15 +161,30 @@
                         $('#upload-modal').modal('hide');
                         $('.uploaded-images').empty();
                         //List all .png file names in the page
-                        //var $img_counter = 0;
                         $(data).find('a[href$="'+fileExt1+'"], a[href$="'+fileExt2+'"], a[href$="'+fileExt3+'"]').each(function () {
                             var $imgSrc = imgDir+'/'+$(this).attr('href');
                             $imgSrc = $imgSrc.replace('./', homeUrl);
-                            $('.uploaded-images').append("<div class='col-sm-4'><img src='" + $imgSrc + "' class='img-responsive'><input type='hidden' name='img[]'></div>");
-                            //$img_counter++;
+                            $('.uploaded-images').append("<div class='col-sm-3'></div><div class='text-center col-sm-6'><div class='cropper-height'><img src='" + $imgSrc + "' class='img-responsive'><input type='hidden' name='img'></div></div>");
                         });
-                        $('.uploaded-images .col-sm-4 > img').cropper({
+                        $('.uploaded-images .col-sm-6 img').cropper({
                             aspectRatio: 4 / 3,
+                            autoCrop: true,
+                        });
+                        $data = new FormData($('#unload')[0]);
+                        $.ajax({
+                            url: '<?php echo home_url();?>/controller',
+                            type: 'post',
+                            xhr: function() {
+                                var myXhr = $.ajaxSettings.xhr();
+                                return myXhr;
+                            },
+                            success: function (data) {
+                                console.log("Data unloaded");
+                            },
+                            data: $data,
+                            cache: false,
+                            contentType: false,
+                            processData: false
                         });
                     }
                 });
@@ -191,21 +206,17 @@
             },500);
         });
 
-        $('#selectimgs').click(function(f){
-            f.preventDefault();
-
+        $('#selectimgs').click(function(e){
+            e.preventDefault();
         });
 
         $('#save').submit(function(e) {
             e.preventDefault();
-            /*var data = $this.data();
-             var $target;
-             var result;
-             var $image = $('.uploaded-images img').eq(0);
 
-             result = $image.cropper();*/
-            $('.uploaded-images .col-sm-4 > img').each(function() {
-                $(this).nextAll('input').eq(0).val($(this).cropper('getCroppedCanvas').toDataURL('image/jpeg'));
+            $('.uploaded-images .col-sm-6 > .cropper-height > img').each(function() {
+                var $canvas = $(this).cropper('getCroppedCanvas'),
+                    $img_base64 = $canvas.toDataURL('image/jpeg');
+                $(this).nextAll('input').eq(0).val($img_base64);
             });
             $(this)[0].submit();
         });

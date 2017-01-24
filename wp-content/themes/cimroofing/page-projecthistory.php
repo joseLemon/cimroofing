@@ -14,7 +14,7 @@ $project = $wpdb->get_results("select * from projects WHERE project_id = '$id'")
             <div class="inside-content">
                 <!-- <form method="POST" action="controller.php">-->
                 <div class="project-info">
-                    <img src="<?php echo bloginfo('template_url').'/'; ?>img/content/project-img-example.png" alt="imagen proyecto" class="project-img">
+                    <img src="<?php echo bloginfo('template_url').'/'; ?>file_uploads/projects/<?php echo $_GET['id']; ?>/project_image.jpg" alt="imagen proyecto" class="project-img">
                     <div class="information">
                         Project Name:&nbsp;<text class="project-name"><?php echo $project[0]->project_name ?></text><br>
                         Address:&nbsp;<text class="project-name"><?php  echo $project[0]->project_address ?></text><br>

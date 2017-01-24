@@ -79,6 +79,11 @@
 		.pdf-page .bold {
 			font-weight: bold;
 		}
+
+        .project-img {
+            max-width: 372px;
+            width: 100%;
+        }
 	</style>
     <script type="text/javascript">
 
@@ -91,7 +96,7 @@
                 console.log('Functionality to run before printing.');
             };
             var afterPrint = function() {
-                //window.history.back();
+                window.history.back();
             };
 
             if (window.matchMedia) {
@@ -190,7 +195,7 @@ if(get_user_meta($user_name, 'first_name',true) != null) {
 				</table>
 			</td>
 			<td style="text-align: center;" class="black">
-				<img src="<?php echo bloginfo('template_url').'/'; ?>img/content/project-img-example.png" alt="imagen proyecto" class="project-img">
+                <img src="<?php echo bloginfo('template_url').'/'; ?>file_uploads/projects/<?php echo $_GET['id']; ?>/project_image.jpg" alt="imagen proyecto" class="project-img">
 			</td>
 		</tr>
 		</tbody>
