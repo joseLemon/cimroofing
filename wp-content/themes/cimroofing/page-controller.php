@@ -67,6 +67,8 @@ if(isset($_POST['submit-project'])) {
         } else {
             echo 'fail';
         }
+        $query_project = "INSERT INTO `project_pictures` (`report_id`, `project_picture_name`, `project_picture_description`) VALUES ('".$report_id."', '".$key."', '".$_POST[$key]."');";
+        $wpdb->query( $query_project );
 
         $i++;
     }
