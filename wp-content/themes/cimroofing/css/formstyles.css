@@ -672,6 +672,7 @@ table, th, td {
     -moz-transition: left 300ms ease;
     transition: left 300ms ease;
     z-index: 99999;
+    position: fixed;
 }
 
 .app-nav::before,
