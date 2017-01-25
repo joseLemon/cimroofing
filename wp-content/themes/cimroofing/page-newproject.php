@@ -8,29 +8,30 @@
             <div class="info-content">
                 <form method="POST" action="<?php echo home_url().'/'; ?>controller" id="save">
                     <div class="">
+                        <div class="alert alert-danger hidden" id="error"></div>
                         <div class="row no-margin">
                             <div class="imageupload col-sm-12">
                                 <label for="selectimgs">Project photo</label>
                                 <div class="upload-section">
                                     <button data-toggle="modal" data-target="#upload-modal" id="selectimgs">Select image...</button>
                                 </div>
-                                <div class="uploaded-images"></div>
+                                <div class="uploaded-images" id="images"></div>
                                 <input type="hidden" id="tmp-folder-delete" name="tmp-folder-delete">
                             </div>
                             <div class="col-sm-6">
-                                <input type="text" name="newproject-name" placeholder="Project name" id="long-text"><br>
+                                <input type="text" name="newproject-name" placeholder="Project name" id="name"><br>
                             </div>
                             <div class="col-sm-6">
-                                <input type="text" name="newproject-address" placeholder="Address" id="long-text"><br>
+                                <input type="text" name="newproject-address" placeholder="Address" id="address"><br>
                             </div>
                             <div class="col-sm-4">
-                                <input type="text" name="newproject-amount" placeholder="Contract amount" id="short-text">
+                                <input type="text" name="newproject-amount" placeholder="Contract amount" id="amount">
                             </div>
                             <div class="col-sm-4">
-                                <input type="text" name="newproject-year" placeholder="Project year" id="short-text">
+                                <input type="text" name="newproject-year" placeholder="Project year" id="year">
                             </div>
                             <div class="col-sm-4">
-                                <input type="text" name="newproject-area" placeholder="Project area" id="short-text"><br>
+                                <input type="text" name="newproject-area" placeholder="Project area" id="area"><br>
                             </div>
                             <div class="col-sm-4">
                                 <?php
@@ -218,7 +219,55 @@
                     $img_base64 = $canvas.toDataURL('image/jpeg');
                 $(this).nextAll('input').eq(0).val($img_base64);
             });
-            $(this)[0].submit();
+
+            var errors ="";
+            var name = document.getElementById("name").value;
+            var address = document.getElementById("address").value;
+            var amount = document.getElementById("amount").value;
+            var year = document.getElementById("year").value;
+            var area = document.getElementById("area").value;
+            var select = $("#newproject-assigned").val();
+
+            if($("#images").html()==''){
+                errors += "You must upload an image for the project<br>";
+            }
+            if( name == null || name.length == 0) {
+                errors += "The name is required<br>";
+            } else if(name.length > 80){
+                    errors += "The maximum number of letters for the name is 80<br>";
+            }
+            if( address == null || address.length == 0) {
+                errors += "The address is required<br>";
+            } else if(address.length > 80){
+                errors += "The maximum number of letters for the address is 80<br>";
+            }
+            if( amount == null || amount.length == 0) {
+                errors += "The amount is required<br>";
+            } else if(!/^\d+$/.test(amount)){
+                errors += "Enter an amount in valid format<br>";
+            }
+            if( year == null || year.length == 0) {
+                errors += "The year is required<br>";
+            } else if(!/^\d{4}$/.test(year)){
+                errors += "You must enter a valid year (e.g. 2017)<br>";
+            }
+            if( area == null || area.length == 0) {
+                errors += "The area is required<br>";
+            } else if(!/^\d{1,11}$/.test(area)){
+                errors += "You must enter a valid area (e.g. 50000, max 11 digits)<br>";
+            }
+            if( select.length == 0){
+                errors += "You must choose at least one user in charge of the project<br>";
+            }
+            //redireccion
+            if(errors=="") {
+                $(this)[0].submit();
+            } else {
+                //colorear los campos mal ingresados
+                $("#error").removeClass('hidden').addClass('active').html("Whoops <br>"+errors);
+                $('html,body').animate({ scrollTop: 0 }, 'slow');
+                return false;
+            }
         });
     </script>
 <?php include('footer-projects.php'); ?>
