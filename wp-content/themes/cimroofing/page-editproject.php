@@ -36,81 +36,71 @@ $pre_select = json_encode($pre_select);
                             <div class="clearfix"></div>
                             <img src="<?php echo bloginfo('template_url').'/'; ?>file_uploads/projects/<?php echo $_GET['id']; ?>/project_image.jpg" alt="imagen proyecto" class="project-img" id="current">
                         </div>
-                        <div class="imageupload col-sm-12">
-                            <label for="selectimgs">Project photo</label>
-                            <div class="upload-section">
-                                <button data-toggle="modal" data-target="#upload-modal" id="selectimgs">Select image...</button>
+                        <div class="row no-margin">
+                            <div class="imageupload col-sm-12">
+                                <label for="selectimgs">Project photo</label>
+                                <div class="upload-section">
+                                    <a href="#" class="btn btn-default" onclick="document.getElementById('pictures').click(); return false;" />Select image</a>
+                                    <div class="uploaded-images"></div>
+                                    <input type="hidden" id="tmp-folder-delete" name="tmp-folder-delete">
+                                </div>
                             </div>
-                            <div class="uploaded-images"></div>
-                            <input type="hidden" id="tmp-folder-delete" name="tmp-folder-delete">
                         </div>
                         <div class="row no-margin">
                             <div class="col-sm-6">
-                                <b><label for="projec-name">Project name:</label></b><input type="text" name="project-name" id="projec-name" value="<?php echo $project->project_name; ?>">
+                                    <b><label for="projec-name">Project name:</label></b><input type="text" name="project-name" id="projec-name" value="<?php echo $project->project_name; ?>">
+                                </div>
+                                <div class="col-sm-6">
+                                    <b><label for="project-address">Address:</label></b><input type="text" name="project-address" id="project-address" value="<?php echo $project->project_address; ?>"><br>
+                                </div>
                             </div>
-                            <div class="col-sm-6">
-                                <b><label for="project-address">Address:</label></b><input type="text" name="project-address" id="project-address" value="<?php echo $project->project_address; ?>"><br>
+                            <div class="row no-margin">
+                                <div class="col-sm-4">
+                                    <b><label for="project-amount">Contract amount:</label></b> <input type="text" name="project-amount" id="project-amount" value="<?php echo $project->project_contract_amount; ?>"> <br>
+                                </div>
+                                <div class="col-sm-4">
+                                    <b><label for="project-year">Project year:</label></b> <input type="text" name="project-year" id="project-year" value="<?php echo $project->project_year; ?>"> <br>
+                                </div>
+                                <div class="col-sm-4">
+                                    <b><label for="project-area">Project area:</label></b> <input type="text" name="project-area" id="project-area" value="<?php echo $project->project_area; ?>"> <br>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row no-margin">
-                            <div class="col-sm-4">
-                                <b><label for="project-amount">Contract amount:</label></b> <input type="text" name="project-amount" id="project-amount" value="<?php echo $project->project_contract_amount; ?>"> <br>
+                            <div class="row no-margin">
+                                <div class="col-sm-4">
+                                    <b><label for="newproject-assigned">Assigned to:</label></b>
+                                    <?php $selected = ''; ?>
+                                    <select name="project-assigned[]" id="newproject-assigned" multiple="multiple">
+                                        <?php foreach ($users as $user) { ?>
+                                            <option value="<?php echo $user->ID ?>" <?php echo $selected; ?>>
+                                                <?php
+                                                if(get_user_meta($user->ID, 'first_name',true) != null) {
+                                                    echo get_user_meta($user->ID, 'first_name',true).' '.get_user_meta($user->ID, 'last_name',true);
+                                                } else {
+                                                    echo $user->user_login;
+                                                }
+                                                ?>
+                                            </option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
                             </div>
-                            <div class="col-sm-4">
-                                <b><label for="project-year">Project year:</label></b> <input type="text" name="project-year" id="project-year" value="<?php echo $project->project_year; ?>"> <br>
-                            </div>
-                            <div class="col-sm-4">
-                                <b><label for="project-area">Project area:</label></b> <input type="text" name="project-area" id="project-area" value="<?php echo $project->project_area; ?>"> <br>
-                            </div>
-                        </div>
-                        <div class="row no-margin">
-                            <div class="col-sm-4">
-                                <b><label for="newproject-assigned">Assigned to:</label></b>
-                                <?php $selected = ''; ?>
-                                <select name="project-assigned[]" id="newproject-assigned" multiple="multiple">
-                                    <?php foreach ($users as $user) { ?>
-                                        <option value="<?php echo $user->ID ?>" <?php echo $selected; ?>>
-                                            <?php
-                                            if(get_user_meta($user->ID, 'first_name',true) != null) {
-                                                echo get_user_meta($user->ID, 'first_name',true).' '.get_user_meta($user->ID, 'last_name',true);
-                                            } else {
-                                                echo $user->user_login;
-                                            }
-                                            ?>
-                                        </option>
-                                    <?php } ?>
-                                </select>
-                            </div>
-                        </div>
-                        <input type="hidden" name="project-id" value="<?php echo $project->project_id; ?>">
-                    </div>
-                    <input type="hidden" name="edit-project">
-                    <input type="submit" value="Submit Changes" id="button-newproject">
+                            <input type="hidden" name="project-id" value="<?php echo $project->project_id; ?>">
+                        <input type="hidden" name="edit-project">
+                        <input type="submit" value="Submit Changes" id="button-newproject">
                 </form>
             </div>
         </div>
     </div>
 
-    <div class="modal fade" role="dialog" tabindex="-1" id="upload-modal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Image Selection</h4>
-                </div>
-                <div class="modal-body">
-                    <form action="<?php echo home_url().'/'; ?>controller" method="POST" id="upload-form" enctype="multipart/form-data">
-                        <input class="hidden" type="file" id="pictures" name="pictures" value="Select file">
-                        <a href="#" class="btn btn-default" onclick="document.getElementById('pictures').click(); return false;" />Select image</a>
-                        <button class="btn btn-success" type="submit">Upload images</button>
-                        <!-- HERE DETECT THE UPLOAD FOR PROJECT -->
-                        <input type="file" id="fileID" style="visibility: hidden;" />
-                        <input type="hidden" id="tmp-folder" name="tmp-folder">
-                        <input type="hidden" name="projects">
-                    </form>
-                </div>
-            </div>
-        </div>
+    <div class="hidden">
+        <form action="<?php echo home_url().'/'; ?>controller" method="POST" id="upload-form" enctype="multipart/form-data">
+            <input class="hidden" type="file" id="pictures" name="pictures" value="Select file">
+            <a href="#" class="btn btn-default" onclick="document.getElementById('pictures').click(); return false;" />Select image</a>
+            <!-- HERE DETECT THE UPLOAD FOR PROJECT -->
+            <input type="file" id="fileID" style="visibility: hidden;" />
+            <input type="hidden" id="tmp-folder" name="tmp-folder">
+            <input type="hidden" name="projects">
+        </form>
     </div>
 
     <div class="hidden">
@@ -149,6 +139,10 @@ $pre_select = json_encode($pre_select);
 
         var homeUrl = 'http://localhost/testpictures/';
         // REPLACE FOR <?php //echo home_url(); ?>
+
+        $('#pictures').change(function () {
+            $('#upload-form').submit();
+        });
 
         $('#upload-form').submit(function(e) {
             e.preventDefault();
