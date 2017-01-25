@@ -28,20 +28,6 @@ if(isset($_POST['submit-project'])) {
     }
     $wpdb->query( $query_workitems );
 
-    /*$tmpFolder = $_POST['tmp-folder-delete'];
-
-    //  DELETE TEMPORARY FOLDER
-    $TmpDirToDelete = dirname(__FILE__) . '\\file_uploads\\reports\\' . $tmpFolder . '\\';
-
-    $files = glob($TmpDirToDelete.'/*'); // get all file names
-
-    foreach($files as $file){ // iterate files
-        if(is_file($file))
-            unlink($file); // delete file
-    }
-
-    rmdir($TmpDirToDelete);*/
-
     $target_dir = dirname(__FILE__) . '\\file_uploads\\reports\\' . $report_id . '\\';
     if(!is_dir($target_dir) && !file_exists($target_dir)) {
         mkdir($target_dir);
@@ -61,7 +47,7 @@ if(isset($_POST['submit-project'])) {
         } else {
             echo 'fail';
         }
-        $query_project = "INSERT INTO `project_pictures` (`report_id`, `project_picture_name`, `project_picture_description`) VALUES ('".$report_id."', '".$key."', '".$_POST[$key]."');";
+        $query_project = "INSERT INTO `project_pictures` (`report_id`, `project_picture_name`, `project_picture_description`) VALUES ('".$report_id."', '".$i."', '".$_POST[$key]."');";
         $wpdb->query( $query_project );
 
         $i++;
@@ -1385,7 +1371,10 @@ if(isset($_POST['edit-project'])){
 
 if(isset($_POST['edit-report'])){
 
-    $query_editreport = "UPDATE `reports` SET report_start_date = '".$_POST['start-date']."', report_end_date = '".$_POST['end-date']."',  report_square_feet_to_date = '".$_POST['square-feet-todate']."', report_percentage_completed = '".$_POST['percentage-completed']."', report_completed = '".$_POST['completion-metal']."', report_target_completion_date = '".$_POST['target-date']."', report_field_notes='".$_POST['details-field-notes']."' WHERE report_id = '".$_POST['report-id']."';"; 
+    $report_id = $_POST['report-id'];
+    $project_id = $_POST['project-id'];
+
+    $query_editreport = "UPDATE `reports` SET report_start_date = '".$_POST['start-date']."', report_end_date = '".$_POST['end-date']."',  report_square_feet_to_date = '".$_POST['square-feet-todate']."', report_percentage_completed = '".$_POST['percentage-completed']."', report_completed = '".$_POST['completion-metal']."', report_target_completion_date = '".$_POST['target-date']."', report_field_notes='".$_POST['details-field-notes']."' WHERE report_id = '".$report_id."';";
 
     $wpdb->query( $query_editreport );
 
@@ -1434,6 +1423,39 @@ if(isset($_POST['edit-report'])){
     }
 
     $wpdb->query($q_add);
+
+    if(!empty($_POST['img'])) {
+
+        $target_dir = dirname(__FILE__) . '\\file_uploads\\reports\\' . $report_id . '\\';
+        if (!is_dir($target_dir) && !file_exists($target_dir)) {
+            mkdir($target_dir);
+        }
+
+        //  PROCESO PARA SUBIR IMAGENES
+        $delete_images = "DELETE FROM `project_pictures` WHERE report_id = $report_id ;";
+        $wpdb->query($delete_images);
+        $i = 1;
+        foreach ($_POST['img'] as $key => $img) {
+            list($type, $img) = explode(';', $img);
+            list(, $img) = explode(',', $img);
+            $data = base64_decode($img);
+
+            $path = $target_dir . $i . '.jpg';
+
+            if (file_put_contents($path, $data)) {
+                echo 'uploaded';
+            } else {
+                echo 'fail';
+            }
+
+            $query_project = "INSERT INTO `project_pictures` (`report_id`, `project_picture_name`, `project_picture_description`) VALUES ('" . $report_id . "', '" . $i . "', '" . $_POST[$key] . "');";
+            $wpdb->query($query_project);
+
+            $i++;
+        }
+    }
+
+    wp_redirect(home_url().'/editreport/?id='.$project_id.'&rid='.$report_id);
 }
 
 if(isset($_POST['edit-inspectionlist'])){
