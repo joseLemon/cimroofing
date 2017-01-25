@@ -21,7 +21,7 @@ $project = $wpdb->get_results("select * from projects where project_id = $id");
 
                 <form method="POST" action="<?php echo home_url().'/'; ?>controller/?id=<?php echo $_GET['id']; ?>" id="save" name="save">
                     <div class="project-info">
-                        <img src="<?php echo bloginfo('template_url').'/'; ?>img/content/project-img-example.png" alt="imagen proyecto" class="project-img">
+                        <img src="<?php echo bloginfo('template_url').'/'; ?>file_uploads/projects/<?php echo $_GET['id']; ?>/project_image.jpg" alt="imagen proyecto" class="project-img">
                         <div class="information">
                             Project Name:&nbsp;<text class="project-name"><?php echo $project[0]->project_name ?></text><br>
                             Address:&nbsp;<text class="project-name"><?php  echo $project[0]->project_address ?></text><br>
@@ -121,7 +121,7 @@ $project = $wpdb->get_results("select * from projects where project_id = $id");
                         <text style="font-weight:700;font-size:19px">PHOTO DOCUMENTATION</text><br>
                         Step 5: Provide photographs detailing various stages of the installation process for the reporting period.<br>
                         <div class="upload-section">
-                            <button data-toggle="modal" data-target="#upload-modal" id="selectimgs">Select images...</button>
+                            <a href="#" class="btn btn-default" onclick="document.getElementById('pictures').click(); return false;" />Select image</a>
                         </div>
                         <div class="uploaded-images"></div>
                         <input type="hidden" id="tmp-folder-delete" name="tmp-folder-delete">
@@ -141,24 +141,14 @@ $project = $wpdb->get_results("select * from projects where project_id = $id");
         </div>
     </div>
 
-    <div class="modal fade" role="dialog" tabindex="-1" id="upload-modal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Image Selection</h4>
-                </div>
-                <div class="modal-body">
-                    <form action="<?php echo home_url().'/?id='; ?>controller" method="POST" id="upload-form" enctype="multipart/form-data">
-                        <input class="hidden" type="file" id="pictures" name="pictures[]" multiple value="Select files">
-                        <a href="#" class="btn btn-default" onclick="document.getElementById('pictures').click(); return false;" />Select images</a>
-                        <button class="btn btn-success" type="submit">Upload images</button>
-                        <input type="file" id="fileID" style="visibility: hidden;" />
-                        <input type="hidden" id="tmp-folder" name="tmp-folder">
-                    </form>
-                </div>
-            </div>
-        </div>
+    <div class="hidden">
+        <form action="<?php echo home_url().'/?id='; ?>controller" method="POST" id="upload-form" enctype="multipart/form-data">
+            <input class="hidden" type="file" id="pictures" name="pictures[]" multiple value="Select files">
+            <a href="#" class="btn btn-default" onclick="document.getElementById('pictures').click(); return false;" />Select images</a>
+            <button class="btn btn-success" type="submit">Upload images</button>
+            <input type="file" id="fileID" style="visibility: hidden;" />
+            <input type="hidden" id="tmp-folder" name="tmp-folder">
+        </form>
     </div>
 
     <div class="hidden">
@@ -194,6 +184,10 @@ $project = $wpdb->get_results("select * from projects where project_id = $id");
 
         var homeUrl = 'http://localhost/testpictures/';
         // REPLACE FOR <?php //echo home_url(); ?>
+
+        $('#pictures').change(function () {
+            $('#upload-form').submit();
+        });
 
         $('#upload-form').submit(function(e) {
             e.preventDefault();
