@@ -16,6 +16,7 @@ $project = $wpdb->get_results("select * from projects where project_id = $id");
             <text class="title">
                 <?php echo $project[0]->project_name ?>
             </text><br>
+            <div class="alert alert-danger hidden" id="error"></div>
             <div class="inside-content">
                 <p class="content">Contractor work log: Please submit the following log at the specified frequency identified by Roof Management during the preconstruction meeting. The log should provide an accurate account of the work items completed, progress to completion, issues encountered and photo representation of various stages of work during the reporting period.</p>
 
@@ -123,7 +124,7 @@ $project = $wpdb->get_results("select * from projects where project_id = $id");
                         <div class="upload-section">
                             <a href="#" class="btn btn-default" onclick="document.getElementById('pictures').click(); return false;" />Select image</a>
                         </div>
-                        <div class="uploaded-images"></div>
+                        <div class="uploaded-images" id="images"></div>
                         <input type="hidden" id="tmp-folder-delete" name="tmp-folder-delete">
                     </div><br>
                     <img src="<?php echo bloginfo('template_url').'/'; ?>img/content/division-empleos.png" alt="divider" class="form-divider longwidth" style="height:2px"><br>
@@ -290,7 +291,57 @@ $project = $wpdb->get_results("select * from projects where project_id = $id");
                     $img_base64 = $canvas.toDataURL('image/jpeg');
                 $(this).nextAll('input').eq(0).val($img_base64);
             });
-            $(this)[0].submit();
+
+            var errors ="";
+            var start = $("input[name=start-date]").val();
+            var end = $("input[name=end-date]").val();
+            //var workItems = $('#workitems:checked').length;
+            var squareFeetToDate = $("#square-feet-todate").val();
+            var percentageCompleted = $("#percentagecompleted").val();
+            var targetdate = $("#targetdate").val();
+            var detailsFieldNotes = $("#details-field-notes").val();
+
+            if( start == null || start.length == 0) {
+                errors += "The Start Date is required<br>";
+            }
+            if( start == null || start.length == 0) {
+                errors += "The End Date is required<br>";
+            }
+            /*if( workItems == 0) {
+                errors += "You must complete at least one work item<br>";
+            }*/
+            if( squareFeetToDate == null || squareFeetToDate.length == 0) {
+                errors += "The Square feet installed to date is required<br>";
+            } else if(!/^\d+$/.test(squareFeetToDate)){
+                errors += "Enter a valid number for Square feet installed to date (only whole numbers)<br>";
+            }
+            if( percentageCompleted == null || percentageCompleted.length == 0) {
+                errors += "The Percentage completed is required<br>";
+            } else if(!/^\d{4}$/.test(percentageCompleted)){
+                errors += "Enter a valid percentage of completion (only whole numbers)<br>";
+            } else if (percentageCompleted > 100) {
+                errors += "You can not select a percentage of completion greater than 100<br>";
+            }
+            if( targetdate == null || targetdate.length == 0) {
+                errors += "The Target completion date is required<br>";
+            }
+            if( detailsFieldNotes == null || detailsFieldNotes.length == 0) {
+                errors += "The field notes are required<br>";
+            } else if(detailsFieldNotes.length > 512){
+                errors += "The maximum number of letters for the field notes is 521<br>";
+            }
+            if($("#images").html()==''){
+                errors += "You must upload an image for the project<br>";
+            }
+            //redireccion
+            if(errors=="") {
+                $(this)[0].submit();
+            } else {
+                //colorear los campos mal ingresados
+                $("#error").removeClass('hidden').addClass('active').html("Whoops <br>"+errors);
+                $('html,body').animate({ scrollTop: 0 }, 'slow');
+                return false;
+            }
         });
     </script>
 <?php include('footer-projects.php'); ?>
