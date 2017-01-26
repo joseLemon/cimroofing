@@ -4,7 +4,7 @@
     <img src="<?php echo bloginfo('template_url').'/'; ?>img/logo.png" alt="cim logo" class="logo"><br>
     <img src="<?php echo bloginfo('template_url').'/'; ?>img/content/division-empleos.png" alt="divider" class="form-divider"><br>
     <text class="title">ROOF INSPECTION LIST</text><br>
-
+    <div class="alert alert-danger hidden" id="error"></div>
     <div class="general-content">
         <div class="inside-content">
             <div class="info-section">
@@ -60,8 +60,8 @@
                     <div class="row no-margin">
                         <div class="col-sm-12">
                             <text class="content">Clear access  </text>
-                            <input type="radio" name="clear-access" value="no" checked><text class="content">No </text>
-                            <input type="radio" name="clear-access" value="yes"><text class="content">Yes </text>
+                            <input type="radio" name="clear-access" id="clearAccessNo" value="no" checked><text class="content">No </text>
+                            <input type="radio" name="clear-access" id="clearAccessYes" value="yes"><text class="content">Yes </text>
                             <select name="clearaccessposition" id="clearaccessposition" disabled>
                                 <option value="" disabled selected>Select</option>
 		                        <?php
@@ -85,7 +85,7 @@
                     <div class="row no-margin">
                         <div class="col-sm-12 one-line">
                             <text class="content">Type of roof  </text>
-                            <input type="radio" name="type-of-roof" value="flatmembrane" checked><text class="content">Flat/Membrane </text>
+                            <input type="radio" name="type-of-roof" value="flatmembrane" id="flatmembrane" checked><text class="content">Flat/Membrane </text>
                             <select name="flatmembrane-select" id="flatmembraneselect" disabled>
                                 <option value="" disabled selected>Select</option>
 		                        <?php
@@ -95,7 +95,7 @@
 		                        }
 		                        ?>
                             </select>
-                            <input type="radio" name="type-of-roof" value="sloped"><text class="content">Sloped </text>
+                            <input type="radio" name="type-of-roof" id="sloped" value="sloped"><text class="content">Sloped </text>
                             <select name="sloped-select" id="slopedselect" disabled>
                                 <option value="" disabled selected>Select</option>
 		                        <?php
@@ -107,7 +107,6 @@
                             </select>
                             <script>
                                 $('input[name=type-of-roof]').change(function() {
-                                    console.log($('input[name=type-of-roof]:checked').val());
                                     if($('input[name=type-of-roof]:checked').val() == 'flatmembrane') {
                                         $('#slopedselect').attr('disabled','disabled');
                                         $('#slope').attr('disabled','disabled');
@@ -645,7 +644,97 @@
         $('#signature-input').val($saveSignature);
         var $saveSketch = sketchPad.toDataURL(); // save image as PNG
         $('#sketch-input').val($saveSketch);
-        $('#inspection-form')[0].submit();
+
+        var errors ="";
+        var projectOwner = $("#project-owner").val();
+        var projectAddress = $("#project-address").val();
+        var heightAtEave = $("#height-at-eave").val();
+        var heightAtRidge = $("#height-at-ridge").val();
+        var SizeOfRoof = $("#size-of-roof").val();
+        var manufacturer = $("#manufacturer").val();
+        var yearInstalled = $("#year-installed").val();
+        var yearManufactured = $("#year-manufactured").val();
+        var facility = $("#facility").val();
+        var location = $("#location").val();
+        var title = $("#title").val();
+
+        if( projectOwner == null || projectOwner.length == 0) {
+            errors += "The Project Owner is required<br>";
+        } else if(projectOwner.length > 50){
+            errors += "The maximum number of letters for the Project Owner is 50<br>";
+        }
+        if( projectAddress == null || projectAddress.length == 0) {
+            errors += "The Project Address is required<br>";
+        } else if(projectOwner.length > 80){
+            errors += "The maximum number of letters for the Project Address is 80<br>";
+        }
+        if( heightAtRidge == null || heightAtRidge.length == 0) {
+            errors += "The Height at ridge is required<br>";
+        } else if(!/^(0|[1-9]\d*)?(\.\d+)?(?<=\d)$/.test(heightAtRidge)){
+            errors += "Enter a valid number for Height at ridge installed to date (e.g. 5.10)<br>";
+        }
+        if( heightAtEave == null || heightAtEave.length == 0) {
+            errors += "The Height at eave is required<br>";
+        } else if(!/^(0|[1-9]\d*)?(\.\d+)?(?<=\d)$/.test(heightAtEave)){
+            errors += "Enter a valid number for Height at eave installed to date (e.g. 5.10)<br>";
+        }
+        if($("#clearAccessYes").is(":checked") && $("#clearaccessposition").val() == null){
+            errors += "You must select a Clear access position<br>";
+        }
+        if($("#flatmembrane").is(":checked") && $("#clearaccessposition").val() == null){
+            errors += "You must select a Flat/Membrane type<br>";
+        }
+        if($("#sloped").is(":checked") && $("#slopedselect").val() == null){
+            errors += "You must select a Type of roof<br>";
+        }
+        if($("#sloped").is(":checked") && ($("#slope").val() == null || $("#slope").val() == 0)){
+            errors += "You must set a Slope<br>";
+        }
+        if( SizeOfRoof == null || SizeOfRoof.length == 0) {
+            errors += "The Size of roof is required<br>";
+        } else if(!/^(0|[1-9]\d*)?(\.\d+)?(?<=\d)$/.test(SizeOfRoof)){
+            errors += "Enter a valid number for Size of roof installed to date (e.g. 5.10)<br>";
+        }
+        if( manufacturer == null || manufacturer.length == 0) {
+            errors += "The Manufacturer and brand are required<br>";
+        } else if(manufacturer.length > 80){
+            errors += "The maximum number of letters for the Manufacturer and brand is 80<br>";
+        }
+        if( yearInstalled == null || yearInstalled.length == 0) {
+            errors += "The year installed is required<br>";
+        } else if(!/^\d{4}$/.test(yearInstalled)){
+            errors += "You must enter a valid year (e.g. 2017)<br>";
+        }
+        if( yearManufactured == null || yearManufactured.length == 0) {
+            errors += "The Year of manufacture is required<br>";
+        } else if(!/^\d{4}$/.test(yearInstalled)){
+            errors += "You must enter a valid year (e.g. 2017)<br>";
+        }
+        if( title == null || title.length == 0) {
+            errors += "The title is required<br>";
+        } else if(title.length > 80){
+            errors += "The maximum number of letters for the title is 80<br>";
+        }
+        if( facility == null || facility.length == 0) {
+            errors += "The facility is required<br>";
+        } else if(facility.length > 80){
+            errors += "The maximum number of letters for the facility is 80<br>";
+        }
+        if( location == null || location.length == 0) {
+            errors += "The location is required<br>";
+        } else if(location.length > 80){
+            errors += "The maximum number of letters for the location is 80<br>";
+        }
+        //redireccion
+        if(errors=="") {
+            $('#inspection-form')[0].submit();
+        } else {
+            //colorear los campos mal ingresados
+            $("#error").removeClass('hidden').addClass('active').html("Whoops <br>"+errors);
+            $('html,body').animate({ scrollTop: 0 }, 'slow');
+            return false;
+        }
+
     });
 </script>
 <?php include('footer-projects.php'); ?>

@@ -317,7 +317,7 @@ $project = $wpdb->get_results("select * from projects where project_id = $id");
             }
             if( percentageCompleted == null || percentageCompleted.length == 0) {
                 errors += "The Percentage completed is required<br>";
-            } else if(!/^\d{4}$/.test(percentageCompleted)){
+            } else if(!/^\d{1,4}$/.test(percentageCompleted)){
                 errors += "Enter a valid percentage of completion (only whole numbers)<br>";
             } else if (percentageCompleted > 100) {
                 errors += "You can not select a percentage of completion greater than 100<br>";
