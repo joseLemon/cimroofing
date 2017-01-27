@@ -122,7 +122,7 @@ $project = $wpdb->get_results("select * from projects where project_id = $id");
                         <text style="font-weight:700;font-size:19px">PHOTO DOCUMENTATION</text><br>
                         Step 5: Provide photographs detailing various stages of the installation process for the reporting period.<br>
                         <div class="upload-section">
-                            <a href="#" class="btn btn-default" onclick="document.getElementById('pictures').click(); return false;" />Select image</a>
+                            <a href="#" class="btn btn-default" onclick="document.getElementById('pictures').click(); return false;" />Select images</a>
                         </div>
                         <div class="uploaded-images" id="images"></div>
                         <input type="hidden" id="tmp-folder-delete" name="tmp-folder-delete">
@@ -279,8 +279,8 @@ $project = $wpdb->get_results("select * from projects where project_id = $id");
             },500);
         });
 
-        $('#selectimgs').click(function(f){
-            f.preventDefault();
+        $('#selectimgs').click(function(e){
+            e.preventDefault();
         });
 
         $('#save').submit(function(e) {

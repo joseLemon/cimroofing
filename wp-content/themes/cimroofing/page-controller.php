@@ -69,6 +69,8 @@ if(isset($_POST['tmp-folder'])) {
 
     if(isset($_POST['projects'])) {
         $target_dir = dirname(__FILE__) . '\\file_uploads\\projects\\' . $tmpFolder . '\\';
+    } else if(isset($_POST['inspections'])) {
+        $target_dir = dirname(__FILE__) . '\\file_uploads\\inspections\\' . $tmpFolder . '\\';
     } else {
         $target_dir = dirname(__FILE__) . '\\file_uploads\\reports\\' . $tmpFolder . '\\';
     }
@@ -101,7 +103,8 @@ if(isset($_POST['tmp-folder'])) {
     }
 
     for ($i = 0; $i < $total; $i++) {
-
+        echo $i;
+        echo $_FILES["pictures"]["size"][$i];
         if ($_FILES["pictures"]["size"][$i] > 25000000) {
             echo "The image exceeds 25Mb.";
             continue;
@@ -129,13 +132,16 @@ if(isset($_POST['tmp-folder-unload'])) {
     if(isset($_POST['projects'])) {
         $TmpDirToDelete = dirname(__FILE__) . '\\file_uploads\\projects\\' . $tmpFolder . '\\';
     }
+    if(isset($_POST['inspections'])) {
+        $TmpDirToDelete = dirname(__FILE__) . '\\file_uploads\\inspections\\' . $tmpFolder . '\\';
+    }
     if(isset($_POST['reports'])) {
         $TmpDirToDelete = dirname(__FILE__) . '\\file_uploads\\reports\\' . $tmpFolder . '\\';
     }
 
     $files = glob($TmpDirToDelete.'/*'); // get all file names
 
-    print_r($files);
+    //print_r($files);
 
     foreach($files as $file){ // iterate files
         if(is_file($file))
@@ -182,11 +188,13 @@ if(isset($_POST['submit-inspectionlist'])) {
     $wpdb->query( $query_client );
     $programmed_date = date('Y-m-d H:i:s',strtotime($_POST['date-maintenance']));
 
-    $client_id = $wpdb->get_results('   SELECT MAX(client_id) as id FROM clients where user_id = '.$user_id)[0]->id;
+    $client_id = $wpdb->get_results('SELECT MAX(client_id) as id FROM clients where user_id = '.$user_id)[0]->id;
 
     $query_roof_inspection = "INSERT INTO `roof_inspections` (`roof_inspection_id`, `roof_inspection_facility`, `roof_inspection_location`, `roof_inspection_datetime`, `client_id`, `roof_inspection_core_sample`, `roof_inspection_comment`, `roof_inspection_plan`,`user_id`) VALUES (NULL, '".$_POST['facility']."', '".$_POST['location']."', '$programmed_date', $client_id, '".$_POST['core-sample']."', '".$_POST['comment']."', '".$_POST['sketch-input']."', ".$user_id.");";
 
     $wpdb->query( $query_roof_inspection );
+
+    $inspection_id = $wpdb->get_results('SELECT MAX roof_inspection_id as id FROM roof_inspections WHERE user_id = '.$user_id[0]->id);
 
     $query_materials = "INSERT INTO `roof_materials` (`roof_inspection_id`, `inspection_material_id`) Values ";
     $roof_inspection_id = $wpdb->get_results('SELECT MAX(roof_inspection_id) as id FROM roof_inspections where user_id = '.$user_id);
@@ -249,7 +257,7 @@ if(isset($_POST['submit-inspectionlist'])) {
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '4', '".$_POST['status-4']."', '".$_POST['observation-4']."', '".$checklist_date."')";
         } else{
-            $query_checklists .= "(".$roof_inspection_id[0]->id.", '4', '".$_POST['status-4']."', '".$_POST['observation-4']."', '".$checklist_date."')";  
+            $query_checklists .= "(".$roof_inspection_id[0]->id.", '4', '".$_POST['status-4']."', '".$_POST['observation-4']."', '".$checklist_date."')";
             $count++;
         }
     }
@@ -284,7 +292,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '7', '".$_POST['status-7']."', '".$_POST['observation-7']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '7', '".$_POST['status-7']."', '".$_POST['observation-7']."', '".$checklist_date."')";
             $count++;
         }
@@ -296,7 +304,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '8', '".$_POST['status-8']."', '".$_POST['observation-8']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '8', '".$_POST['status-8']."', '".$_POST['observation-8']."', '".$checklist_date."')";
             $count++;
         }
@@ -308,7 +316,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '9', '".$_POST['status-9']."', '".$_POST['observation-9']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '9', '".$_POST['status-9']."', '".$_POST['observation-9']."', '".$checklist_date."')";
             $count++;
         }
@@ -320,7 +328,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '10', '".$_POST['status-10']."', '".$_POST['observation-10']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '10', '".$_POST['status-10']."', '".$_POST['observation-10']."', '".$checklist_date."')";
             $count++;
         }
@@ -332,7 +340,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '11', '".$_POST['status-11']."', '".$_POST['observation-11']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '11', '".$_POST['status-11']."', '".$_POST['observation-11']."', '".$checklist_date."')";
             $count++;
         }
@@ -344,7 +352,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '12', '".$_POST['status-12']."', '".$_POST['observation-12']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '12', '".$_POST['status-12']."', '".$_POST['observation-12']."', '".$checklist_date."')";
             $count++;
         }
@@ -356,7 +364,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '13', '".$_POST['status-13']."', '".$_POST['observation-13']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '13', '".$_POST['status-13']."', '".$_POST['observation-13']."', '".$checklist_date."')";
             $count++;
         }
@@ -368,7 +376,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '14', '".$_POST['status-14']."', '".$_POST['observation-14']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '14', '".$_POST['status-14']."', '".$_POST['observation-14']."', '".$checklist_date."')";
             $count++;
         }
@@ -380,7 +388,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '15', '".$_POST['status-15']."', '".$_POST['observation-15']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '15', '".$_POST['status-15']."', '".$_POST['observation-15']."', '".$checklist_date."')";
             $count++;
         }
@@ -392,7 +400,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '16', '".$_POST['status-16']."', '".$_POST['observation-16']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '16', '".$_POST['status-16']."', '".$_POST['observation-16']."', '".$checklist_date."')";
             $count++;
         }
@@ -404,7 +412,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '17', '".$_POST['status-17']."', '".$_POST['observation-17']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '17', '".$_POST['status-17']."', '".$_POST['observation-17']."', '".$checklist_date."')";
             $count++;
         }
@@ -416,7 +424,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '18', '".$_POST['status-18']."', '".$_POST['observation-18']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '18', '".$_POST['status-18']."', '".$_POST['observation-18']."', '".$checklist_date."')";
             $count++;
         }
@@ -428,7 +436,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '19', '".$_POST['status-19']."', '".$_POST['observation-19']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '19', '".$_POST['status-19']."', '".$_POST['observation-19']."', '".$checklist_date."')";
             $count++;
         }
@@ -440,7 +448,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '20', '".$_POST['status-20']."', '".$_POST['observation-20']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '20', '".$_POST['status-20']."', '".$_POST['observation-20']."', '".$checklist_date."')";
             $count++;
         }
@@ -452,7 +460,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '21', '".$_POST['status-21']."', '".$_POST['observation-21']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '21', '".$_POST['status-21']."', '".$_POST['observation-21']."', '".$checklist_date."')";
             $count++;
         }
@@ -464,7 +472,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '22', '".$_POST['status-22']."', '".$_POST['observation-22']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '22', '".$_POST['status-22']."', '".$_POST['observation-22']."', '".$checklist_date."')";
             $count++;
         }
@@ -476,7 +484,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '23', '".$_POST['status-23']."', '".$_POST['observation-23']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '23', '".$_POST['status-23']."', '".$_POST['observation-23']."', '".$checklist_date."')";
             $count++;
         }
@@ -488,7 +496,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '24', '".$_POST['status-24']."', '".$_POST['observation-24']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '24', '".$_POST['status-24']."', '".$_POST['observation-24']."', '".$checklist_date."')";
             $count++;
         }
@@ -500,7 +508,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '25', '".$_POST['status-25']."', '".$_POST['observation-25']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '25', '".$_POST['status-25']."', '".$_POST['observation-25']."', '".$checklist_date."')";
             $count++;
         }
@@ -512,7 +520,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '26', '".$_POST['status-26']."', '".$_POST['observation-26']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '26', '".$_POST['status-26']."', '".$_POST['observation-26']."', '".$checklist_date."')";
             $count++;
         }
@@ -524,7 +532,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '27', '".$_POST['status-27']."', '".$_POST['observation-27']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '27', '".$_POST['status-27']."', '".$_POST['observation-27']."', '".$checklist_date."')";
             $count++;
         }
@@ -536,7 +544,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '28', '".$_POST['status-28']."', '".$_POST['observation-28']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '28', '".$_POST['status-28']."', '".$_POST['observation-28']."', '".$checklist_date."')";
             $count++;
         }
@@ -548,7 +556,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '29', '".$_POST['status-29']."', '".$_POST['observation-29']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '29', '".$_POST['status-29']."', '".$_POST['observation-29']."', '".$checklist_date."')";
             $count++;
         }
@@ -560,7 +568,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '30', '".$_POST['status-30']."', '".$_POST['observation-30']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '30', '".$_POST['status-30']."', '".$_POST['observation-30']."', '".$checklist_date."')";
             $count++;
         }
@@ -572,7 +580,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '31', '".$_POST['status-31']."', '".$_POST['observation-31']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '31', '".$_POST['status-31']."', '".$_POST['observation-31']."', '".$checklist_date."')";
             $count++;
         }
@@ -584,7 +592,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '32', '".$_POST['status-32']."', '".$_POST['observation-32']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '32', '".$_POST['status-32']."', '".$_POST['observation-32']."', '".$checklist_date."')";
             $count++;
         }
@@ -596,7 +604,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '33', '".$_POST['status-33']."', '".$_POST['observation-33']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '33', '".$_POST['status-33']."', '".$_POST['observation-33']."', '".$checklist_date."')";
             $count++;
         }
@@ -608,7 +616,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '34', '".$_POST['status-34']."', '".$_POST['observation-34']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '34', '".$_POST['status-34']."', '".$_POST['observation-34']."', '".$checklist_date."')";
             $count++;
         }
@@ -620,7 +628,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '35', '".$_POST['status-35']."', '".$_POST['observation-35']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '35', '".$_POST['status-35']."', '".$_POST['observation-35']."', '".$checklist_date."')";
             $count++;
         }
@@ -632,7 +640,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '36', '".$_POST['status-36']."', '".$_POST['observation-36']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '36', '".$_POST['status-36']."', '".$_POST['observation-36']."', '".$checklist_date."')";
             $count++;
         }
@@ -644,7 +652,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '37', '".$_POST['status-37']."', '".$_POST['observation-37']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '37', '".$_POST['status-37']."', '".$_POST['observation-37']."', '".$checklist_date."')";
             $count++;
         }
@@ -656,7 +664,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '38', '".$_POST['status-38']."', '".$_POST['observation-38']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '38', '".$_POST['status-38']."', '".$_POST['observation-38']."', '".$checklist_date."')";
             $count++;
         }
@@ -668,7 +676,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '39', '".$_POST['status-39']."', '".$_POST['observation-39']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '39', '".$_POST['status-39']."', '".$_POST['observation-39']."', '".$checklist_date."')";
             $count++;
         }
@@ -680,7 +688,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '40', '".$_POST['status-40']."', '".$_POST['observation-40']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '40', '".$_POST['status-40']."', '".$_POST['observation-40']."', '".$checklist_date."')";
             $count++;
         }
@@ -692,7 +700,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '41', '".$_POST['status-41']."', '".$_POST['observation-41']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '41', '".$_POST['status-41']."', '".$_POST['observation-41']."', '".$checklist_date."')";
             $count++;
         }
@@ -704,7 +712,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '42', '".$_POST['status-42']."', '".$_POST['observation-42']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '42', '".$_POST['status-42']."', '".$_POST['observation-42']."', '".$checklist_date."')";
             $count++;
         }
@@ -716,7 +724,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '43', '".$_POST['status-43']."', '".$_POST['observation-43']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '43', '".$_POST['status-43']."', '".$_POST['observation-43']."', '".$checklist_date."')";
             $count++;
         }
@@ -728,7 +736,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '44', '".$_POST['status-44']."', '".$_POST['observation-44']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '44', '".$_POST['status-44']."', '".$_POST['observation-44']."', '".$checklist_date."')";
             $count++;
         }
@@ -740,7 +748,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '45', '".$_POST['status-45']."', '".$_POST['observation-45']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '45', '".$_POST['status-45']."', '".$_POST['observation-45']."', '".$checklist_date."')";
             $count++;
         }
@@ -752,7 +760,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '46', '".$_POST['status-46']."', '".$_POST['observation-46']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '46', '".$_POST['status-46']."', '".$_POST['observation-46']."', '".$checklist_date."')";
             $count++;
         }
@@ -764,7 +772,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '47', '".$_POST['status-47']."', '".$_POST['observation-47']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '47', '".$_POST['status-47']."', '".$_POST['observation-47']."', '".$checklist_date."')";
             $count++;
         }
@@ -776,7 +784,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '48', '".$_POST['status-48']."', '".$_POST['observation-48']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '48', '".$_POST['status-48']."', '".$_POST['observation-48']."', '".$checklist_date."')";
             $count++;
         }
@@ -788,7 +796,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '49', '".$_POST['status-49']."', '".$_POST['observation-49']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '49', '".$_POST['status-49']."', '".$_POST['observation-49']."', '".$checklist_date."')";
             $count++;
         }
@@ -800,7 +808,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '50', '".$_POST['status-50']."', '".$_POST['observation-50']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '50', '".$_POST['status-50']."', '".$_POST['observation-50']."', '".$checklist_date."')";
             $count++;
         }
@@ -812,7 +820,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '51', '".$_POST['status-51']."', '".$_POST['observation-51']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '51', '".$_POST['status-51']."', '".$_POST['observation-51']."', '".$checklist_date."')";
             $count++;
         }
@@ -824,7 +832,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '52', '".$_POST['status-52']."', '".$_POST['observation-52']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '52', '".$_POST['status-52']."', '".$_POST['observation-52']."', '".$checklist_date."')";
             $count++;
         }
@@ -836,7 +844,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '53', '".$_POST['status-53']."', '".$_POST['observation-53']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '53', '".$_POST['status-53']."', '".$_POST['observation-53']."', '".$checklist_date."')";
             $count++;
         }
@@ -848,7 +856,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '54', '".$_POST['status-54']."', '".$_POST['observation-54']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '54', '".$_POST['status-54']."', '".$_POST['observation-54']."', '".$checklist_date."')";
             $count++;
         }
@@ -860,7 +868,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '55', '".$_POST['status-55']."', '".$_POST['observation-55']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '55', '".$_POST['status-55']."', '".$_POST['observation-55']."', '".$checklist_date."')";
             $count++;
         }
@@ -872,7 +880,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '56', '".$_POST['status-56']."', '".$_POST['observation-56']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '56', '".$_POST['status-56']."', '".$_POST['observation-56']."', '".$checklist_date."')";
             $count++;
         }
@@ -884,7 +892,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '57', '".$_POST['status-57']."', '".$_POST['observation-57']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '57', '".$_POST['status-57']."', '".$_POST['observation-57']."', '".$checklist_date."')";
             $count++;
         }
@@ -896,7 +904,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '58', '".$_POST['status-58']."', '".$_POST['observation-58']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '58', '".$_POST['status-58']."', '".$_POST['observation-58']."', '".$checklist_date."')";
             $count++;
         }
@@ -908,7 +916,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '59', '".$_POST['status-59']."', '".$_POST['observation-59']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '59', '".$_POST['status-59']."', '".$_POST['observation-59']."', '".$checklist_date."')";
             $count++;
         }
@@ -920,7 +928,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '60', '".$_POST['status-60']."', '".$_POST['observation-60']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '60', '".$_POST['status-60']."', '".$_POST['observation-60']."', '".$checklist_date."')";
             $count++;
         }
@@ -932,7 +940,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '61', '".$_POST['status-61']."', '".$_POST['observation-61']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '61', '".$_POST['status-61']."', '".$_POST['observation-61']."', '".$checklist_date."')";
             $count++;
         }
@@ -944,7 +952,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '62', '".$_POST['status-62']."', '".$_POST['observation-62']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '62', '".$_POST['status-62']."', '".$_POST['observation-62']."', '".$checklist_date."')";
             $count++;
         }
@@ -956,7 +964,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '63', '".$_POST['status-63']."', '".$_POST['observation-63']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '63', '".$_POST['status-63']."', '".$_POST['observation-63']."', '".$checklist_date."')";
             $count++;
         }
@@ -968,7 +976,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '64', '".$_POST['status-64']."', '".$_POST['observation-64']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '64', '".$_POST['status-64']."', '".$_POST['observation-64']."', '".$checklist_date."')";
             $count++;
         }
@@ -980,7 +988,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '65', '".$_POST['status-65']."', '".$_POST['observation-65']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '65', '".$_POST['status-65']."', '".$_POST['observation-65']."', '".$checklist_date."')";
             $count++;
         }
@@ -992,7 +1000,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '66', '".$_POST['status-66']."', '".$_POST['observation-66']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '66', '".$_POST['status-66']."', '".$_POST['observation-66']."', '".$checklist_date."')";
             $count++;
         }
@@ -1004,7 +1012,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '67', '".$_POST['status-67']."', '".$_POST['observation-67']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '67', '".$_POST['status-67']."', '".$_POST['observation-67']."', '".$checklist_date."')";
             $count++;
         }
@@ -1016,7 +1024,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '68', '".$_POST['status-68']."', '".$_POST['observation-68']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '68', '".$_POST['status-68']."', '".$_POST['observation-68']."', '".$checklist_date."')";
             $count++;
         }
@@ -1028,7 +1036,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '69', '".$_POST['status-69']."', '".$_POST['observation-69']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '69', '".$_POST['status-69']."', '".$_POST['observation-69']."', '".$checklist_date."')";
             $count++;
         }
@@ -1040,7 +1048,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '70', '".$_POST['status-70']."', '".$_POST['observation-70']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '70', '".$_POST['status-70']."', '".$_POST['observation-70']."', '".$checklist_date."')";
             $count++;
         }
@@ -1052,7 +1060,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '71', '".$_POST['status-71']."', '".$_POST['observation-71']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '71', '".$_POST['status-71']."', '".$_POST['observation-71']."', '".$checklist_date."')";
             $count++;
         }
@@ -1064,7 +1072,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '72', '".$_POST['status-72']."', '".$_POST['observation-72']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '72', '".$_POST['status-72']."', '".$_POST['observation-72']."', '".$checklist_date."')";
             $count++;
         }
@@ -1076,7 +1084,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '73', '".$_POST['status-73']."', '".$_POST['observation-73']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '73', '".$_POST['status-73']."', '".$_POST['observation-73']."', '".$checklist_date."')";
             $count++;
         }
@@ -1088,7 +1096,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '74', '".$_POST['status-74']."', '".$_POST['observation-74']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '74', '".$_POST['status-74']."', '".$_POST['observation-74']."', '".$checklist_date."')";
             $count++;
         }
@@ -1100,7 +1108,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '75', '".$_POST['status-75']."', '".$_POST['observation-75']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '75', '".$_POST['status-75']."', '".$_POST['observation-75']."', '".$checklist_date."')";
             $count++;
         }
@@ -1112,7 +1120,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '76', '".$_POST['status-76']."', '".$_POST['observation-76']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '76', '".$_POST['status-76']."', '".$_POST['observation-76']."', '".$checklist_date."')";
             $count++;
         }
@@ -1124,7 +1132,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '77', '".$_POST['status-77']."', '".$_POST['observation-77']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '77', '".$_POST['status-77']."', '".$_POST['observation-77']."', '".$checklist_date."')";
             $count++;
         }
@@ -1136,7 +1144,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '78', '".$_POST['status-78']."', '".$_POST['observation-78']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '78', '".$_POST['status-78']."', '".$_POST['observation-78']."', '".$checklist_date."')";
             $count++;
         }
@@ -1148,7 +1156,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '79', '".$_POST['status-79']."', '".$_POST['observation-79']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '79', '".$_POST['status-79']."', '".$_POST['observation-79']."', '".$checklist_date."')";
             $count++;
         }
@@ -1160,7 +1168,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '80', '".$_POST['status-80']."', '".$_POST['observation-80']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '80', '".$_POST['status-80']."', '".$_POST['observation-80']."', '".$checklist_date."')";
             $count++;
         }
@@ -1172,7 +1180,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '81', '".$_POST['status-81']."', '".$_POST['observation-81']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '81', '".$_POST['status-81']."', '".$_POST['observation-81']."', '".$checklist_date."')";
             $count++;
         }
@@ -1184,7 +1192,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '82', '".$_POST['status-82']."', '".$_POST['observation-82']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '82', '".$_POST['status-82']."', '".$_POST['observation-82']."', '".$checklist_date."')";
             $count++;
         }
@@ -1196,7 +1204,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '83', '".$_POST['status-83']."', '".$_POST['observation-83']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '83', '".$_POST['status-83']."', '".$_POST['observation-83']."', '".$checklist_date."')";
             $count++;
         }
@@ -1208,7 +1216,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '84', '".$_POST['status-84']."', '".$_POST['observation-84']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '84', '".$_POST['status-84']."', '".$_POST['observation-84']."', '".$checklist_date."')";
             $count++;
         }
@@ -1220,7 +1228,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '85', '".$_POST['status-85']."', '".$_POST['observation-85']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '85', '".$_POST['status-85']."', '".$_POST['observation-85']."', '".$checklist_date."')";
             $count++;
         }
@@ -1232,7 +1240,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '86', '".$_POST['status-86']."', '".$_POST['observation-86']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '86', '".$_POST['status-86']."', '".$_POST['observation-86']."', '".$checklist_date."')";
             $count++;
         }
@@ -1244,7 +1252,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '87', '".$_POST['status-87']."', '".$_POST['observation-87']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '87', '".$_POST['status-87']."', '".$_POST['observation-87']."', '".$checklist_date."')";
             $count++;
         }
@@ -1256,7 +1264,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '88', '".$_POST['status-88']."', '".$_POST['observation-88']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '88', '".$_POST['status-88']."', '".$_POST['observation-88']."', '".$checklist_date."')";
             $count++;
         }
@@ -1268,7 +1276,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '89', '".$_POST['status-89']."', '".$_POST['observation-89']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '89', '".$_POST['status-89']."', '".$_POST['observation-89']."', '".$checklist_date."')";
             $count++;
         }
@@ -1280,7 +1288,7 @@ if(isset($_POST['submit-inspectionlist'])) {
     }else{
         if($count>0){
             $query_checklists .= ", (".$roof_inspection_id[0]->id.", '90', '".$_POST['status-90']."', '".$_POST['observation-90']."', '".$checklist_date."')";
-        } else{   
+        } else{
             $query_checklists .= "(".$roof_inspection_id[0]->id.", '90', '".$_POST['status-90']."', '".$_POST['observation-90']."', '".$checklist_date."')";
             $count++;
         }
@@ -1288,6 +1296,31 @@ if(isset($_POST['submit-inspectionlist'])) {
 
     $query_checklists .= ";";
     $wpdb->query( $query_checklists );
+
+    $target_dir = dirname(__FILE__) . '\\file_uploads\\inspections\\' . $inspection_id . '\\';
+    if(!is_dir($target_dir) && !file_exists($target_dir)) {
+        mkdir($target_dir);
+    }
+
+    //  PROCESO PARA SUBIR IMAGENES
+    $i = 1;
+    foreach( $_POST['img'] as $key => $img) {
+        list($type, $img) = explode(';', $img);
+        list(, $img)      = explode(',', $img);
+        $data = base64_decode($img);
+
+        $path = $target_dir.$i.'.jpg';
+
+        if(file_put_contents($path, $data)) {
+            echo 'uploaded';
+        } else {
+            echo 'fail';
+        }
+        $query_project = "INSERT INTO `project_pictures` (`report_id`, `project_picture_name`, `project_picture_description`) VALUES ('".$report_id."', '".$i."', '".$_POST[$key]."');";
+        $wpdb->query( $query_project );
+
+        $i++;
+    }
 
     wp_redirect(home_url().'/inspectionhistory');
 }
@@ -1395,7 +1428,7 @@ if(isset($_POST['edit-report'])){
                     if($b == $a){
                         $an[$key1]=NULL;
                         $bn[$key2]=NULL;
-                    }   
+                    }
                 }
             }
         }
@@ -1510,7 +1543,7 @@ if(isset($_POST['edit-inspectionlist'])){
                     `client_signature` = '".$_POST['signature-input']."', 
                     `client_date` = $client_date,
                      `deleted_at` = NULL 
-                WHERE `client_id` = ".$_POST['client-id'].";"; 
+                WHERE `client_id` = ".$_POST['client-id'].";";
         $wpdb->query($query_editclient);
     } else {
         $query_editclient = "UPDATE `clients` SET 
@@ -1529,28 +1562,28 @@ if(isset($_POST['edit-inspectionlist'])){
                     `client_title` = '".$_POST['title']."',
                     `client_date` = $client_date,
                      `deleted_at` = NULL 
-                WHERE `client_id` = ".$_POST['client-id'].";"; 
+                WHERE `client_id` = ".$_POST['client-id'].";";
         $wpdb->query($query_editclient);
     }
 
     $programmed_date = date('Y-m-d H:i:s',strtotime($_POST['date-maintenance']));
 
     $sketch = $_POST['sketch-input'];
-    
-    if(isset($_POST['null-sketch'])?"checked":""){
-       $query_editinspection = "UPDATE `roof_inspections` SET roof_inspection_facility = '".$_POST['facility']."', roof_inspection_location = '".$_POST['location']."',  roof_inspection_datetime = '$programmed_date', roof_inspection_core_sample = '".$_POST['core-sample']."', roof_inspection_comment = '".$_POST['comment']."', roof_inspection_plan = NULL WHERE roof_inspection_id = '".$_POST['inspection-id']."';"; 
 
-        $wpdb->query( $query_editinspection ); 
+    if(isset($_POST['null-sketch'])?"checked":""){
+       $query_editinspection = "UPDATE `roof_inspections` SET roof_inspection_facility = '".$_POST['facility']."', roof_inspection_location = '".$_POST['location']."',  roof_inspection_datetime = '$programmed_date', roof_inspection_core_sample = '".$_POST['core-sample']."', roof_inspection_comment = '".$_POST['comment']."', roof_inspection_plan = NULL WHERE roof_inspection_id = '".$_POST['inspection-id']."';";
+
+        $wpdb->query( $query_editinspection );
     } else if(!empty($sketch)){
-        $query_editinspection = "UPDATE `roof_inspections` SET roof_inspection_facility = '".$_POST['facility']."', roof_inspection_location = '".$_POST['location']."',  roof_inspection_datetime = '$programmed_date', roof_inspection_core_sample = '".$_POST['core-sample']."', roof_inspection_comment = '".$_POST['comment']."', roof_inspection_plan = '".$_POST['sketch-input']."' WHERE roof_inspection_id = '".$_POST['inspection-id']."';"; 
+        $query_editinspection = "UPDATE `roof_inspections` SET roof_inspection_facility = '".$_POST['facility']."', roof_inspection_location = '".$_POST['location']."',  roof_inspection_datetime = '$programmed_date', roof_inspection_core_sample = '".$_POST['core-sample']."', roof_inspection_comment = '".$_POST['comment']."', roof_inspection_plan = '".$_POST['sketch-input']."' WHERE roof_inspection_id = '".$_POST['inspection-id']."';";
 
         $wpdb->query( $query_editinspection );
     } else{
-        $query_editinspection = "UPDATE `roof_inspections` SET roof_inspection_facility = '".$_POST['facility']."', roof_inspection_location = '".$_POST['location']."',  roof_inspection_datetime = '$programmed_date', roof_inspection_core_sample = '".$_POST['core-sample']."', roof_inspection_comment = '".$_POST['comment']."' WHERE roof_inspection_id = '".$_POST['inspection-id']."';"; 
+        $query_editinspection = "UPDATE `roof_inspections` SET roof_inspection_facility = '".$_POST['facility']."', roof_inspection_location = '".$_POST['location']."',  roof_inspection_datetime = '$programmed_date', roof_inspection_core_sample = '".$_POST['core-sample']."', roof_inspection_comment = '".$_POST['comment']."' WHERE roof_inspection_id = '".$_POST['inspection-id']."';";
 
-        $wpdb->query( $query_editinspection ); 
+        $wpdb->query( $query_editinspection );
     }
-    
+
 
     $rid = $_POST['inspection-id'];
     $obja = $wpdb->get_results("select inspection_material_id from roof_materials where roof_inspection_id = $rid");
@@ -1567,7 +1600,7 @@ if(isset($_POST['edit-inspectionlist'])){
                     if($b == $a){
                         $an[$key1]=NULL;
                         $bn[$key2]=NULL;
-                    }   
+                    }
                 }
             }
         }
@@ -2612,7 +2645,7 @@ if(isset($_POST['edit-inspectionlist'])){
                         $check[$a] = 1;
                         if(($aproblem[$key1] == $bproblem[$key2]) && ($aobservation[$key1]==$bobservation[$key2]) && ($adate[$key1]==$bdate[$key2]))
                             $check[$a] = 0;
-                    }   
+                    }
                 }
             }
         }
