@@ -24,6 +24,7 @@ $pre_select = json_encode($pre_select);
             <img src="<?php echo bloginfo('template_url').'/'; ?>img/content/division-empleos.png" alt="divider" class="form-divider"><br>
             <text class="title">EDIT PROJECT</text>
             <div class="info-content">
+                <div class="alert alert-danger hidden" id="error"></div>
                 <div class="row no-margin">
                     <div class="col-sm-12">
                         <a href="<?php echo home_url().'/'; ?>/projects"><button type="button">Return to projects</button></a>
@@ -241,7 +242,54 @@ $pre_select = json_encode($pre_select);
                     $img_base64 = $canvas.toDataURL('image/jpeg');
                 $(this).nextAll('input').eq(0).val($img_base64);
             });
-            $(this)[0].submit();
+            var errors ="";
+            var name = document.getElementById("name").value;
+            var address = document.getElementById("address").value;
+            var amount = document.getElementById("amount").value;
+            var year = document.getElementById("year").value;
+            var area = document.getElementById("area").value;
+            var select = $("#newproject-assigned").val();
+
+            if($("#images").html()==''){
+                errors += "You must upload an image for the project<br>";
+            }
+            if( name == null || name.length == 0) {
+                errors += "The name is required<br>";
+            } else if(name.length > 80){
+                errors += "The maximum number of letters for the name is 80<br>";
+            }
+            if( address == null || address.length == 0) {
+                errors += "The address is required<br>";
+            } else if(address.length > 80){
+                errors += "The maximum number of letters for the address is 80<br>";
+            }
+            if( amount == null || amount.length == 0) {
+                errors += "The amount is required<br>";
+            } else if(!/^\d+$/.test(amount)){
+                errors += "Enter an amount in valid format<br>";
+            }
+            if( year == null || year.length == 0) {
+                errors += "The year is required<br>";
+            } else if(!/^\d{4}$/.test(year)){
+                errors += "You must enter a valid year (e.g. 2017)<br>";
+            }
+            if( area == null || area.length == 0) {
+                errors += "The area is required<br>";
+            } else if(!/^\d{1,11}$/.test(area)){
+                errors += "You must enter a valid area (e.g. 50000, max 11 digits)<br>";
+            }
+            if( select.length == 0){
+                errors += "You must choose at least one user in charge of the project<br>";
+            }
+            //redireccion
+            if(errors=="") {
+                $(this)[0].submit();
+            } else {
+                //colorear los campos mal ingresados
+                $("#error").removeClass('hidden').addClass('active').html("Whoops <br>"+errors);
+                $('html,body').animate({ scrollTop: 0 }, 'slow');
+                return false;
+            }
         });
     </script>
 <?php include('footer-projects.php'); ?>
