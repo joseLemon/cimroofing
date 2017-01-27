@@ -16,7 +16,7 @@ $report = $report[0];
             <img src="<?php echo bloginfo('template_url').'/'; ?>img/logo.png" alt="cim logo" class="logo"><br>
             <img src="<?php echo bloginfo('template_url').'/'; ?>img/content/division-empleos.png" alt="divider" class="form-divider"><br>
             <text class="title">
-                <?php echo $project[0]->project_name."fsafafafafaf" ?>
+                <?php echo $project[0]->project_name ?>
             </text><br>
             <div class="alert alert-danger hidden" id="error"></div>
             <div class="inside-content">
