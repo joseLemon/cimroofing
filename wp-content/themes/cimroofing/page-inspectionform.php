@@ -1,5 +1,14 @@
 <?php $page = 'inspectionform'; ?>
 <?php include('header-projects.php'); ?>
+<?php
+$user_id = get_current_user_id();
+
+if(get_user_meta($user_id, 'first_name',true) != null) {
+    $user_name = get_user_meta($user_id, 'first_name',true).' '.get_user_meta($user_id, 'last_name',true);
+} else {
+    $user_name = get_user_by('id', $user_id)->user_login;
+}
+?>
     <div id="reportform">
         <img src="<?php echo bloginfo('template_url').'/'; ?>img/logo.png" alt="cim logo" class="logo"><br>
         <img src="<?php echo bloginfo('template_url').'/'; ?>img/content/division-empleos.png" alt="divider" class="form-divider"><br>
@@ -165,7 +174,7 @@
                             </div>
                         </div>
                         <div class="signature-canvas" style="margin-left:10px">
-                            Inspected by: NAME OF EMPLOYEE HERE<br>
+                            Inspected by: <?php echo $user_name; ?><br>
                             Signature: <br>
                             <div class="canvas-area">
                                 <canvas id="signature"style="border: 1px solid black; display: block;" width="400" height="250"></canvas>

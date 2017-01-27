@@ -91,7 +91,7 @@
     <script type="text/javascript">
 
         window.onload = function() {
-            setTimeout("window.print();", 500);
+            //setTimeout("window.print();", 500);
         };
 
         (function() {
@@ -129,12 +129,11 @@ $report = $report[0];
 
 $user_id = $report->user_id;
 
-if(get_user_meta($user_name, 'first_name',true) != null) {
+if(get_user_meta($user_id, 'first_name',true) != null) {
 	$user_name = get_user_meta($user_id, 'first_name',true).' '.get_user_meta($user_id, 'last_name',true);
 } else {
 	$user_name =  get_user_by('id', $user_id)->user_login;
 }
-
 ?>
 <div class="pdf-page">
 	<table>
