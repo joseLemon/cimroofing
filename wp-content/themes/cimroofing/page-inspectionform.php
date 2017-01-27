@@ -681,7 +681,7 @@
         if($("#clearAccessYes").is(":checked") && $("#clearaccessposition").val() == null){
             errors += "You must select a Clear access position<br>";
         }
-        if($("#flatmembrane").is(":checked") && $("#clearaccessposition").val() == null){
+        if($("#flatmembrane").is(":checked") && $("#flatmembraneselect").val() == null){
             errors += "You must select a Flat/Membrane type<br>";
         }
         if($("#sloped").is(":checked") && $("#slopedselect").val() == null){
