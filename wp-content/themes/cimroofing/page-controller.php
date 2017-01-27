@@ -104,7 +104,6 @@ if(isset($_POST['tmp-folder'])) {
 
     for ($i = 0; $i < $total; $i++) {
         echo $i;
-        echo $_FILES["pictures"]["size"][$i];
         if ($_FILES["pictures"]["size"][$i] > 25000000) {
             echo "The image exceeds 25Mb.";
             continue;
@@ -138,6 +137,9 @@ if(isset($_POST['tmp-folder-unload'])) {
     if(isset($_POST['reports'])) {
         $TmpDirToDelete = dirname(__FILE__) . '\\file_uploads\\reports\\' . $tmpFolder . '\\';
     }
+
+    echo $tmpFolder;
+    echo $TmpDirToDelete;
 
     $files = glob($TmpDirToDelete.'/*'); // get all file names
 
@@ -1316,8 +1318,8 @@ if(isset($_POST['submit-inspectionlist'])) {
         } else {
             echo 'fail';
         }
-        $query_project = "INSERT INTO `project_pictures` (`report_id`, `project_picture_name`, `project_picture_description`) VALUES ('".$report_id."', '".$i."', '".$_POST[$key]."');";
-        $wpdb->query( $query_project );
+        $query_inspection = "INSERT INTO `picture_inspections` (`roof_inspection_id`, `picture_inspection_name`, `picture_inspection_description`) VALUES ('".$inspection_id."', '".$i."', '".$_POST[$key]."');";
+        $wpdb->query( $query_inspection );
 
         $i++;
     }
@@ -2680,6 +2682,48 @@ if(isset($_POST['edit-inspectionlist'])){
     $q_addnew .= ";";
     $wpdb->query($q_addnew);
 
+    print_r($_POST['img']);
+
+    $inspection_id = $_POST['inspection-id'];
+
+    if(!empty($_POST['img'])) {
+        $target_dir = dirname(__FILE__) . '\\file_uploads\\inspections\\' . $inspection_id . '\\';
+        if (!is_dir($target_dir) && !file_exists($target_dir)) {
+            mkdir($target_dir);
+        }
+
+        //  Delete files if they exist
+        $files = glob($target_dir.'/*'); // get all file names
+        foreach($files as $file){ // iterate files
+            if(is_file($file))
+                unlink($file); // delete file
+        }
+
+        //  PROCESO PARA SUBIR IMAGENES
+        $delete_images = "DELETE FROM `picture_inspections` WHERE roof_inspection_id = $inspection_id;";
+        $wpdb->query($delete_images);
+        $i = 1;
+        foreach ($_POST['img'] as $key => $img) {
+            list($type, $img) = explode(';', $img);
+            list(, $img) = explode(',', $img);
+            $data = base64_decode($img);
+
+            $path = $target_dir . $i . '.jpg';
+
+            if (file_put_contents($path, $data)) {
+                echo 'uploaded';
+            } else {
+                echo 'fail';
+            }
+
+            $query_inspection = "INSERT INTO `picture_inspections` (`roof_inspection_id`, `picture_inspection_name`, `picture_inspection_description`) VALUES ('".$inspection_id."', '".$i."', '".$_POST[$key]."');";
+            $wpdb->query( $query_inspection );
+
+            $i++;
+        }
+    }
+
+    wp_redirect(home_url().'/editinspectionform/?id='.$inspection_id);
 
 }
 

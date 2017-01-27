@@ -134,18 +134,20 @@ $report = $report[0];
                         <div class="image-thumbs">
                             <?php
                             $counter = 0;
-                            foreach($project_images as $image) {
-                                ?>
-                                <div class="col-sm-4">
-                                    <?php
-                                    echo '<img src="'.get_bloginfo('template_url').'/file_uploads/reports/'.$_GET['rid'].'/'.$image->project_picture_name.'.jpg" class="center-block">';
-                                    echo '<p>'.$image->project_picture_description.'</p>';
+                            if(!empty($project_images)) {
+                                foreach($project_images as $image) {
                                     ?>
-                                </div>
-                                <?php
-                                $counter++;
-                                if($counter%3 == 0){
-                                    echo '<div class="clearfix"></div>';
+                                    <div class="col-sm-4">
+                                        <?php
+                                        echo '<img src="'.get_bloginfo('template_url').'/file_uploads/reports/'.$_GET['rid'].'/'.$image->project_picture_name.'.jpg" class="center-block">';
+                                        echo '<p>'.$image->project_picture_description.'</p>';
+                                        ?>
+                                    </div>
+                                    <?php
+                                    $counter++;
+                                    if($counter%3 == 0){
+                                        echo '<div class="clearfix"></div>';
+                                    }
                                 }
                             }
                             ?>
@@ -217,8 +219,6 @@ $report = $report[0];
             </div>
         </div>
     </div>
-
-    <script src="<?php echo bloginfo('template_url').'/'; ?>/js/cropper.js"></script>
     <script>
         $(document).ready(function () {
             $('head').append('<meta http-equiv="cache-control" content="max-age=0" />' +

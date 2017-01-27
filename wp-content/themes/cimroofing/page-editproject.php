@@ -110,9 +110,15 @@ $pre_select = json_encode($pre_select);
             <input type="hidden" name="projects">
         </form>
     </div>
-
-    <script src="<?php echo bloginfo('template_url').'/'; ?>/js/cropper.js"></script>
     <script>
+        $(document).ready(function () {
+            $('head').append('<meta http-equiv="cache-control" content="max-age=0" />' +
+                '<meta http-equiv="cache-control" content="no-cache" />' +
+                '<meta http-equiv="expires" content="0" />' +
+                '<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />' +
+                '<meta http-equiv="pragma" content="no-cache" />');
+        });
+
         $pre_select = <?php print_r($pre_select); ?>;
         $('select').select2().val($pre_select).trigger('change');
 

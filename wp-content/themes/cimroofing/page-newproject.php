@@ -93,8 +93,6 @@
             <input type="hidden" name="projects">
         </form>
     </div>
-
-    <script src="<?php echo bloginfo('template_url').'/'; ?>/js/cropper.js"></script>
     <script>
         $('select').select2();
 

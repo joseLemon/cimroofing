@@ -3,6 +3,7 @@
 <?php
 $id = $_GET['id'];
 $client = $wpdb->get_results("select * from clients where client_id = $id");
+$inspection_images = $wpdb->get_results("select * from picture_inspections where roof_inspection_id = $id");
 $inspection = $wpdb->get_results("select * from roof_inspections where client_id = $id");
 $client = $client[0];
 $inspection = $inspection[0];
@@ -76,30 +77,30 @@ if(get_user_meta($client->user_id, 'first_name',true) != null) {
                     <div class="row no-margin">
                         <div class="col-sm-12">
                             <text class="content">Clear access  </text>
-							<?php
-							if($client->clear_access_id == NULL){
-								echo '<input type="radio" name="clear-access" value="no" checked><text class="content">No </text>
+                            <?php
+                            if($client->clear_access_id == NULL){
+                                echo '<input type="radio" name="clear-access" value="no" checked><text class="content">No </text>
                                  <input type="radio" name="clear-access" value="yes"><text class="content">Yes </text>
                                  <select name="clearaccessposition" id="clearaccessposition" disabled>
                                 <option value="" disabled selected>Select</option>';
-								$clearSelect = $wpdb->get_results("select clear_access_id, clear_access_name from clear_access");
-								foreach($clearSelect as $clear){
-									echo '<option value="'.$clear->clear_access_id.'">'.$clear->clear_access_name.'</option>';
-								}
-							}else{
-								echo '<input type="radio" name="clear-access" value="no"><text class="content">No </text>
+                                $clearSelect = $wpdb->get_results("select clear_access_id, clear_access_name from clear_access");
+                                foreach($clearSelect as $clear){
+                                    echo '<option value="'.$clear->clear_access_id.'">'.$clear->clear_access_name.'</option>';
+                                }
+                            }else{
+                                echo '<input type="radio" name="clear-access" value="no"><text class="content">No </text>
                                 <input type="radio" name="clear-access" value="yes" checked><text class="content">Yes </text>
                                  <select name="clearaccessposition" id="clearaccessposition" disabled>
                                 <option value="" disabled>Select</option>';
-								$clearSelect = $wpdb->get_results("select clear_access_id, clear_access_name from clear_access");
-								foreach($clearSelect as $clear){
-									if($client->clear_access_id != $clear->clear_access_id)
-										echo '<option value="'.$clear->clear_access_id.'">'.$clear->clear_access_name.'</option>';
-									else
-										echo '<option value="'.$clear->clear_access_id.'" selected>'.$clear->clear_access_name.'</option>';
-								}
-							}
-							?>
+                                $clearSelect = $wpdb->get_results("select clear_access_id, clear_access_name from clear_access");
+                                foreach($clearSelect as $clear){
+                                    if($client->clear_access_id != $clear->clear_access_id)
+                                        echo '<option value="'.$clear->clear_access_id.'">'.$clear->clear_access_name.'</option>';
+                                    else
+                                        echo '<option value="'.$clear->clear_access_id.'" selected>'.$clear->clear_access_name.'</option>';
+                                }
+                            }
+                            ?>
                             </select>
                             <script>
                                 $('input[   name=clear-access]').change(function() {
@@ -115,48 +116,48 @@ if(get_user_meta($client->user_id, 'first_name',true) != null) {
                     <div class="row no-margin">
                         <div class="col-sm-12 one-line">
                             <text class="content">Type of roof  </text><?php
-							if($client->type_roof_sloped_id == NULL){
-								echo '<input type="radio" name="type-of-roof" value="flatmembrane" checked><text class="content">Flat/Membrane </text>
+                            if($client->type_roof_sloped_id == NULL){
+                                echo '<input type="radio" name="type-of-roof" value="flatmembrane" checked><text class="content">Flat/Membrane </text>
                             <select name="flatmembrane-select" id="flatmembraneselect" disabled>
                             <option value="" disabled>Select</option>';
-								$flatMembrane = $wpdb->get_results("select type_roof_flat_id, type_roof_flat_name from type_roof_flat");
-								foreach($flatMembrane as $flat){
-									if($client->type_roof_flat_id != $flat->type_roof_flat_id)
-										echo '<option value="'.$flat->type_roof_flat_id.'">'.$flat->type_roof_flat_name.'</option>';
-									else
-										echo '<option value="'.$flat->type_roof_flat_id.'" selected>'.$flat->type_roof_flat_name.'</option>';
-								}
-								echo '</select>
+                                $flatMembrane = $wpdb->get_results("select type_roof_flat_id, type_roof_flat_name from type_roof_flat");
+                                foreach($flatMembrane as $flat){
+                                    if($client->type_roof_flat_id != $flat->type_roof_flat_id)
+                                        echo '<option value="'.$flat->type_roof_flat_id.'">'.$flat->type_roof_flat_name.'</option>';
+                                    else
+                                        echo '<option value="'.$flat->type_roof_flat_id.'" selected>'.$flat->type_roof_flat_name.'</option>';
+                                }
+                                echo '</select>
                             <input type="radio" name="type-of-roof" value="sloped"><text class="content">Sloped </text>
                             <select name="sloped-select" id="slopedselect" disabled>
                             <option value="" disabled selected>Select</option>';
-								$slopedSelect = $wpdb->get_results("select type_roof_sloped_id, type_roof_sloped_name from type_roof_sloped");
-								foreach($slopedSelect as $sloped){
-									echo '<option value="'.$sloped->type_roof_sloped_id.'">'.$sloped->type_roof_sloped_name.'</option>';
-								}
-								echo '</select>';
-							}else{
-								echo '<input type="radio" name="type-of-roof" value="flatmembrane"><text class="content">Flat/Membrane </text>
+                                $slopedSelect = $wpdb->get_results("select type_roof_sloped_id, type_roof_sloped_name from type_roof_sloped");
+                                foreach($slopedSelect as $sloped){
+                                    echo '<option value="'.$sloped->type_roof_sloped_id.'">'.$sloped->type_roof_sloped_name.'</option>';
+                                }
+                                echo '</select>';
+                            }else{
+                                echo '<input type="radio" name="type-of-roof" value="flatmembrane"><text class="content">Flat/Membrane </text>
                             <select name="flatmembrane-select" id="flatmembraneselect" disabled>
                             <option value="" disabled selected>Select</option>';
-								$flatMembrane = $wpdb->get_results("select type_roof_flat_id, type_roof_flat_name from type_roof_flat");
-								foreach($flatMembrane as $flat){
-									echo '<option value="'.$flat->type_roof_flat_id.'">'.$flat->type_roof_flat_name.'</option>';
-								}
-								echo '</select>
+                                $flatMembrane = $wpdb->get_results("select type_roof_flat_id, type_roof_flat_name from type_roof_flat");
+                                foreach($flatMembrane as $flat){
+                                    echo '<option value="'.$flat->type_roof_flat_id.'">'.$flat->type_roof_flat_name.'</option>';
+                                }
+                                echo '</select>
                             <input type="radio" name="type-of-roof" value="sloped" checked><text class="content">Sloped </text>
                         <select name="sloped-select" id="slopedselect" disabled>
                             <option value="" disabled>Select</option>';
-								$slopedSelect = $wpdb->get_results("select type_roof_sloped_id, type_roof_sloped_name from type_roof_sloped");
-								foreach($slopedSelect as $sloped){
-									if($client->type_roof_sloped_id != $sloped->type_roof_sloped_id)
-										echo '<option value="'.$sloped->type_roof_sloped_id.'">'.$sloped->type_roof_sloped_name.'</option>';
-									else
-										echo '<option value="'.$sloped->type_roof_sloped_id.'" selected>'.$sloped->type_roof_sloped_name.'</option>';
-								}
-								echo '</select>';
-							}
-							?>
+                                $slopedSelect = $wpdb->get_results("select type_roof_sloped_id, type_roof_sloped_name from type_roof_sloped");
+                                foreach($slopedSelect as $sloped){
+                                    if($client->type_roof_sloped_id != $sloped->type_roof_sloped_id)
+                                        echo '<option value="'.$sloped->type_roof_sloped_id.'">'.$sloped->type_roof_sloped_name.'</option>';
+                                    else
+                                        echo '<option value="'.$sloped->type_roof_sloped_id.'" selected>'.$sloped->type_roof_sloped_name.'</option>';
+                                }
+                                echo '</select>';
+                            }
+                            ?>
 
                             <script>
                                 $('input[name=type-of-roof]').change(function() {
@@ -255,29 +256,29 @@ if(get_user_meta($client->user_id, 'first_name',true) != null) {
                     <div id="materials-checklist">
                         <div class="title-section">INSPECTION MATERIALS CHECKLIST</div>
                         <ul class="checkbox-grid">
-							<?php
-							$rid = $inspection->roof_inspection_id;
-							$count = $wpdb->get_var("SELECT COUNT(*) FROM roof_materials WHERE roof_inspection_id= '$rid'");
-							$material = $wpdb->get_results("select inspection_material_id from roof_materials where roof_inspection_id = '$rid'");
-							$material_name = $wpdb->get_results("select inspection_material_name from inspection_materials");
-							for($i=1;$i<=19;$i++){
-								$found = false;
+                            <?php
+                            $rid = $inspection->roof_inspection_id;
+                            $count = $wpdb->get_var("SELECT COUNT(*) FROM roof_materials WHERE roof_inspection_id= '$rid'");
+                            $material = $wpdb->get_results("select inspection_material_id from roof_materials where roof_inspection_id = '$rid'");
+                            $material_name = $wpdb->get_results("select inspection_material_name from inspection_materials");
+                            for($i=1;$i<=19;$i++){
+                                $found = false;
 
 
-								for($n=0;$n<$count;$n++){
-									if($material[$n]->inspection_material_id == $i)
-										$found = true;
-								}
+                                for($n=0;$n<$count;$n++){
+                                    if($material[$n]->inspection_material_id == $i)
+                                        $found = true;
+                                }
 
-								if($found==true)
-									echo '<li><input type="checkbox" name="materials[]" value="',$i,'" checked /><text class="content">',$material_name[($i-1)]->inspection_material_name,' </text></li>';
-								else
-									echo '<li><input type="checkbox" name="materials[]" value="',$i,'" /><text class="content">',$material_name[($i-1)]->inspection_material_name,' </text></li>';
+                                if($found==true)
+                                    echo '<li><input type="checkbox" name="materials[]" value="',$i,'" checked /><text class="content">',$material_name[($i-1)]->inspection_material_name,' </text></li>';
+                                else
+                                    echo '<li><input type="checkbox" name="materials[]" value="',$i,'" /><text class="content">',$material_name[($i-1)]->inspection_material_name,' </text></li>';
 
 
-							}
+                            }
 
-							?>
+                            ?>
                         </ul>
                     </div>
                     <br>
@@ -293,32 +294,32 @@ if(get_user_meta($client->user_id, 'first_name',true) != null) {
                                 <col style="width: 30%">
                                 <col style="width: 30%">
                             </colgroup>
-							<?php
-							$checklist = $wpdb->get_results("SELECT * FROM roof_checklists WHERE roof_inspection_id='$rid'");
-							$count = $wpdb->get_var("SELECT COUNT(*) FROM roof_checklists WHERE roof_inspection_id= '$rid'");
+                            <?php
+                            $checklist = $wpdb->get_results("SELECT * FROM roof_checklists WHERE roof_inspection_id='$rid'");
+                            $count = $wpdb->get_var("SELECT COUNT(*) FROM roof_checklists WHERE roof_inspection_id= '$rid'");
 
-							$result = array_fill(1, 90, false);
+                            $result = array_fill(1, 90, false);
 
-							for($i=0;$i<$count;$i++){
-								for($n=1;$n<=90;$n++){
-									if($checklist[$i]->inspection_checklist_id == $n)
-										$result[$n] = true;
-								}
-							}
+                            for($i=0;$i<$count;$i++){
+                                for($n=1;$n<=90;$n++){
+                                    if($checklist[$i]->inspection_checklist_id == $n)
+                                        $result[$n] = true;
+                                }
+                            }
 
-							?>
+                            ?>
 
-							<?php
-							$counter = 1;
+                            <?php
+                            $counter = 1;
 
-							for($cat=1;$cat<=15;$cat++){
-								$count_per_cat = $wpdb->get_var("SELECT COUNT(*) FROM inspection_checklists WHERE inspection_checklist_category_id= '$cat'");
+                            for($cat=1;$cat<=15;$cat++){
+                                $count_per_cat = $wpdb->get_var("SELECT COUNT(*) FROM inspection_checklists WHERE inspection_checklist_category_id= '$cat'");
 
-								$category_name = $wpdb->get_results("SELECT inspection_checklist_category_name FROM inspection_checklist_categories");
+                                $category_name = $wpdb->get_results("SELECT inspection_checklist_category_name FROM inspection_checklist_categories");
 
-								$type_name = $wpdb->get_results("SELECT inspection_checklist_name FROM inspection_checklists WHERE inspection_checklist_category_id='$cat'");
-								if($cat == 1){
-									echo '<tr>
+                                $type_name = $wpdb->get_results("SELECT inspection_checklist_name FROM inspection_checklists WHERE inspection_checklist_category_id='$cat'");
+                                if($cat == 1){
+                                    echo '<tr>
                                     <th>',$category_name[($cat-1)]->inspection_checklist_category_name,'</th>
                                     <th>OK</th>
                                     <th>Minor problem</th>
@@ -326,39 +327,39 @@ if(get_user_meta($client->user_id, 'first_name',true) != null) {
                                     <th>Observation</th>
                                     <th>Date of repair</th>
                                     </tr>';
-								}else{
-									echo '<tr><th>',$category_name[($cat-1)]->inspection_checklist_category_name,'</th></tr>';
-								}
+                                }else{
+                                    echo '<tr><th>',$category_name[($cat-1)]->inspection_checklist_category_name,'</th></tr>';
+                                }
 
-								for($type=0;$type<$count_per_cat;$type++){
-									echo'<tr>
+                                for($type=0;$type<$count_per_cat;$type++){
+                                    echo'<tr>
                                 <td>',$type_name[$type]->inspection_checklist_name,'</td>';
 
-									if($result[$counter] == false){
-										echo '<td><input type="radio" name="status-',$counter,'" value="0" checked></td>
+                                    if($result[$counter] == false){
+                                        echo '<td><input type="radio" name="status-',$counter,'" value="0" checked></td>
                                 <td><input type="radio" name="status-',$counter,'" value="1"></td>
                                 <td><input type="radio" name="status-',$counter,'" value="2"></td>
                                 <td><input type="text" name="observation-',$counter,'" id="observation',$counter,'" style="width: 100%;" disabled></td>
                                 <td><input type="date" name="daterepair-',$counter,'" id="daterepair',$counter,'" style="width: 100%;" disabled></td></tr>';
-									}else{
-										$r = $wpdb->get_results("SELECT * FROM roof_checklists WHERE inspection_checklist_id= '$counter' AND roof_inspection_id = '$rid'");
-										echo '<td><input type="radio" name="status-',$counter,'" value="0"></td>';
-										if($r[0]->roof_checklist_problem == $counter){
-											echo '<td><input type="radio" name="status-',$counter,'" value="1" checked></td>
+                                    }else{
+                                        $r = $wpdb->get_results("SELECT * FROM roof_checklists WHERE inspection_checklist_id= '$counter' AND roof_inspection_id = '$rid'");
+                                        echo '<td><input type="radio" name="status-',$counter,'" value="0"></td>';
+                                        if($r[0]->roof_checklist_problem == $counter){
+                                            echo '<td><input type="radio" name="status-',$counter,'" value="1" checked></td>
                                         <td><input type="radio" name="status-',$counter,'" value="2"></td>';
-										} else{
-											echo '<td><input type="radio" name="status-',$counter,'" value="1"></td>
+                                        } else{
+                                            echo '<td><input type="radio" name="status-',$counter,'" value="1"></td>
                                         <td><input type="radio" name="status-',$counter,'" value="2" checked></td>';
-										}
-										echo'<td><input type="text" name="observation-',$counter,'" id="observation',$counter,'" value="',$r[0]->roof_checklist_observation,'"></td>
+                                        }
+                                        echo'<td><input type="text" name="observation-',$counter,'" id="observation',$counter,'" value="',$r[0]->roof_checklist_observation,'"></td>
                                 <td><input type="date" name="daterepair-',$counter,'" id="daterepair',$counter,'" value="',$r[0]->roof_checklist_date_of_repair,'"></td></tr>';
-									}
-									$counter++;
+                                    }
+                                    $counter++;
 
-								}
-							}
+                                }
+                            }
 
-							?>
+                            ?>
                         </table>
                         <script>
                             $('#checklist-table input[type=radio]').change(function() {
@@ -385,12 +386,12 @@ if(get_user_meta($client->user_id, 'first_name',true) != null) {
                         <p><text class="title-centered">- USE THIS AREA ONLY IF DEFICIENCIES ARE OBSERVED -</text><br>Sketch roof plan. Include north arrow, the location of the items listed below, approximate dimensions of building, roofing materials, and other relevant items located on the roof. Show changes in roof elevations in a separate sketch.</p>
                     </div>
                     <div class="drawingarea">
-						<?php
-						if($inspection->roof_inspection_plan != NULL)
-							echo '<img src=',$inspection->roof_inspection_plan,' style="display:block;margin: 0 auto;" /><br>';
-						else
-							echo '<p style="text-align:center;font-style:italic">NO SKETCH YET</text></p>'
-						?>
+                        <?php
+                        if($inspection->roof_inspection_plan != NULL)
+                            echo '<img src=',$inspection->roof_inspection_plan,' style="display:block;margin: 0 auto;" /><br>';
+                        else
+                            echo '<p style="text-align:center;font-style:italic">NO SKETCH YET</text></p>'
+                        ?>
 
                         Add new plan: <br>
                         <canvas id="sketch" width="900" height="400" style="border: 1px solid black;display:block;margin: 0 auto;"></canvas>
@@ -654,17 +655,80 @@ if(get_user_meta($client->user_id, 'first_name',true) != null) {
                         <li>Inspect ducts, vents, and pipe caps for possible entry points</li>
                         <li>Repair suspect areas with high quality urethane caulk or 100% silicon - when appropriate</li>
                     </ul>
+                    <div class="title-section" style="width:500px; margin-top:25px">PHOTO DOCUMENTATION</div>
+                    <div class="image-thumbs row no-margin">
+                        <?php
+                        $counter = 0;
+                        if(!empty($inspection_images)) {
+                            foreach($inspection_images as $image) {
+                                ?>
+                                <div class="col-sm-4">
+                                    <?php
+                                    echo '<img src="'.get_bloginfo('template_url').'/file_uploads/inspections/'.$_GET['id'].'/'.$image->picture_inspection_name.'.jpg" class="center-block">';
+                                    echo '<p>'.$image->picture_inspection_description.'</p>';
+                                    ?>
+                                </div>
+                                <?php
+                                $counter++;
+                                if($counter%3 == 0){
+                                    echo '<div class="clearfix"></div>';
+                                }
+                            }
+                        }
+                        ?>
+                    </div>
+                    <div class="upload-section">
+                        <a href="#select-warning" class="btn btn-default" data-toggle="modal" data-target="#select-warning">Select images</a>
+                    </div>
+                    <div class="uploaded-images row no-margin" id="images"></div>
                     <input type="hidden" name="edit-inspectionlist" id="inspectionlist-button">
                     <input type="submit" value="Submit Checklist" style="display:block;margin:0 auto">
-
                 </form>
             </div>
         </div>
     </div>
-    </body>
-    <link rel="stylesheet" href="<?php echo bloginfo('template_url').'/'; ?>/css/jquery.periodpicker.min.css">
-    <link rel="stylesheet" href="<?php echo bloginfo('template_url').'/'; ?>/css/jquery.timepicker.min.css">
-    <script src="<?php echo bloginfo('template_url').'/'; ?>/js/jquery.periodpicker.full.min.js"></script>
+
+    <div class="modal fade fade-scale" role="dialog" id="select-warning">
+        <div class="modal-dialog">
+            <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+            <div class="modal-content">
+                <div class="modal-login-form">
+                    <div class="modal-header">
+                        <h3>IMPORTANT</h3>
+                    </div>
+                    <div class="modal-body">
+                        <p class="text">
+                            Selecting new images will replace the current ones attached to this report, those which
+                            will be lost should you choose to continue.
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <a class="btn btn-success" href="#" onclick="document.getElementById('pictures').click(); return false;">OK</a>
+                        <a href="#" type="button" class="btn btn-danger" data-dismiss="modal">Cancel</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="hidden">
+        <form action="<?php echo home_url().'/'; ?>controller" method="POST" id="upload-form" enctype="multipart/form-data">
+            <input class="hidden" type="file" id="pictures" name="pictures[]" value="Select file" multiple>
+            <a href="#" class="btn btn-default" onclick="document.getElementById('pictures').click(); return false;" />Select image</a>
+            <!-- HERE DETECT THE UPLOAD FOR PROJECT -->
+            <input type="file" id="fileID" style="visibility: hidden;" />
+            <input type="hidden" id="tmp-folder" name="tmp-folder">
+            <input type="hidden" name="inspections">
+        </form>
+    </div>
+
+    <div class="hidden">
+        <form action="<?php echo home_url().'/'; ?>controller" method="POST" id="unload">
+            <input type="hidden" name="tmp-folder-unload" id="tmp-folder-unload">
+            <input type="hidden" name="inspections">
+        </form>
+    </div>
+
     <script>
         $('.datetimepicker').periodpicker({
             lang: 'en', // use english language
@@ -686,8 +750,138 @@ if(get_user_meta($client->user_id, 'first_name',true) != null) {
         });
 
     </script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script>
+        $(document).ready(function () {
+            $('head').append('<meta http-equiv="cache-control" content="max-age=0" />' +
+                '<meta http-equiv="cache-control" content="no-cache" />' +
+                '<meta http-equiv="expires" content="0" />' +
+                '<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />' +
+                '<meta http-equiv="pragma" content="no-cache" />');
+        });
+
+        var home = '<?php echo bloginfo('template_url');?>',
+            tmpFolder = makeid(),
+            imgDir = home+'/file_uploads/inspections/'+tmpFolder,
+            fileExt1 = '.png',
+            fileExt2 = '.jpg',
+            fileExt3 = '.jpeg',
+            request = '';
+
+        $('#tmp-folder').val(tmpFolder);
+        $('#tmp-folder-delete').val(tmpFolder);
+        $('#tmp-folder-unload').val(tmpFolder);
+
+        function makeid() {
+            var text = "";
+            var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+            for( var i=0; i < 5; i++ )
+                text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+            return text;
+        }
+
+        var homeUrl = 'http://localhost/testpictures/';
+        // REPLACE FOR <?php //echo home_url(); ?>
+
+        $('#pictures').change(function () {
+            $('#upload-form').submit();
+            $('#select-warning').modal('hide');
+        });
+
+        $('#upload-form').submit(function(e) {
+            e.preventDefault();
+
+            console.log('enter');
+
+            // Abort any pending request
+            if (request) {
+                request.abort();
+            }
+
+            var $form = $(this),
+                $inputs = $form.find('input'),
+                $data = new FormData($(this)[0]);
+
+            $inputs.prop('disabled', true);
+            $('.loader-container').addClass('active');
+
+            request = $.ajax({
+                url: '<?php echo home_url();?>/controller',
+                type: 'post',
+                xhr: function() {
+                    var myXhr = $.ajaxSettings.xhr();
+                    return myXhr;
+                },
+                success: function (data) {
+                    //alert("Data Uploaded: "+data);
+                },
+                data: $data,
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+
+            request.done(function (response, textStatus, jqXHR) {
+                console.log('Images saved successfully');
+                $.ajax({
+                    url: imgDir,
+                    success: function(data) {
+                        $('#upload-modal').modal('hide');
+                        $('.uploaded-images').empty();
+                        var cont = 0;
+                        $('.uploaded-images').append('New images <div class="clearfix"></div>');
+                        $(data).find('a[href$="'+fileExt1+'"], a[href$="'+fileExt2+'"], a[href$="'+fileExt3+'"]').each(function () {
+                            var $imgSrc = imgDir+'/'+$(this).attr('href');
+                            $imgSrc = $imgSrc.replace('./', homeUrl);
+                            $('.uploaded-images').append("<div class='col-sm-4'><div class='cropper-height'><img src='" + $imgSrc + "' class='img-responsive'><input type='hidden' name='img[]'></div><input type='text' placeholder='Description of the image' class='img-desc' name='"+cont+"'></div>");
+                            cont++;
+                        });
+
+                        $('.uploaded-images .col-sm-4 img').cropper({
+                            aspectRatio: 4 / 3,
+                            autoCrop: true,
+                        });
+                        $data = new FormData($('#unload')[0]);
+                        $.ajax({
+                            url: '<?php echo home_url();?>/controller',
+                            type: 'post',
+                            xhr: function() {
+                                var myXhr = $.ajaxSettings.xhr();
+                                return myXhr;
+                            },
+                            success: function (data) {
+                                console.log("Data unloaded");
+                            },
+                            data: $data,
+                            cache: false,
+                            contentType: false,
+                            processData: false
+                        });
+                    }
+                });
+            });
+
+            request.fail(function (jqXHR, textStatus, errorThrown) {
+                console.error(
+                    'The following error has occurred: ' +
+                    textStatus, errorThrown
+                );
+            });
+
+            setTimeout(function() {
+                request.always(function () {
+                    // Reenable the inputs
+                    $inputs.prop("disabled", false);
+                    $('.loader-container').removeClass('active');
+                });
+            },500);
+        });
+
+        $('#selectimgs').click(function(e){
+            e.preventDefault();
+        });
+
         //  INITIALIZE SIGNATURE PAD
         var signaturePad = '';
 
@@ -733,6 +927,13 @@ if(get_user_meta($client->user_id, 'first_name',true) != null) {
         //  SET SIGNATURE VALUE TO INPUT
         $('#editinspection-form').submit(function(e) {
             e.preventDefault();
+
+            $('.uploaded-images .col-sm-4 > .cropper-height > img').each(function() {
+                var $canvas = $(this).cropper('getCroppedCanvas'),
+                    $img_base64 = $canvas.toDataURL('image/jpeg');
+                $(this).nextAll('input').eq(0).val($img_base64);
+            });
+
             if(signaturePad.isEmpty()){
             }else{
                 var $saveSignature = signaturePad.toDataURL(); // save image as PNG

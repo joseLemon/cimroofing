@@ -595,7 +595,6 @@
             <input type="hidden" name="inspections">
         </form>
     </div>
-    <script src="<?php echo bloginfo('template_url').'/'; ?>/js/cropper.js"></script>
     <script>
         $('.datetimepicker').periodpicker({
             lang: 'en', // use english language

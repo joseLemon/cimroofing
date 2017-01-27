@@ -158,8 +158,6 @@ $project = $wpdb->get_results("select * from projects where project_id = $id");
             <input type="hidden" name="reports">
         </form>
     </div>
-
-    <script src="<?php echo bloginfo('template_url').'/'; ?>/js/cropper.js"></script>
     <script>
         var home = '<?php echo bloginfo('template_url');?>',
             tmpFolder = makeid(),

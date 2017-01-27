@@ -30,6 +30,22 @@
         .table-info td {
             border: 0;
         }
+        .pdf-page .img-table tr {
+            border: 0;
+        }
+
+        .pdf-page .img-table td {
+            padding: 5px;
+        }
+
+        .pdf-page .img-table img {
+            padding: 10px 0;
+            width: 100%;
+        }
+
+        .pdf-page .img-table p {
+            margin: 0;
+        }
     </style>
     <script type="text/javascript">
 
@@ -650,13 +666,53 @@ if(get_user_meta($client->user_id, 'first_name',true) != null) {
                     <li>Repair suspect areas with high quality urethane caulk or 100% silicon - when appropriate</li>
                 </ul>
             </div>
+            <?php
+            $counter = 0;
+
+            $project_images = $wpdb->get_results("select * from picture_inspections where roof_inspection_id = $id");
+            $arraySize = count($project_images);
+
+            foreach($project_images as $image) {
+                if($counter == 0 || $counter%6 == 0) {
+                    echo '<div class="pdf-page">
+				<table class="img-table">
+					<colgroup>
+						<col style="width: 50%;">
+						<col style="width: 50%;">
+					</colgroup>
+					<thead>
+					<tr>
+						<th></th>
+						<th></th>
+					</tr>
+					</thead>
+					<tbody>';
+                }
+                if($counter == 0 || $counter%2 == 0) {
+                    echo '<tr>';
+                }
+                ?>
+                <td>
+                    <?php
+                    echo '<img src="'.get_bloginfo('template_url').'/file_uploads/inspections/'.$_GET['id'].'/'.$image->picture_inspection_name.'.jpg" class="center-block">';
+                    echo '<p>'.$image->picture_inspection_description.'</p>';
+                    ?>
+                </td>
+                <?php
+                $counter++;
+                if($counter%2 == 0 || $counter == $arraySize) {
+                    echo '</tr>';
+                }
+                if($counter%6 == 0 || $counter == $arraySize) {
+                    echo '</tbody>
+			</table>
+		</div>';
+                }
+            }
+            ?>
         </div>
     </div>
-    </div>
-    </body>
-    <link rel="stylesheet" href="<?php echo bloginfo('template_url').'/'; ?>/css/jquery.periodpicker.min.css">
-    <link rel="stylesheet" href="<?php echo bloginfo('template_url').'/'; ?>/css/jquery.timepicker.min.css">
-    <script src="<?php echo bloginfo('template_url').'/'; ?>/js/jquery.periodpicker.full.min.js"></script>
+
     <script>
         $('.datetimepicker').periodpicker({
             lang: 'en', // use english language
@@ -678,5 +734,4 @@ if(get_user_meta($client->user_id, 'first_name',true) != null) {
         });
 
     </script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <?php include('footer-projects.php'); ?>

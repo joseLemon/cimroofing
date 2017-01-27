@@ -17,6 +17,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
     <script src="<?php echo bloginfo('template_url').'/'; ?>js/numeral.min.js"></script>
     <script src="<?php echo bloginfo('template_url').'/'; ?>js/signature_pad.js"></script>
+    <script src="<?php echo bloginfo('template_url').'/'; ?>/js/cropper.js"></script>
 </head>
 <body>
 <nav class="app-nav">
