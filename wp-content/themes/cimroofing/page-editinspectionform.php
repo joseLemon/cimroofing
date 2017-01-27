@@ -768,12 +768,12 @@ if(get_user_meta($client->user_id, 'first_name',true) != null) {
             }
             if( heightAtRidge == null || heightAtRidge.length == 0) {
                 errors += "The Height at ridge is required<br>";
-            } else if(!/^(0|[1-9]\d*)?(\.\d+)?(?<=\d)$/.test(heightAtRidge)){
+            } else if(!/^(0|[1-9]\d*)(\.\d+)?$/.test(heightAtRidge)){
                 errors += "Enter a valid number for Height at ridge installed to date (e.g. 5.10)<br>";
             }
             if( heightAtEave == null || heightAtEave.length == 0) {
                 errors += "The Height at eave is required<br>";
-            } else if(!/^(0|[1-9]\d*)?(\.\d+)?(?<=\d)$/.test(heightAtEave)){
+            } else if(!/^(0|[1-9]\d*)(\.\d+)?$/.test(heightAtEave)){
                 errors += "Enter a valid number for Height at eave installed to date (e.g. 5.10)<br>";
             }
             if($("#clearAccessYes").is(":checked") && $("#clearaccessposition").val() == null){
@@ -790,7 +790,7 @@ if(get_user_meta($client->user_id, 'first_name',true) != null) {
             }
             if( SizeOfRoof == null || SizeOfRoof.length == 0) {
                 errors += "The Size of roof is required<br>";
-            } else if(!/^(0|[1-9]\d*)?(\.\d+)?(?<=\d)$/.test(SizeOfRoof)){
+            } else if(!/^(0|[1-9]\d*)(\.\d+)?$/.test(SizeOfRoof)){
                 errors += "Enter a valid number for Size of roof installed to date (e.g. 5.10)<br>";
             }
             if( manufacturer == null || manufacturer.length == 0) {
