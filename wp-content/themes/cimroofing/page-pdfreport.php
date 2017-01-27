@@ -91,7 +91,7 @@
     <script type="text/javascript">
 
         window.onload = function() {
-            //setTimeout("window.print();", 500);
+            setTimeout("window.print();", 500);
         };
 
         (function() {
