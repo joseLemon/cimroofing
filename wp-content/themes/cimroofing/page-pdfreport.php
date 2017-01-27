@@ -1,4 +1,3 @@
-<?php $page = 'editreport'; ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -68,8 +67,12 @@
         }
 
 		.pdf-page .img-table img {
-			padding: 30px 0;
+			padding: 10px 0;
 			width: 100%;
+		}
+
+		.pdf-page .img-table p {
+			margin: 0;
 		}
 
 		.pdf-page .text-divider {
@@ -251,14 +254,13 @@ if(get_user_meta($user_name, 'first_name',true) != null) {
 	</div>
 </div>
 
-
 <?php
-$directory = dirname(__FILE__) . '\\file_uploads\\reports\\' . $_GET['rid'] . '\\';
-$images = glob($directory.'*.jpg');
-$arraySize = count($images);
 $counter = 0;
 
-foreach($images as $image) {
+$project_images = $wpdb->get_results("select * from project_pictures where report_id = $rid");
+$arraySize = count($project_images);
+
+foreach($project_images as $image) {
 	if($counter == 0 || $counter%6 == 0) {
 		echo '<div class="pdf-page">
 				<table class="img-table">
@@ -280,7 +282,8 @@ foreach($images as $image) {
 	?>
 	<td>
 		<?php
-		echo '<img src="'.get_bloginfo('template_url').'/file_uploads/reports/'.$_GET['id'].'/'.basename($image).'" class="center-block">';
+		echo '<img src="'.get_bloginfo('template_url').'/file_uploads/reports/'.$_GET['rid'].'/'.$image->project_picture_name.'.jpg" class="center-block">';
+        echo '<p>'.$image->project_picture_description.'</p>';
 		?>
 	</td>
 	<?php

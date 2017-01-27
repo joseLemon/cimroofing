@@ -133,8 +133,6 @@ $report = $report[0];
                         <div class="image-tumbnails">Image thumbnails</div><br>
                         <div class="image-thumbs">
                             <?php
-                            $directory = dirname(__FILE__) . '\\file_uploads\\reports\\' . $_GET['rid'] . '\\';
-                            $images = glob($directory.'*.jpg');
                             $counter = 0;
                             foreach($project_images as $image) {
                                 ?>
