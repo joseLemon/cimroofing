@@ -21,7 +21,7 @@ $report = $report[0];
             <div class="inside-content">
                 <p class="content">Contractor work log: Please submit the following log at the specified frequency identified by Roof Management during the preconstruction meeting. The log should provide an accurate account of the work items completed, progress to completion, issues encountered and photo representation of various stages of work during the reporting period.</p>
 
-                <form method="POST" action="<?php echo home_url().'/'; ?>controller">
+                <form method="POST" action="<?php echo home_url().'/'; ?>controller" ID="save">
                     <div class="project-info">
                         <img src="<?php echo bloginfo('template_url').'/'; ?>file_uploads/projects/<?php echo $_GET['id']; ?>/project_image.jpg" alt="imagen proyecto" class="project-img">
                         <div class="information">
@@ -158,12 +158,22 @@ $report = $report[0];
                         <text style="font-weight:700;font-size:19px">SUBMIT LOG</text><br>
                         Step 6: Provide the name of the submitter and click the button to submit the log.
                         <div class="signature">
-                            <text class="submitted-by">Submitted By: NAME</text><!--nombre de usuario-->
+                            <text class="submitted-by">
+                                Submitted By:
+                                <?php
+                                if(get_user_meta($report->user_id, 'first_name',true) != null) {
+                                    echo get_user_meta($report->user_id, 'first_name',true).' '.get_user_meta($report->user_id, 'last_name',true);
+                                } else {
+                                    echo get_user_by('id',$report->user_id)->user_login;
+                                }
+                                ?>
+                            </text><br>
                             <input type="hidden" name="report-id" value="<?php echo $report->report_id; ?>">
                             <input type="hidden" name="project-id" value="<?php echo $report->project_id; ?>">
-                            <input type="submit" value="Submit" name="edit-report" id="editreport-button">
+                            <input type="hidden" name="edit-report">
+                            <input type="submit" value="Submit" id="editreport-button">
                         </div>
-                    </div><br>
+                    </div>
                 </form>
             </div>
         </div>
