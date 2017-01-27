@@ -692,7 +692,7 @@
         }
         if( SizeOfRoof == null || SizeOfRoof.length == 0) {
             errors += "The Size of roof is required<br>";
-        } else if(!/^(0|[1-9]\d*)?(\.\d+)?(?<=\d)$/.test(SizeOfRoof)){
+        } else if(!/^(0|[1-9]\d*)(\.\d+)?$/.test(SizeOfRoof)){
             errors += "Enter a valid number for Size of roof installed to date (e.g. 5.10)<br>";
         }
         if( manufacturer == null || manufacturer.length == 0) {
