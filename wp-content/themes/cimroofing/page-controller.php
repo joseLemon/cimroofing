@@ -1288,6 +1288,8 @@ if(isset($_POST['submit-inspectionlist'])) {
 
     $query_checklists .= ";";
     $wpdb->query( $query_checklists );
+
+    wp_redirect(home_url().'/inspectionhistory');
 }
 
 if(isset($_POST['submit-newproject'])) {
