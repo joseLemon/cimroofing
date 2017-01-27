@@ -1431,6 +1431,13 @@ if(isset($_POST['edit-report'])){
             mkdir($target_dir);
         }
 
+        //  Delete files if they exist
+        $files = glob($target_dir.'/*'); // get all file names
+        foreach($files as $file){ // iterate files
+            if(is_file($file))
+                unlink($file); // delete file
+        }
+
         //  PROCESO PARA SUBIR IMAGENES
         $delete_images = "DELETE FROM `project_pictures` WHERE report_id = $report_id ;";
         $wpdb->query($delete_images);

@@ -18,11 +18,10 @@ $report = $report[0];
             <text class="title">
                 <?php echo $project[0]->project_name ?>
             </text><br>
-            <div class="alert alert-danger hidden" id="error"></div>
             <div class="inside-content">
                 <p class="content">Contractor work log: Please submit the following log at the specified frequency identified by Roof Management during the preconstruction meeting. The log should provide an accurate account of the work items completed, progress to completion, issues encountered and photo representation of various stages of work during the reporting period.</p>
 
-                <form method="POST" action="<?php echo home_url().'/'; ?>controller" id="save">
+                <form method="POST" action="<?php echo home_url().'/'; ?>controller" ID="save">
                     <div class="project-info">
                         <img src="<?php echo bloginfo('template_url').'/'; ?>file_uploads/projects/<?php echo $_GET['id']; ?>/project_image.jpg" alt="imagen proyecto" class="project-img">
                         <div class="information">
@@ -159,12 +158,22 @@ $report = $report[0];
                         <text style="font-weight:700;font-size:19px">SUBMIT LOG</text><br>
                         Step 6: Provide the name of the submitter and click the button to submit the log.
                         <div class="signature">
-                            <text class="submitted-by">Submitted By: NAME</text><!--nombre de usuario-->
+                            <text class="submitted-by">
+                                Submitted By:
+                                <?php
+                                if(get_user_meta($report->user_id, 'first_name',true) != null) {
+                                    echo get_user_meta($report->user_id, 'first_name',true).' '.get_user_meta($report->user_id, 'last_name',true);
+                                } else {
+                                    echo get_user_by('id',$report->user_id)->user_login;
+                                }
+                                ?>
+                            </text><br>
                             <input type="hidden" name="report-id" value="<?php echo $report->report_id; ?>">
                             <input type="hidden" name="project-id" value="<?php echo $report->project_id; ?>">
-                            <input type="submit" value="Submit" name="edit-report" id="editreport-button">
+                            <input type="hidden" name="edit-report">
+                            <input type="submit" value="Submit" id="editreport-button">
                         </div>
-                    </div><br>
+                    </div>
                 </form>
             </div>
         </div>
@@ -343,57 +352,7 @@ $report = $report[0];
                     $img_base64 = $canvas.toDataURL('image/jpeg');
                 $(this).nextAll('input').eq(0).val($img_base64);
             });
-
-            var errors ="";
-            var start = $("input[name=start-date]").val();
-            var end = $("input[name=end-date]").val();
-            //var workItems = $('#workitems:checked').length;
-            var squareFeetToDate = $("#square-feet-todate").val();
-            var percentageCompleted = $("#percentagecompleted").val();
-            var targetdate = $("#targetdate").val();
-            var detailsFieldNotes = $("#details-field-notes").val();
-
-            if( start == null || start.length == 0) {
-                errors += "The Start Date is required<br>";
-            }
-            if( start == null || start.length == 0) {
-                errors += "The End Date is required<br>";
-            }
-            /*if( workItems == 0) {
-             errors += "You must complete at least one work item<br>";
-             }*/
-            if( squareFeetToDate == null || squareFeetToDate.length == 0) {
-                errors += "The Square feet installed to date is required<br>";
-            } else if(!/^\d+$/.test(squareFeetToDate)){
-                errors += "Enter a valid number for Square feet installed to date (only whole numbers)<br>";
-            }
-            if( percentageCompleted == null || percentageCompleted.length == 0) {
-                errors += "The Percentage completed is required<br>";
-            } else if(!/^\d{1,4}$/.test(percentageCompleted)){
-                errors += "Enter a valid percentage of completion (only whole numbers)<br>";
-            } else if (percentageCompleted > 100) {
-                errors += "You can not select a percentage of completion greater than 100<br>";
-            }
-            if( targetdate == null || targetdate.length == 0) {
-                errors += "The Target completion date is required<br>";
-            }
-            if( detailsFieldNotes == null || detailsFieldNotes.length == 0) {
-                errors += "The field notes are required<br>";
-            } else if(detailsFieldNotes.length > 512){
-                errors += "The maximum number of letters for the field notes is 521<br>";
-            }
-            if($("#images").html()==''){
-                errors += "You must upload an image for the project<br>";
-            }
-            //redireccion
-            if(errors=="") {
-                $(this)[0].submit();
-            } else {
-                //colorear los campos mal ingresados
-                $("#error").removeClass('hidden').addClass('active').html("Whoops <br>"+errors);
-                $('html,body').animate({ scrollTop: 0 }, 'slow');
-                return false;
-            }
+            $(this)[0].submit();
         });
     </script>
 <?php include('footer-projects.php'); ?>

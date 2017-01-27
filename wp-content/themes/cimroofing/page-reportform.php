@@ -132,7 +132,7 @@ $project = $wpdb->get_results("select * from projects where project_id = $id");
                         <text style="font-weight:700;font-size:19px">SUBMIT LOG</text><br>
                         Step 6: Provide the name of the submitter and click the button to submit the log.
                         <div class="signature">
-                            <text class="submitted-by">Submitted By: NAME</text><!--nombre de usuario-->
+                            <!--<text class="submitted-by">Submitted By: NAME</text><!--nombre de usuario-->
                             <input type="hidden" name="submit-project">
                             <input type="submit" value="Submit Project Update" id="submitproject-button">
                         </div>
@@ -317,7 +317,7 @@ $project = $wpdb->get_results("select * from projects where project_id = $id");
             }
             if( percentageCompleted == null || percentageCompleted.length == 0) {
                 errors += "The Percentage completed is required<br>";
-            } else if(!/^\d{1,4}$/.test(percentageCompleted)){
+            } else if(!/^\d{4}$/.test(percentageCompleted)){
                 errors += "Enter a valid percentage of completion (only whole numbers)<br>";
             } else if (percentageCompleted > 100) {
                 errors += "You can not select a percentage of completion greater than 100<br>";
