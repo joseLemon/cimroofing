@@ -25,43 +25,43 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <?php if($page== 'index') { ?>
-                        <li class="active"><a href="index.php">INICIO <span class="sr-only">(current)</span></a></li>
+                        <li class="active"><a href="index.php">HOME <span class="sr-only">(current)</span></a></li>
                         <?php } else { ?>
-                        <li><a href="index">INICIO <span class="sr-only">(current)</span></a></li>
+                        <li><a href="index">HOME <span class="sr-only">(current)</span></a></li>
                         <?php } ?>
                         <?php if($page == 'nosotros')  { ?>
                         <li class="active open" class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">NOSOTROS <span></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">ABOUT US <span></span></a>
                             <ul class="dropdown-menu">
                                 <div class="vertical-align links-container dropdown-font">
-                                    <li><a href="#section-nosotros" class="active">COMPAÑÍA</a></li>
-                                    <li><a href="#section-fabricantes">FABRICANTES</a></li>
-                                    <li><a href="#section-responsabilidad">RESPONSABILIDAD</a></li>
-                                    <li><a href="#section-certificaciones">CERTIFICACIONES</a></li>
-                                    <li><a href="#section-empleos">EMPLEOS</a></li>
+                                    <li><a href="#section-nosotros" class="active">COMPANY</a></li>
+                                    <li><a href="#section-fabricantes">MANUFACTURERS</a></li>
+                                    <li><a href="#section-responsabilidad">SOCIAL RESPONSABILITY</a></li>
+                                    <li><a href="#section-certificaciones">CERTIFICATIONS</a></li>
+                                    <li><a href="#section-empleos">EMPLOYMENT</a></li>
                                 </div>
                             </ul>
                         </li>
                         <?php } else {  ?>
-                        <li><a href="nosotros">NOSOTROS</a></li>
+                        <li><a href="nosotros">ABOUT US</a></li>
                         <?php } ?>
                         <?php if($page == 'servicios')  { ?>
                         <li class="active open" class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">SERVICIOS <span></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">SERVICES <span></span></a>
                             <ul class="dropdown-menu">
                                 <div class="vertical-align links-container dropdown-font">
-                                    <li><a href="#section-impermeabilizacion" class="active">IMPERMEABILIZACIÓN</a></li>
-                                    <li><a href="#section-renovacion">RENOVACIÓN</a></li>
-                                    <li><a href="#section-reemplazo">REEMPLAZO</a></li>
-                                    <li><a href="#section-reparacion">REPARACIÓN</a></li>
-                                    <li><a href="#section-preventivo">MANT. PREVENTIVO</a></li>
-                                    <li><a href="#section-inspeccion">INSPECCIÓN</a></li>
-                                    <li><a href="#section-contrato">CONTRATO</a></li>
+                                    <li><a href="#section-impermeabilizacion" class="active">NEW CONSTRUCTION</a></li>
+                                    <li><a href="#section-renovacion">ROOF RENOVATION</a></li>
+                                    <li><a href="#section-reemplazo">ROOF REPLACEMENT</a></li>
+                                    <li><a href="#section-reparacion">LEAK REPAIR</a></li>
+                                    <li><a href="#section-preventivo">PREVENTIVE MAINT.</a></li>
+                                    <li><a href="#section-inspeccion">INSP. AND DIAGNOSIS</a></li>
+                                    <li><a href="#section-contrato">SERVICE CONTRACTS</a></li>
                                 </div>
                             </ul>
                         </li>
                         <?php } else {  ?>
-                        <li><a href="servicios">SERVICIOS</a></li>
+                        <li><a href="servicios">SERVICES</a></li>
                         <?php } ?>
                         <?php if($page== 'cimsafety') { ?>
                         <li class="active"><a href="cimsafety">CIM SAFETY</a></li>
@@ -69,9 +69,9 @@
                         <li><a href="cimsafety">CIM SAFETY</a></li>
                         <?php } ?>
                         <?php if($page== 'galeria') { ?>
-                        <li class="active"><a href="galeria">GALERÍA</a></li>
+                        <li class="active"><a href="galeria">GALLERY</a></li>
                         <?php } else {  ?>
-                        <li><a href="galeria">GALERÍA</a></li>
+                        <li><a href="galeria">GALLERY</a></li>
                         <?php } ?>
                         <?php if($page== 'blog') { ?>
                         <li class="active"><a href="blog">BLOG</a></li>
@@ -79,9 +79,9 @@
                         <li><a href="blog">BLOG</a></li>
                         <?php } ?>
                         <?php if($page== 'contacto') { ?>
-                        <li class="active"><a href="contacto">CONTACTO</a></li>
+                        <li class="active"><a href="contacto">CONTACT US</a></li>
                         <?php } else {  ?>
-                        <li><a href="contacto">CONTACTO</a></li>
+                        <li><a href="contacto">CONTACT US</a></li>
                         <?php } ?>
                         <!--
                         <li><a href="cimsafety">CIM SAFETY</a></li>
