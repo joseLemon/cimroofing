@@ -1,3 +1,7 @@
+<div class="free-inspection">
+    <a href="free-inspecion"><img class="img-responsive" src="<?php echo bloginfo('template_url').'/'; ?>img/content/free-inspection.png" alt="Free Inspection"></a>
+</div>
+
 <script src="<?php echo bloginfo('template_url').'/';?>js/bootstrap.min.js"></script>
 <script src="<?php echo bloginfo('template_url').'/';?>js/app.js"></script>
 <script src="<?php echo bloginfo('template_url').'/';?>js/jquery.scrollbar.min.js"></script>

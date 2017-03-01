@@ -1160,6 +1160,22 @@ Text Domain:
     display: block;
     text-align: right;
 }
+
+.free-inspection {
+    position: fixed;
+    z-index: 999;
+    bottom: 15px;
+    width: 150px;
+    display: block;
+    right: 15px;
+    opacity: .5;
+    transition: opacity 300ms ease;
+}
+
+.free-inspection:hover {
+    opacity: 1;
+}
+
 /* MEDIA QUERIES */
 
 @media(max-width: 1366px){
